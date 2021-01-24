@@ -1,9 +1,10 @@
 # Captsone-Spring2021
 
-Team names:
-Mike Calvo
+#Team members:
+
+*Mike Calvo
 Ronald Abrams
-Richard
+Richard Abrams
 Jason Manning
 Ian Wilhemlsen
-Emily Ashburn
+Emily Ashburn*
