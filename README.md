@@ -1,4 +1,4 @@
-# Captsone-Spring2021
+# Capstone-Spring2021
 
 ## Team members:
 
