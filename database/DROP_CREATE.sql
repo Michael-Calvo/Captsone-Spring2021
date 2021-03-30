@@ -163,6 +163,153 @@ create table if not exists posdb.TicketItem (
     primary key(`ID`)
 );
 
+create table if not exists posdb.PayPeriod(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    StoreID int not null,
+    DateStart datetime,
+    DateEnd datetime,
+    primary key(`ID`)
+);
+
+create table if not exists posdb.Schedule(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    PayPeriodID int not null,
+    JobID int not null,
+    Employeeid int not null,
+    primary key(`ID`)
+);
+create table if not exists posdb.Shift(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    ScheduleID int not null,
+    DateTimeStart datetime,
+    DateTimeEnd datetime,
+    primary key(`ID`)
+);
+
+create table if not exists posdb.Job(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    Wage double not null,
+    RoleID int not null,
+    UserID int not null,
+    primary key(`ID`)
+);
+
+create table if not exists posdb.Punch(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    ShiftID int not null,
+    ClockIn datetime,
+    ClockOut datetime,
+    primary key(`ID`)
+);
+
+create table if not exists posdb.ItemsSold(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    TicketID int not null,
+    MenuItemID int not null,
+    CurrDatetime datetime,
+    Quantity int,
+    primary key(`ID`)
+);
+
+create table if not exists posdb.WasteLog(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    CurrDatetime datetime,
+    StockItemID int not null,
+    Quantity double,
+    Unit varchar(16),
+    primary key(`ID`)
+);
+
+create table if not exists posdb.Recipe(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    MenuItemID int not null,
+    primary key(`ID`)
+);
+
+create table if not exists posdb.RecipeItem(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    RecipeID int not null,
+    StockItemID int not null,
+    Quantity double,
+    Unit varchar(16),
+    EWP double,
+    primary key(`ID`)
+);
+
+create table if not exists posdb.StockItem(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    StockItemName varchar(128),
+    Quantity double,
+    Unit varchar(16),
+    primary key(`ID`)
+);
+
+create table if not exists posdb.StockPurchase(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    SellerID int not null,
+    StockItemID int not null,
+    DateArrival datetime not null,
+    Cost double,
+    primary key(`ID`)
+);
+
+create table if not exists posdb.StockSeller(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    StockSellerName varchar(128),
+    StockSellerType varchar(128),
+    primary key(`ID`)
+);
+
+create table if not exists posdb.InventoryAudit(
+	ID int not null auto_increment,
+    UUID varchar(64) not null,
+    SortValue int default 0,
+    IsActive INT default 1,
+    DatePerformed datetime,
+    StoreID int not null,
+    UserID int not null,
+    StockItemID int not null,
+    Quantity double,
+    Unit varchar(16),
+    primary key(`ID`)
+);
+
 Alter table posdb.TicketItem
 	add foreign key
     ticket_ticketitem (TicketID)
@@ -297,5 +444,101 @@ alter table posdb.transactionhistory
     transact_paymentstatus (PaymentStatus)
     references 
 posdb.paymentstatuslu (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.PayPeriod
+	add foreign key
+    payperiod_store (StoreID)
+    references
+    posdb.Store (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.Schedule
+	add foreign key
+    schedule_payperiod (PayPeriodID)
+    references
+    posdb.PayPeriod (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.Shift
+	add foreign key
+    shift_schedule (ScheduleID)
+    references
+    posdb.Schedule (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.Job
+	add foreign key
+    job_role (RoleID)
+    references
+    posdb.RoleLU (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.Job
+	add foreign key
+    job_user (UserID)
+    references
+    posdb.UserLU (ID)
+    on update cascade
+    on delete cascade;
+    
+alter table posdb.Punch
+	add foreign key
+    punch_shift (ShiftID)
+    references
+    posdb.Shift (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.ItemsSold
+	add foreign key
+    itemssold_ticket (TicketID)
+    references
+    posdb.Ticket (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.ItemsSold
+	add foreign key
+    itemssold_menuitem (MenuItemID)
+    references
+    posdb.MenuItemID (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.WasteLog
+	add foreign key
+    wastelog_stockitem (StockItemID)
+    references
+    posdb.StockItem (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.Recipe
+	add foreign key
+    recipe_menuitemid (MenuItemID)
+    references
+    posdb.MenuItem (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.RecipeItem
+	add foreign key
+    recipeitem_recipe (RecipeID)
+    references
+    posdb.Recipe (ID)
+    on update cascade
+    on delete cascade;
+
+alter table posdb.StockPurchase
+	add foreign key
+    stockpurchase_stockitem (StockItemID)
+    references
+    posdb.StockItem (ID)
     on update cascade
     on delete cascade;
