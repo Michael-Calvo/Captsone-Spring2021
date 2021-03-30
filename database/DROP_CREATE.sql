@@ -507,7 +507,7 @@ alter table posdb.ItemsSold
 	add foreign key
     itemssold_menuitem (MenuItemID)
     references
-    posdb.MenuItemID (ID)
+    posdb.MenuItem (ID)
     on update cascade
     on delete cascade;
 
