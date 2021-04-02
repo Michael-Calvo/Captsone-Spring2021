@@ -1275,7 +1275,7 @@ begin
 	set retVal = 1;
 end$$
 
-drop procedure if exists create_itemsold$$
+drop procedure if exists create_itemssold$$
 create procedure create_itemssold
 (
 	in p_UUID varchar(64),
@@ -1729,7 +1729,6 @@ begin
 	FROM `posdb`.`recipe`
     where `recipe`.`MenuItemID` = p_MenuItemID
     and `recipe`.`IsActive` = p_IsActive;
-	set retID = 1;
 end$$
 
 drop procedure if exists update_recipe$$
@@ -1750,6 +1749,7 @@ begin
 	`IsActive` = p_IsActive,
 	`MenuItemID` = p_MenuItemID
 	WHERE `ID` = p_ID;
+    set retVal = 1;
 end$$
 
 drop procedure if exists delete_recipe$$
@@ -1765,6 +1765,7 @@ begin
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
+    set retVal = 1;
 end$$
 
 drop procedure if exists create_schedule$$
@@ -1846,18 +1847,7 @@ begin
 	`PayPeriodID` = p_PayPeriodID,
 	`JobID` = p_JobID,
 	`Employeeid` = p_UserID
-	WHERE `ID` = p_ID;
-	set retVal = 1;
-end$$
-	UPDATE `posdb`.`schedule`
-	SET
-	`UUID` = p_UUID,
-	`SortValue` = p_SortValue,
-	`IsActive` = p_IsActive,
-	`PayPeriodID` = p_PayPeriodID,
-	`JobID` = p_JobID,
-	`UserID` = p_UserID
-	WHERE `ID` = p_ID;
+	WHERE `schedule`.`ID` = p_ID;
 	set retVal = 1;
 end$$
 
@@ -1987,7 +1977,7 @@ create procedure create_stockitem
     in p_StockItemName varchar(128),
     in p_Quantity double,
     in p_Unit varchar(16),
-    out retVal int
+    out retID int
 )
 begin
 	INSERT INTO `posdb`.`stockitem`
@@ -2016,10 +2006,374 @@ end$$
 drop procedure if exists read_stockitem$$
 create procedure read_stockitem
 (
-	
+	in p_StoreID int,
+    in p_IsActive int,
+    out op_ID int,
+    out op_UUID varchar(64),
+    out op_SortValue int,
+    out op_IsActive int,
+    out op_StoreID int,
+    out op_StockItemName varchar(128),
+    out op_Quantity double,
+    out op_Unit varchar(16)
 )
 begin
-
+	SELECT `stockitem`.`ID`,
+    `stockitem`.`UUID`,
+    `stockitem`.`SortValue`,
+    `stockitem`.`IsActive`,
+    `stockitem`.`StoreID`,
+    `stockitem`.`StockItemName`,
+    `stockitem`.`Quantity`,
+    `stockitem`.`Unit`
+	FROM `posdb`.`stockitem`
+    where `stockitem`.`StoreID` = p_StoreID
+    and `stockitem`.`IsActive` = p_IsActive;
 end$$
 
--- set retID = last_insert_id();
+drop procedure if exists update_stockitem$$
+create procedure update_stockitem
+(
+	in p_ID int,
+    in p_UUID varchar(64),
+    in p_SortValue int,
+    in p_IsActive int,
+    in p_StoreID int,
+    in p_StockItemName varchar(128),
+    in p_Quantity double,
+    in p_Unit varchar(16),
+    out retVal int
+)
+begin
+	UPDATE `posdb`.`stockitem`
+	SET
+	`UUID` = p_UUID,
+	`SortValue` = p_SortValue,
+	`IsActive` = p_IsActive,
+	`StoreID` = p_StoreID,
+	`StockItemName` = p_StockItemName,
+	`Quantity` = p_Quantity,
+	`Unit` = p_Unit
+	WHERE `ID` = p_ID;
+	set retVal = 1;
+end$$
+
+drop procedure if exists delete_stockitem$$
+create procedure delete_stockitem
+(
+	in p_ID int,
+    in p_UUID varchar(64),
+    in p_IsActive int,
+    out retVal int
+)
+begin
+	UPDATE `posdb`.`stockitem`
+	SET
+	`IsActive` = p_IsActive
+	WHERE `ID` = p_ID and `UUID` = p_UUID;
+	set retVal = 1;
+end$$
+
+drop procedure if exists create_stockpurchase$$
+create procedure create_stockpurchase
+(
+	in p_UUID varchar(64),
+    in p_SortValue int,
+    in p_IsActive int,
+    in p_SellerID int,
+    in p_StockItemID int,
+    in p_DateArrival datetime,
+    in p_Cost double,
+    out retID int
+)
+begin
+	INSERT INTO `posdb`.`stockpurchase`
+	(
+		`UUID`,
+		`SortValue`,
+		`IsActive`,
+		`SellerID`,
+		`StockItemID`,
+		`DateArrival`,
+		`Cost`
+    )
+	VALUES
+	(p_UUID,
+    p_SortValue,
+    p_IsActive,
+    p_SellerID,
+    p_StockItemID,
+    p_DateArrival,
+    p_Cost);
+	set retID = last_insert_id();
+end$$
+
+drop procedure if exists read_stockpurchase$$
+create procedure read_stockpurchase
+(
+	in p_StockItemID int,
+    in p_IsActive int,
+    out op_ID int,
+    out op_UUID varchar(64),
+    out op_SortValue int,
+    out op_IsActive int,
+    out op_SellerID int,
+    out op_StockItemID int,
+    out op_DateArrival datetime,
+    out op_Cost double
+)
+begin
+	SELECT `stockpurchase`.`ID`,
+    `stockpurchase`.`UUID`,
+    `stockpurchase`.`SortValue`,
+    `stockpurchase`.`IsActive`,
+    `stockpurchase`.`SellerID`,
+    `stockpurchase`.`StockItemID`,
+    `stockpurchase`.`DateArrival`,
+    `stockpurchase`.`Cost`
+	FROM `posdb`.`stockpurchase`
+    where `stockpurchase`.`StockItemID` = p_StockItemID
+    and `stockpurchase`.`IsActive` = p_IsActive;
+end$$
+
+drop procedure if exists update_stockpurchase$$
+create procedure update_stockpurchase
+(
+	in p_ID int,
+    in p_UUID varchar(64),
+    in p_SortValue int,
+    in p_IsActive int,
+    in p_SellerID int,
+    in p_StockItemID int,
+    in p_DateArrival datetime,
+    in p_Cost double,
+    out retVal int
+)
+begin
+	UPDATE `posdb`.`stockpurchase`
+	SET
+	`UUID` = p_UUID,
+	`SortValue` = p_SortValue,
+	`IsActive` = p_IsActive,
+	`SellerID` = p_SellerID,
+	`StockItemID` = p_StockItemID,
+	`DateArrival` = p_DateArrival,
+	`Cost` = p_Cost
+	WHERE `ID` = p_ID;
+    set retVal = 1;
+end$$
+
+drop procedure if exists delete_stockpurchase$$
+create procedure delete_stockpurchase
+(
+	in p_ID int,
+    in p_UUID varchar(64),
+    in p_IsActive int,
+    out retVal int
+)
+begin
+	UPDATE `posdb`.`stockpurchase`
+	SET
+	`IsActive` = p_IsActive
+	WHERE `ID` = p_ID and `UUID` = p_UUID;
+    set retVal = 1;
+end$$
+
+drop procedure if exists create_stockseller$$
+create procedure create_stockseller
+(
+    in p_UUID varchar(64),
+    in p_SortValue int,
+    in p_IsActive int,
+    in p_StoreID int,
+    in p_StockSellerName varchar(128),
+    in p_StockSellerType varchar(128),
+    out retID int
+)
+begin
+	INSERT INTO `posdb`.`stockseller`
+	(`UUID`,
+	`SortValue`,
+	`IsActive`,
+    `StoreID`,
+	`StockSellerName`,
+	`StockSellerType`)
+	VALUES
+	(p_UUID,
+    p_SortValue,
+    p_IsActive,
+    p_StoreID,
+    p_StockSellerName,
+    p_StockSellerType);
+	set retID = last_insert_id();
+end$$
+
+drop procedure if exists read_stockseller$$
+create procedure read_stockseller
+(
+	in p_StoreID int,
+    in p_IsActive int,
+    out op_ID int,
+    out op_UUID varchar(64),
+    out op_SortValue int,
+    out op_IsActive int,
+    out op_StoreID int,
+    out op_StockSellerName varchar(128),
+    out op_StockSellerType varchar(128)
+)
+begin
+	SELECT `stockseller`.`ID`,
+    `stockseller`.`UUID`,
+    `stockseller`.`SortValue`,
+    `stockseller`.`IsActive`,
+    `stockseller`.`StoreID`,
+    `stockseller`.`StockSellerName`,
+    `stockseller`.`StockSellerType`
+	FROM `posdb`.`stockseller`
+    where `stockseller`.`StoreID` = p_StoreID
+    and `stockseller`.`IsActive` = p_IsActive;
+end$$
+
+drop procedure if exists update_stockseller$$
+create procedure update_stockseller
+(
+	in p_ID int,
+    in p_UUID varchar(64),
+    in p_SortValue int,
+    in p_IsActive int,
+    in p_StoreID int,
+    in p_StockSellerName varchar(128),
+    in p_StockSellerType varchar(128),
+    out retVal int
+)
+begin
+	UPDATE `posdb`.`stockseller`
+	SET
+	`UUID` = p_UUID,
+	`SortValue` = p_SortValue,
+	`IsActive` = p_IsActive,
+    `StoreID` = p_StoreID,
+	`StockSellerName` = p_StockSellerName,
+	`StockSellerType` = p_StockSellerType
+	WHERE `ID` = p_ID;
+	set retVal = 1;
+end$$
+
+drop procedure if exists delete_stockseller$$
+create procedure delete_stockseller
+(
+	in p_ID int,
+    in p_UUID varchar(64),
+    in p_IsActive int,
+    out retVal int
+)
+begin
+	UPDATE `posdb`.`stockseller`
+	SET
+	`IsActive` = p_IsActive
+	WHERE `ID` = p_ID and `UUID` = p_UUID;
+	set retVal = 1;
+end$$
+
+drop procedure if exists create_wastelog$$
+create procedure create_wastelog
+(
+	in p_UUID varchar(64),
+    in p_SortValue int,
+    in p_IsActive int,
+    in p_CurrDatetime datetime,
+    in p_StockItemID int,
+    in p_Quantity double,
+    in p_Unit varchar(16),
+    out retID int
+)
+begin
+	INSERT INTO `posdb`.`wastelog`
+	(`UUID`,
+	`SortValue`,
+	`IsActive`,
+	`CurrDatetime`,
+	`StockItemID`,
+	`Quantity`,
+	`Unit`)
+	VALUES
+	(p_UUID,
+    p_SortValue,
+    p_IsActive,
+    p_CurrDatetime,
+    p_StockItemID,
+    p_Quantity,
+    p_Unit);
+	set retID = last_insert_id();
+end$$
+
+drop procedure if exists read_wastelog$$
+create procedure read_wastelog
+(
+	in p_StockItemID int,
+    in p_IsActive int,
+    out op_ID int,
+    out op_UUID varchar(64),
+    out op_SortValue int,
+    out op_IsActive int,
+    out op_CurrDatetime datetime,
+    out op_StockItemID int,
+    out op_Quantity double,
+    out op_Unit varchar(16)
+)
+begin
+	SELECT `wastelog`.`ID`,
+    `wastelog`.`UUID`,
+    `wastelog`.`SortValue`,
+    `wastelog`.`IsActive`,
+    `wastelog`.`CurrDatetime`,
+    `wastelog`.`StockItemID`,
+    `wastelog`.`Quantity`,
+    `wastelog`.`Unit`
+	FROM `posdb`.`wastelog`
+    where `wastelog`.`StockItemID` = p_StockItemID
+    and `wastelog`.`IsActive` = p_IsActive;
+end$$
+
+drop procedure if exists update_wastelog$$
+create procedure update_wastelog
+(
+	in p_ID int,
+    in p_UUID varchar(64),
+    in p_SortValue int,
+    in p_IsActive int,
+    in p_CurrDatetime datetime,
+    in p_StockItemID int,
+    in p_Quantity double,
+    in p_Unit varchar(16),
+    out retVal int
+)
+begin
+	UPDATE `posdb`.`wastelog`
+	SET
+	`UUID` = p_UUID,
+	`SortValue` = p_SortValue,
+	`IsActive` = p_IsActive,
+	`CurrDatetime` = p_CurrDatetime,
+	`StockItemID` = p_StockItemID,
+	`Quantity` = p_Quantity,
+	`Unit` = p_Unit
+	WHERE `ID` = p_ID;
+	set retVal = 1;
+end$$
+
+drop procedure if exists delete_wastelog$$
+create procedure delete_wastelog
+(
+	in p_ID int,
+    in p_UUID varchar(64),
+    in p_IsActive int,
+    out retVal int
+)
+begin
+	UPDATE `posdb`.`wastelog`
+	SET
+	`IsActive` = p_IsActive
+	WHERE `ID` = p_ID and `UUID` = p_UUID;
+	set retVal = 1;
+end$$

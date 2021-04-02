@@ -292,6 +292,7 @@ create table if not exists posdb.StockSeller(
     UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
+    StoreID int,
     StockSellerName varchar(128),
     StockSellerType varchar(128),
     primary key(`ID`)
@@ -563,6 +564,14 @@ alter table posdb.InventoryAudit
 alter table posdb.StockItem
 	add foreign key
     stockitem_store (StoreID)
+    references
+    posdb.Store (ID)
+    on update cascade
+    on delete cascade;
+    
+alter table posdb.stockseller
+	add foreign key
+    stockseller_store (StoreID)
     references
     posdb.Store (ID)
     on update cascade
