@@ -181,7 +181,7 @@ create table if not exists posdb.Schedule(
     IsActive INT default 1,
     PayPeriodID int not null,
     JobID int not null,
-    Employeeid int not null,
+    UserID int not null,
     primary key(`ID`)
 );
 create table if not exists posdb.Shift(
@@ -268,6 +268,7 @@ create table if not exists posdb.StockItem(
     UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
+    StoreID int,
     StockItemName varchar(128),
     Quantity double,
     Unit varchar(16),
@@ -301,8 +302,8 @@ create table if not exists posdb.InventoryAudit(
     UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
-    DatePerformed datetime,
     StoreID int not null,
+    DatePerformed datetime,
     UserID int not null,
     StockItemID int not null,
     Quantity double,
@@ -463,6 +464,14 @@ alter table posdb.Schedule
     on update cascade
     on delete cascade;
 
+alter table posdb.Schedule
+	add foreign key
+    schedule_userlu (UserID)
+    references
+    posdb.UserLU (ID)
+    on update cascade
+    on delete cascade;
+
 alter table posdb.Shift
 	add foreign key
     shift_schedule (ScheduleID)
@@ -540,5 +549,21 @@ alter table posdb.StockPurchase
     stockpurchase_stockitem (StockItemID)
     references
     posdb.StockItem (ID)
+    on update cascade
+    on delete cascade;
+    
+alter table posdb.InventoryAudit
+	add foreign key
+    inventoryaudit_store (StoreID)
+    references
+    posdb.Store (ID)
+    on update cascade
+    on delete cascade;
+    
+alter table posdb.StockItem
+	add foreign key
+    stockitem_store (StoreID)
+    references
+    posdb.Store (ID)
     on update cascade
     on delete cascade;
