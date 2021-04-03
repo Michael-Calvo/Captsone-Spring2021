@@ -29,6 +29,12 @@ class apiUtil
         $this->standardJSONReply($responseCode, $responseMsg);
     }
 
+    protected function objReadJSONReply(int $responseCode, array $data, array $responseMsg)
+    {
+        $responseMsg[API_OBJ_READS] = $data;
+        $this->standardJSONReply($responseCode, $responseMsg);
+    }
+
     public function createObj(String $objName, array $payload): int
     {
         $newID = $this->$dao->createModelObject($objName,$payload);
@@ -45,7 +51,10 @@ class apiUtil
 
     public function readObj(String $objName, array $payload)
     {
-        # code...
+        //get the reads
+        $readData = $this->$dao->readModelObject($objName, $payload);
+        //send them to the user
+        objReadJSONReply(API_OBJ_READ_CODE, $readData, API_OBJ_READ);
     }
 
     public function updateObj(String $objName, array $payload)
