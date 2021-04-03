@@ -2,7 +2,7 @@
 
 class dbtadapter implements dbinterface
 {
-    private $dao;
+    private dbconnector $dao;
 
     function __construct()
     {
