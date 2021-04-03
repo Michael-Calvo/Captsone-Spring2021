@@ -20,4 +20,8 @@ define('API_OBJ_DELETED', array("message" => "Object was deleted."));
 define('API_OBJ_DELETED_CODE', 201);
 define('API_OBJ_FAIL', array("message" => "Unable to process request on object."));
 define('API_OBJ_FAIL_CODE', 503);
+
+//api payload constants
+define('API_UD_PAYLOADS', array("ID", "UUID", "IsActive"));
+
 ?>
