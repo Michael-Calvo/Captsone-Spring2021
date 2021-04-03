@@ -18,9 +18,12 @@ define('API_OBJ_UPDATED', array("message" => "Object was updated."));
 define('API_OBJ_UPDATED_CODE', 201);
 define('API_OBJ_DELETED', array("message" => "Object was deleted."));
 define('API_OBJ_DELETED_CODE', 201);
+define('API_OBJ_READ', array("message" => "Objects read."));
+define('API_OBJ_READ_CODE', 201);
 define('API_OBJ_FAIL', array("message" => "Unable to process request on object."));
 define('API_OBJ_FAIL_CODE', 503);
 define('API_OBJ_ID', 'ID');
+define('API_OBJ_READS', 'Objects');
 
 
 //api payload constants
