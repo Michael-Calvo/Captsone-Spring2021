@@ -23,9 +23,24 @@ class apiUtil
         echo json_encode(responseMsg);
     }
 
-    public function createObj(String $objName, array $payload)
+    protected function objCreatedJSONReply(int $responseCode, int $retID, array $responseMsg)
     {
-        # code...
+        $responseMsg[API_OBJ_ID] = $retID;
+        $this->standardJSONReply($responseCode, $responseMsg);
+    }
+
+    public function createObj(String $objName, array $payload): int
+    {
+        $newID = $this->$dao->createModelObject($objName,$payload);
+        //check the new ID
+        if (isset($newID) && is_int($newID) && $newID > 0) {
+            //inform the caller
+            $this->objCreatedJSONReply(API_OBJ_CREATED_CODE, $newID, API_OBJ_CREATED);
+        }
+        //there was a problem
+        else {
+            $this->standardJSONReply(API_OBJ_FAIL_CODE, API_OBJ_FAIL);
+        }
     }
 
     public function readObj(String $objName, array $payload)
@@ -37,7 +52,11 @@ class apiUtil
     {
         //check the payload
         if ($this->checkUpdatePayload($payload)) {
-            # code...
+            //get the confirm from the db
+            if ($this->$dao->updateModelObject($objName, $payload)) {
+                //send confirm message to the user
+                $this->standardJSONReply(API_OBJ_UPDATED_CODE,API_OBJ_UPDATED);
+            }
         }
         else {
             //bad request. inform the user
@@ -47,7 +66,18 @@ class apiUtil
 
     public function deleteObj(String $objName, array $payload)
     {
-        # code...
+        //check the payload
+        if ($this->checkDeletePayload($payload)) {
+            //get the confirm from the db
+            if ($this->$dao->deleteModelObject($objName, $payload)) {
+                //send confirm message to the user
+                $this->standardJSONReply(API_OBJ_DELETED_CODE,API_OBJ_DELETED);
+            }
+        }
+        else {
+            //bad request. inform the user
+            $this->standardJSONReply(API_INCOMP_CODE, API_INCOMP);
+        }
     }
 
     protected function checkUpdatePayload(array $payload)

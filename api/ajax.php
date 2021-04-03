@@ -11,6 +11,9 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
 
+//call up the util
+$api = new apiUtil();
+
 // make sure data is not empty
 if(
     !empty($data) &&
@@ -20,15 +23,8 @@ if(
 ){
     //check the function and bounce if needed.
     if (!in_array($data->function, SUPPORTED_FUNCS) || !in_array($data->object, SUPPORTED_OBJS)) {
-        // set response code - bad request
-        http_response_code(API_UNSUPP_CODE);
-  
-        // tell the user
-        echo json_encode(API_UNSUPP);
+        $api->standardJSONReply(API_UNSUPP_CODE, API_UNSUPP);
     }
-
-    //call up the util
-    $api = new apiUtil();
 
     //process the request
     if ($data->function == API_CREATE) {
@@ -47,10 +43,6 @@ if(
   
 // tell the user data is incomplete
 else{
-  
-    // set response code - bad request
-    http_response_code(API_INCOMP_CODE);
-  
-    // tell the user
-    echo json_encode(API_INCOMP);
+    // set response code - bad request - inform user
+    $api->standardJSONReply(API_INCOMP_CODE,API_INCOMP);
 }
