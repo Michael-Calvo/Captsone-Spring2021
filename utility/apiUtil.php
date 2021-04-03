@@ -20,7 +20,7 @@ class apiUtil
     protected function standardJSONReply(int $responseCode, array $responseMsg)
     {
         http_response_code(responseCode);
-        echo json_encode(responseMsg);.
+        echo json_encode(responseMsg);
     }
 
     public function createObj(String $objName, array $payload)
