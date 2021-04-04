@@ -22,7 +22,7 @@ class dbconnector implements dbinterface
 
     private function makeInsertCall(string $tableName, array $params) {
 	    //this should be a constant bad ID
-        $msg = FALSE;
+        $msg = -999;
 	    $stmt = $this->pdo->prepare($this->createInsertStat($tableName, $params));
 	    if (!$stmt) {
 	        error_log(__CLASS__ . __FUNCTION__ . $this->failedPrep);
@@ -30,7 +30,7 @@ class dbconnector implements dbinterface
 	    $result = $stmt->execute();
 	    if ($result) {
             // @TODO this should return the ID
-	        $msg = TRUE;
+	        $msg = 13;
 	    }else {
 	        error_log(__CLASS__ . __FUNCTION__ . $this->failedConn . print_r($stmt->errorInfo()));
 	        $msg[1] = $this->failMsg;
