@@ -1,5 +1,5 @@
 <?php
-include 'dbconstants.php'
+include 'dbconstants.php';
 class dbconnector implements dbinterface
 {
     private string $db = "mysql:host=localhost;dbname=posdb;";
