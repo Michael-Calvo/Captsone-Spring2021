@@ -9,6 +9,7 @@ import { ProfileComponent } from './landing_page_components/profile/profile.comp
 import { TitleComponentComponent } from './landing_page_components/title-component/title-component.component';
 import { InventoryPageComponent } from './inventory_components/inventory-page/inventory-page.component';
 import { InventoryListComponent } from './inventory_components/inventory-list/inventory-list.component';
+import { InventoryItemComponent } from './inventory_components/inventory-item/inventory-item.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { InventoryListComponent } from './inventory_components/inventory-list/in
     ProfileComponent,
     TitleComponentComponent,
     InventoryPageComponent,
-    InventoryListComponent
+    InventoryListComponent,
+    InventoryItemComponent,
   ],
   imports: [
     BrowserModule,
