@@ -66,3 +66,16 @@ VALUES
 (4, UUID(), 1, 1, "Take Out 2", 1),
 (5, UUID(), 1, 1, "Bar 1", 1),
 (6, UUID(), 1, 1, "Bar 2", 1);
+
+INSERT INTO `posdb`.`stockitem`
+(`ID`,
+`UUID`,
+`SortValue`,
+`IsActive`,
+`StoreID`,
+`StockItemName`,
+`Quantity`,
+`Unit`)
+VALUES
+(1,UUID(),1,1,1,"Frozen French Fries",2,"boxes");
+
