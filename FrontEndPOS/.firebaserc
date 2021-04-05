@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "getthisbread-a7bd8": {
+      "hosting": {
+        "FrontEndPOS": [
+          "getthisbread-a7bd8"
+        ]
+      }
+    }
+  }
+}
