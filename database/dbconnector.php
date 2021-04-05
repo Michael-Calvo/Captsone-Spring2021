@@ -3,7 +3,7 @@ include 'dbconstants.php';
 class dbconnector implements dbinterface
 {
     private string $db = "mysql:host=localhost;dbname=posdb;";
-    private string $dbuser = "GTBUser";
+    private string $dbuser = "posuser";
     private string $dbpass = "1q2w3e4r5t";
     private string $failedConn = 'failed connection';
     private string $failedPrep = 'failed prep';
