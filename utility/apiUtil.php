@@ -1,15 +1,15 @@
 <?php
 
 require "../database/dbadapter.php";
-include "apiConstants.php";
+include_once "apiConstants.php";
 
 class apiUtil
 {
-    protected dbtadapter $dao;
+    protected dbadapter $dao;
 
     function __construct()
     {
-        $this->$dao = new dbadapter();
+        $this->dao = new dbadapter();
     }
 
     function __destruct()
@@ -17,10 +17,10 @@ class apiUtil
         die();
     }
 
-    protected function standardJSONReply(int $responseCode, array $responseMsg)
+    public function standardJSONReply(int $responseCode, array $responseMsg)
     {
-        http_response_code(responseCode);
-        echo json_encode(responseMsg);
+        http_response_code($responseCode);
+        echo json_encode($responseMsg);
     }
 
     protected function objCreatedJSONReply(int $responseCode, int $retID, array $responseMsg)
@@ -37,7 +37,7 @@ class apiUtil
 
     public function createObj(String $objName, array $payload): int
     {
-        $newID = $this->$dao->createModelObject($objName,$payload);
+        $newID = $this->dao->createModelObject($objName,$payload);
         //check the new ID
         if (isset($newID) && is_int($newID) && $newID > 0) {
             //inform the caller
@@ -52,7 +52,7 @@ class apiUtil
     public function readObj(String $objName, array $payload)
     {
         //get the reads
-        $readData = $this->$dao->readModelObject($objName, $payload);
+        $readData = $this->dao->readModelObject($objName, $payload);
         //send them to the user
         objReadJSONReply(API_OBJ_READ_CODE, $readData, API_OBJ_READ);
     }
@@ -62,7 +62,7 @@ class apiUtil
         //check the payload
         if ($this->checkUpdatePayload($payload)) {
             //get the confirm from the db
-            if ($this->$dao->updateModelObject($objName, $payload)) {
+            if ($this->dao->updateModelObject($objName, $payload)) {
                 //send confirm message to the user
                 $this->standardJSONReply(API_OBJ_UPDATED_CODE,API_OBJ_UPDATED);
             }
@@ -78,7 +78,7 @@ class apiUtil
         //check the payload
         if ($this->checkDeletePayload($payload)) {
             //get the confirm from the db
-            if ($this->$dao->deleteModelObject($objName, $payload)) {
+            if ($this->dao->deleteModelObject($objName, $payload)) {
                 //send confirm message to the user
                 $this->standardJSONReply(API_OBJ_DELETED_CODE,API_OBJ_DELETED);
             }
