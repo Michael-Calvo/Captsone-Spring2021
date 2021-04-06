@@ -94,21 +94,23 @@ export class InventoryListComponent implements OnInit {
 
   addItem(){
     const data : Transporter = {
-      function: "API_CREATE",
-      object: "MenuItem",
+      function: "create",
+      object: "menuitem",
       payload: [
-        "Grilled Cheese",
-        1239,
-        2.99,
+        56789,
+        2,
         1,
-        5
+        "Grilled Cheese",
+        5.99,
+        0,
+        0
       ]
     }
-    for(let i = 0; i < this.transporterArr.length; ++i){
+    /*for(let i = 0; i < this.transporterArr.length; ++i){
       if (this.transporterArr[i].payload[1] === data.payload[1]) {
         data.payload[1] = data.payload[1] + 1
       }
-  }
+  }*/
   this.inventoryService.createTransporterPost(data).subscribe(transporter => { 
     this.transporterArr.push(transporter);
   });

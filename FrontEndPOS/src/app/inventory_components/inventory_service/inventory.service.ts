@@ -47,7 +47,7 @@ export class InventoryService {
   }
 
   public createTransporterPost(transporter:Transporter ): Observable<Transporter> {
-    return this.http.post<Transporter>("TEMP", transporter, httpOptions).pipe(
+    return this.http.post<Transporter>(AppSettings.BASE_URL, transporter, httpOptions).pipe(
         //.catchError(err => {
           //console.log(err)
           //eturn Observable.of(err)
