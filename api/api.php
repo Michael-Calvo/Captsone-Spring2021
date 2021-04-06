@@ -10,6 +10,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
+error_log($data);
 
 //call up the util
 $api = new apiUtil();
