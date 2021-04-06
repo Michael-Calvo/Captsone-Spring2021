@@ -1,6 +1,6 @@
 <?php
 
-require "../database/dbapter.php";
+require "../database/dbadapter.php";
 include "apiConstants.php";
 
 class apiUtil

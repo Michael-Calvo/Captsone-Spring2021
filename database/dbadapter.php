@@ -1,6 +1,6 @@
 <?php
 
-class dbtadapter implements dbinterface
+class dbadapter implements dbinterface
 {
     private dbconnector $dao;
 
