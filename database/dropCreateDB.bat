@@ -6,4 +6,5 @@ mysql -u OTRUser --password=1q2w3e4r5t -h localhost -e "source %inputPath%\datab
 mysql -u OTRUser --password=1q2w3e4r5t -h localhost -e "source %inputPath%\database\luInserts.sql"
 mysql -u OTRUser --password=1q2w3e4r5t -h localhost -e "source %inputPath%\database\dropCreateUser.sql"
 mysql -u OTRUser --password=1q2w3e4r5t -h localhost -e "source %inputPath%\database\seedData.sql"
+pause
 exit
