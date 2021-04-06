@@ -14,6 +14,7 @@ import {ProfileComponent} from './landingPage_components/profile/profile.compone
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {environment} from "../environments/environment";
+import { WelcomePageComponent } from './landingPage_components/welcome-page/welcome-page.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {environment} from "../environments/environment";
     InventoryItemComponent,
     TitleComponent,
     ProfileComponent,
-    SidebarComponent
+    SidebarComponent,
+    WelcomePageComponent
   ],
   imports: [
     BrowserModule,

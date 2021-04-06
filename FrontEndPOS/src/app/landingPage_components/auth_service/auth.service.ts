@@ -10,7 +10,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
   providedIn: 'root'
 })
 export class AuthService {
-  user: User;
+  userData: any;
 
   constructor(
     public afs: AngularFirestore,
@@ -19,22 +19,23 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     private angularFireAuth: AngularFireAuth
   ) { 
-    this.afAuth.authState.subscribe(user => { if (user) {
-      this.user = user;
-      localStorage.setItem('user', JSON.stringify(this.user));
-      JSON.parse(localStorage.getItem('user'));
-    } else {
-      localStorage.setItem('user', null);
-      JSON.parse(localStorage.getItem('user'));
-    }
-  })
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
+    })
   }
 
   OAuthProvider(provider){
     return this.afAuth.signInWithPopup(provider).then((res) =>{
         this.ngZone.run(()=> {
           this.router.navigate(['profile']);
-        })
+        });
         this.SetUserData(res.user);
     }).catch((error)=>{
       window.alert(error)
@@ -53,7 +54,7 @@ export class AuthService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['profile']);
+      this.router.navigate(['welcome-page']);
     })
   }
 
