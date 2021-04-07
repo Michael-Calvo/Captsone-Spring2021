@@ -23,14 +23,14 @@ class dbconnector implements dbinterface
     private function makeInsertCall(string $tableName, array $params) {
 	    //this should be a constant bad ID
         $msg = -999;
-	    $stmt = $this->pdo->prepare($this->createInsertStat($tableName, $params));
+	    $stmt = $this->pdo->prepare($this->createInsertState($tableName, $params));
 	    if (!$stmt) {
 	        error_log(__CLASS__ . __FUNCTION__ . $this->failedPrep);
 	    }
 	    $result = $stmt->execute();
-	    if ($result) {
+	    if (!empty($result)) {
             // @TODO this should return the ID
-	        $msg = 13;
+	        $msg = $result;
 	    }else {
 	        error_log(__CLASS__ . __FUNCTION__ . $this->failedConn . print_r($stmt->errorInfo()));
 	        $msg[1] = $this->failMsg;
@@ -38,7 +38,7 @@ class dbconnector implements dbinterface
 	    return $msg;
 	}
 
-    private function createInsertState(string $table, array $params)
+    private function createInsertState(string $tableName, array $params)
     {
         return CREATE_START . $tableName . $this->makeInsertParamList($params);
     }
@@ -70,12 +70,12 @@ class dbconnector implements dbinterface
 
     private function makeReadCall(string $tableName, array $params) {
 	    
-	    $stmt = $this->pdo->prepare($this->createReadStat($tableName));
+	    $stmt = $this->pdo->prepare($this->createReadState($tableName));
 	    $stmt->execute();
 	    return $stmt->fetchAll();
 	}
 
-    private function createReadStat(string $tableName) {
+    private function createReadState(string $tableName) {
 	    return READ_START . $tableName . NORM_END;
 	}
 
@@ -86,7 +86,7 @@ class dbconnector implements dbinterface
 
     private function makeUpdateCall(string $tableName, array $params) {
 	    $msg = FALSE;
-	    $stmt = $this->pdo->prepare($this->createUpdateStat($tableName, $params));
+	    $stmt = $this->pdo->prepare($this->createUpdateState($tableName, $params));
 	    if (!$stmt) {
 	        error_log(__CLASS__ . __FUNCTION__ . $this->getFailedPrep());
 	    }
@@ -100,7 +100,7 @@ class dbconnector implements dbinterface
 	    return $msg;
 	}
 
-    private function createUpdateStat(string $tableName, array $params) {
+    private function createUpdateState(string $tableName, array $params) {
 	    return UPDATE_START . $tableName . UPDATE_MID . $this->makeUpdateParamList($params, $tableName);
 	}
 
@@ -115,13 +115,13 @@ class dbconnector implements dbinterface
 	        }
 	        else {
 	            $retVal = $retVal . $key . ' = ' . $this->getFormattedBit($value);
-	            $retVal = $retVal . $this->makeWhereStat($params, $tableName);
+	            $retVal = $retVal . $this->makeWhereState($params, $tableName);
 	        }
 	    }
 	    return $retVal;
 	}
 
-    private function makeWhereStat(array $params, string $tableName) {
+    private function makeWhereState(array $params, string $tableName) {
 	    $retVal = ' WHERE ';
 	    $i = 0;
 	    $x = count($this->pks[$tableName]) - 1;
@@ -154,7 +154,7 @@ class dbconnector implements dbinterface
 
     private function makeDeleteCall(string $tableName, array $params) {
 	    $msg = FALSE;
-	    $stmt = $this->pdo->prepare($this->createDeleteStat($tableName, $params));
+	    $stmt = $this->pdo->prepare($this->createDeleteState($tableName, $params));
 	    if (!$stmt) {
 	        error_log(__CLASS__ . __FUNCTION__ . $this->getFailedPrep());
 	    }
@@ -168,8 +168,8 @@ class dbconnector implements dbinterface
 	    return $msg;
 	}
 
-    private function createDeleteStat(string $tableName, array $params) {
-	    return DELETE_START . $tableName . $this->makeWhereStat($params, $tableName);
+    private function createDeleteState(string $tableName, array $params) {
+	    return DELETE_START . $tableName . $this->makeWhereState($params, $tableName);
 	}
 }
 ?>
