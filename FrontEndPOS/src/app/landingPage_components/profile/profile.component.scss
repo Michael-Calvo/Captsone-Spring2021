@@ -1,0 +1,32 @@
+.profileContainer {
+    text-align: left;
+    position: fixed;
+    top: 135px;
+    padding: 0px 10px;
+    margin-left: 454px;
+    margin-right: 40px;
+    height: calc(100% - 190px);
+    background-color: rgb(165, 180, 199);
+    width: calc(100% - 542px);
+    display: block;
+  }
+  .login-wrapper{
+    background-color: white;
+    width: calc(100% - 522px);
+
+    margin-left: 454px;
+    margin-right: 60px;
+    display: block;
+    position: fixed;
+    float:right;
+    margin-top: 38px;
+    height: 89px;
+}
+  .large-button{
+    float: right;
+    height: 87px;
+    width: 200px;
+    background: rgb(2, 170, 248);
+
+
+  }
