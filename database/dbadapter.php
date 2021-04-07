@@ -1,13 +1,13 @@
 <?php
 include 'dbinterface.php';
-include 'dbconnector.php';
+include 'dbconnectorSP.php';
 class dbadapter implements dbinterface
 {
-    private dbconnector $dao;
+    private dbinterface $dao;
 
     function __construct()
     {
-        $this->dao = new dbconnector();
+        $this->dao = new dbconnectorSP();
     }
 
     public function createModelObject(String $className, array $parameters)

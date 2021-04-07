@@ -9,8 +9,8 @@ Create table if not exists posdb.PosCheck (
 	  TableID INT NOT NULL,
 	  UserID INT NOT NULL,
 	  CheckStatus INT NOT NULL,
-	  DateStarted DATETIME NOT NULL,
-	  DateClosed datetime NULL,
+	  DateStarted varchar(64) NOT NULL,
+	  DateClosed varchar(64),
 	  PRIMARY KEY (ID)
 );
 Create table if not exists posdb.CheckStatusLU (
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS posdb.TransactionHistory (
     UserID INT NOT NULL,
     FinalTotal double not null,
     PaymentType INT NOT NULL,
-    PaymentDate DATE NOT NULL,
+    PaymentDate varchar(64) NOT NULL,
     PaymentStatus INT NOT NULL,
     PRIMARY KEY (`ID`)
 ); 
@@ -169,8 +169,8 @@ create table if not exists posdb.PayPeriod(
     SortValue int default 0,
     IsActive INT default 1,
     StoreID int not null,
-    DateStart datetime,
-    DateEnd datetime,
+    DateStart varchar(64),
+    DateEnd varchar(64),
     primary key(`ID`)
 );
 
@@ -190,8 +190,8 @@ create table if not exists posdb.Shift(
     SortValue int default 0,
     IsActive INT default 1,
     ScheduleID int not null,
-    DateTimeStart datetime,
-    DateTimeEnd datetime,
+    DateTimeStart varchar(64),
+    DateTimeEnd varchar(64),
     primary key(`ID`)
 );
 
@@ -212,8 +212,8 @@ create table if not exists posdb.Punch(
     SortValue int default 0,
     IsActive INT default 1,
     ShiftID int not null,
-    ClockIn datetime,
-    ClockOut datetime,
+    ClockIn varchar(64),
+    ClockOut varchar(64),
     primary key(`ID`)
 );
 
@@ -224,7 +224,7 @@ create table if not exists posdb.ItemsSold(
     IsActive INT default 1,
     TicketID int not null,
     MenuItemID int not null,
-    CurrDatetime datetime,
+    CurrDatetime varchar(64),
     Quantity int,
     primary key(`ID`)
 );
@@ -234,7 +234,7 @@ create table if not exists posdb.WasteLog(
     UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
-    CurrDatetime datetime,
+    CurrDatetime varchar(64),
     StockItemID int not null,
     Quantity double,
     Unit varchar(16),
@@ -282,7 +282,7 @@ create table if not exists posdb.StockPurchase(
     IsActive INT default 1,
     SellerID int not null,
     StockItemID int not null,
-    DateArrival datetime not null,
+    DateArrival varchar(64) not null,
     Cost double,
     primary key(`ID`)
 );
@@ -304,7 +304,7 @@ create table if not exists posdb.InventoryAudit(
     SortValue int default 0,
     IsActive INT default 1,
     StoreID int not null,
-    DatePerformed datetime,
+    DatePerformed varchar(64),
     UserID int not null,
     StockItemID int not null,
     Quantity double,
