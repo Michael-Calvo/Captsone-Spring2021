@@ -10,7 +10,9 @@ import { AppSettings } from '../../app.setting';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    //'Access-Control-Allow-Origin': '*',
+    //'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT'
   })
 }
 
@@ -34,7 +36,7 @@ export class InventoryService {
   public getTransporterdata(): Observable<Transporter [] > {
     let params = new HttpParams().set('userId', "1");
     //let headers = new HttpHeaders().set("Authroization", "auth-token");
-    return this.http.get<Transporter[]>(`${AppSettings.BASE_URL}/users`)
+    return this.http.get<Transporter[]>(`${AppSettings.BASE_URL}`)
   }
 
   public createPost(inventoryClass:MenuItem ): Observable<MenuItem> {
@@ -47,11 +49,15 @@ export class InventoryService {
   }
 
   public createTransporterPost(transporter:Transporter ): Observable<Transporter> {
-    return this.http.post<Transporter>("api", transporter, httpOptions).pipe(
-        //.catchError(err => {
-          //console.log(err)
-          //eturn Observable.of(err)
-          // })
+    return this.http.post<Transporter>("https://jsonplaceholder.typicode.com/posts", JSON.stringify(transporter), httpOptions).pipe(
+        /*.catchError(err => {
+          console.log(err)
+          eturn Observable.of(err)
+           })*/
     )
+  }
+
+  public getTransporterPost(transporter:Transporter ): Observable<Transporter[]> {
+    return this.http.post<Transporter[]>("https://jsonplaceholder.typicode.com/posts", httpOptions)
   }
 }

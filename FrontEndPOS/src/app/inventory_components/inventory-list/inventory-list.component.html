@@ -11,10 +11,10 @@
         </thead>
         <tr *ngFor='let menuitem of inventoryItems' [attr.id]="menuitem.menuID">
             <td> <input type="checkbox" id="myCheck"> </td>
-            <td>{{menuitem.menuID}}</td>
-            <td>{{menuitem.itemName}}</td>
-            <td>{{menuitem.price}}</td>
-            <td>{{menuitem.priorityScore}}</td>
+            <td>{{ menuitem.menuID }}</td>
+            <td>{{ menuitem.itemName }}</td>
+            <td>{{ menuitem.price }}</td>
+            <td>{{ menuitem.priorityScore }}</td>
             <button id="remove" (click)="deleteRow(menuitem.menuID)"> Delete</button>
         </tr>
     </table>
