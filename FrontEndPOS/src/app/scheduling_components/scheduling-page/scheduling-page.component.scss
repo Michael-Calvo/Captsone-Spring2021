@@ -1,12 +1,32 @@
+.float-container {
+  text-align: center;
+  padding: 20px 40px;
+  margin-left: 400px;
+  margin-right: 400px;
+  height: calc(100% - 300px);
+  width: calc(100% -300px);
+  background-color: rgb(165, 180, 199);
+  display: block
+}
+
+.float-child {
+  width: 90%;
+  float: center;
+  padding: 10px;
+}
+
 .schedulingContainer {
-    text-align: left;
+    text-align: center;
     position: fixed;
-    top: 135px;
+    top: 100px;
     padding: 0px 10px;
     margin-left: 454px;
     margin-right: 28px;
-    height: calc(100% - 190px);
-    width: calc(100% -38px);
+    height: calc(100% - 300px);
+    width: calc(100% -300px);
+    float: right;
     background-color: rgb(165, 180, 199);
     display: block;
   }
+ 
+  

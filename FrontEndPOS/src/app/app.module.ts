@@ -15,6 +15,7 @@ import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {environment} from "../environments/environment";
 import { WelcomePageComponent } from './landingPage_components/welcome-page/welcome-page.component';
+import { SchedulingClockComponent } from './scheduling_components/scheduling-clock/scheduling-clock.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { WelcomePageComponent } from './landingPage_components/welcome-page/welc
     TitleComponent,
     ProfileComponent,
     SidebarComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    SchedulingClockComponent
   ],
   imports: [
     BrowserModule,

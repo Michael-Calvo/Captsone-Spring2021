@@ -37,8 +37,8 @@ export class SchedulingService {
     return this.http.get<Transporter[]>(`${AppSettings.BASE_URL}/users`)
   }
 
-  public createPost(inventoryClass:ClockIn ): Observable<ClockIn> {
-    return this.http.post<ClockIn>("PLACEHOLDER", inventoryClass, httpOptions).pipe(
+  public createPost(schedulingClass:ClockIn ): Observable<ClockIn> {
+    return this.http.post<ClockIn>("PLACEHOLDER", schedulingClass, httpOptions).pipe(
         //.catchError(err => {
           //console.log(err)
           //eturn Observable.of(err)
