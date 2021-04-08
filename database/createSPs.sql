@@ -3,28 +3,14 @@ Delimiter $$
 drop procedure if exists posdb.create_Menu$$
 create procedure create_Menu 
 (
-	IN p_StoreID varchar(64),
-    IN p_MenuName varchar(64),
-    IN p_MenuType varchar(64),
 	IN p_UUID varchar(64),
-	IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retID int
+	IN p_IsActive int,
+    IN p_SortValue int,
+	IN p_StoreID int,
+    IN p_MenuName varchar(64),
+    IN p_MenuType int
 )
 BEGIN
-	declare currStoreID int;
-    declare currMenuName varchar(64);
-    declare currMenuType int;
-	declare currUUID varchar(64);
-	declare currIsActive int;
-    declare currSortValue int;
-    set currStoreID = cast(p_StoreID as unsigned);
-    set currMenuName = p_MenuName;
-    set currMenuType = cast(p_MenuType as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
-    
 	INSERT INTO `posdb`.`Menu`
     (
 		`UUID`,
@@ -35,135 +21,83 @@ BEGIN
         `MenuName`
 	) VALUES
     (
-		currUUID,
-        currSortValue, 
-        currIsActive,
-        currStoreID, 
-        currMenuType,
-        currMenuName
+		p_UUID,
+        p_SortValue, 
+        p_IsActive,
+        p_StoreID, 
+        p_MenuType,
+        p_MenuName
 	);
-	set retID = last_insert_id();
+	select last_insert_id();
 END$$
 
 drop procedure if exists read_Menu$$
 create procedure read_Menu
 (
-    in p_IsActive varchar(64),
-    in p_StoreID varchar(64),
-	out op_StoreID int,
-    out op_MenuName varchar(64),
-    out op_MenuType int,
-	out op_ID int,
-    out op_UUID varchar(64),
-	out op_IsActive int,
-    out op_SortValue int
+    in p_IsActive int,
+    in p_StoreID int
 )
 BEGIN
-	declare currIsActive int;
-    declare currStoreID int;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currStoreID = cast(p_StoreID as unsigned);
-    SELECT `menu`.`StoreID`,
-		`menu`.`MenuName`,
-		`menu`.`MenuType`,
-		`menu`.`ID`,
-		`menu`.`UUID`,
-		`menu`.`IsActive`,
-		`menu`.`SortValue`
+	SELECT `menu`.`ID`,
+    `menu`.`UUID`,
+    `menu`.`IsActive`,
+    `menu`.`SortValue`,
+    `menu`.`StoreID`,
+    `menu`.`MenuName`,
+    `menu`.`MenuType`
 	FROM `posdb`.`menu`
-    WHERE `Menu`.`IsActive` = currIsActive and
-		`Menu`.`StoreID` = currStoreID;
+    WHERE `Menu`.`IsActive` = p_IsActive and
+		`Menu`.`StoreID` = p_StoreID;
 END$$
 
 drop procedure if exists update_Menu$$
 create procedure update_Menu
 (
-	IN p_StoreID varchar(64),
-    IN p_MenuName varchar(64),
-    IN p_MenuType varchar(64),
-	IN p_ID varchar(64),
+	IN p_ID int,
     IN p_UUID varchar(64),
-	IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retVal int
+	IN p_IsActive int,
+    IN p_SortValue int,
+    IN p_StoreID int,
+    IN p_MenuName varchar(64),
+    IN p_MenuType int
 )
 BEGIN
-	declare currStoreID int;
-    declare currMenuName varchar(64);
-    declare currMenuType int;
-	declare currID int;
-    declare currUUID varchar(64);
-	declare currIsActive int;
-    declare currSortValue int;
-    set currStoreID = cast(p_StoreID as unsigned);
-    set currMenuName = p_MenuName;
-    set currMenuType = cast(p_MenuType as unsigned);
-    set currID = cast(p_ID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	UPDATE `posdb`.`Menu` SET
-		`SortValue` = currSortValue,
-		`IsActive` = currIsActive,
-		`StoreID` = currStoreID,
-		`MenuType` = currMenuType,
-		`MenuName` = currMenuName
-	WHERE posdb.menu.UUID = currUUID and `ID` = currID;
-	set retVal = 1;
+		`SortValue` = p_SortValue,
+		`IsActive` = p_IsActive,
+		`StoreID` = p_StoreID,
+		`MenuType` = p_MenuType,
+		`MenuName` = p_MenuName
+	WHERE posdb.menu.UUID = p_UUID and `ID` = p_ID;
 END$$
 
 drop procedure if exists posdb.delete_Menu$$
 create procedure posdb.delete_Menu
 (
-	in p_ID varchar(64),
+	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    OUT retVal int
+    in p_IsActive int
 )
 BEGIN
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive bit;
-    set currID = cast(p_ID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUUID = p_UUID;
 	UPDATE posdb.menu
     SET
-		`IsActive` = currIsActive
-	WHERE `ID` = currID and `UUID` = currUUID;
-    SET retVal = 1;
+		`IsActive` = p_IsActive
+	WHERE `ID` = p_ID and `UUID` = p_UUID;
 END$$
 
 drop procedure if exists create_MenuItem$$
 create procedure create_MenuItem
 (
-	IN p_ItemName varchar(64),
-    IN p_MenuID varchar(64),
-    IN p_Price varchar(64),
-    IN p_PriorityScore varchar(64),
-    IN p_ExecutionTime varchar(64),
-    IN p_UUID varchar(64),
-	IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retID int
+	IN p_UUID varchar(64),
+	IN p_IsActive int,
+    IN p_SortValue int,
+    IN p_MenuID int,
+    IN p_ItemName varchar(64),
+    IN p_Price double,
+    IN p_PriorityScore int,
+    IN p_ExecutionTime int
 )
 BEGIN
-	declare currItemName varchar(64);
-    declare currMenuID int;
-    declare currPrice double;
-    declare currPriorityScore int;
-    declare currExecutionTime int;
-    declare currUUID varchar(64);
-	declare currIsActive int;
-    declare currSortValue int;
-    set currItemName = p_ItemName;
-    set currMenuID = cast(p_MenuID as unsigned);
-    set currPrice = cast(p_Price as decimal(10,2));
-    set currPriorityScore = cast(p_PriorityScore as unsigned);
-    set currExecutionTime = cast(p_ExecutionTime as unsigned);
-    set currUUID = p_UUID;
-	set currIsActive = cast(p_IsActive as binary);
-    set currSortValue = cast(p_SortValue as unsigned);
 	INSERT INTO `posdb`.`MenuItem`
     (
 		`UUID`,
@@ -176,145 +110,87 @@ BEGIN
         `ExecutionTime`
 	) VALUES
     (
-		currUUID,
-        currSortValue, 
-        currIsActive,
-        currMenuID,
-		currItemName,
-		currPrice,
-		currPriorityScore,
-		currExecutionTime
+		p_UUID,
+        p_SortValue, 
+        p_IsActive,
+        p_MenuID,
+		p_ItemName,
+		p_Price,
+		p_PriorityScore,
+		p_ExecutionTime
 	);
-    set retID = last_insert_id();
+    select last_insert_id();
 END$$
 
 drop procedure if exists read_MenuItem$$
 create procedure read_MenuItem
 (
-	in p_MenuID varchar(64),
-    in p_IsActive varchar(64),
-    out op_ItemName varchar(64),
-    out op_MenuID int,
-    out op_Price double,
-    out op_PriorityScore int,
-    out op_ExecutionTime int,
-    out op_ID int,
-    out op_UUID varchar(64),
-	out op_IsActive int,
-    out op_SortValue int
+    in p_IsActive int,
+	in p_MenuID int
 )
 BEGIN
-	declare currMenuID int;
-    declare currIsActive int;
-    set currMenuID = cast(p_MenuID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    SELECT `MenuItem`.`ItemName`, 
-		`MenuItem`.`MenuID`,
-        `MenuItem`.`Price`,
-        `MenuItem`.`PriorityScore`,
-		`MenuItem`.`ExecutionTime`,
-        `MenuItem`.`ID`,
-		`MenuItem`.`UUID`,
-		`MenuItem`.`IsActive`,
-        `MenuItem`.`SortValue`
-	FROM `posdb`.`MenuItem` WHERE `MenuItem`.`IsActive` = currIsActive and
-		`MenuItem`.`MenuID` = currMenuID;
+	SELECT `menuitem`.`ID`,
+    `menuitem`.`UUID`,
+    `menuitem`.`SortValue`,
+    `menuitem`.`IsActive`,
+    `menuitem`.`MenuID`,
+    `menuitem`.`ItemName`,
+    `menuitem`.`Price`,
+    `menuitem`.`PriorityScore`,
+    `menuitem`.`ExecutionTime`
+	FROM `posdb`.`MenuItem` WHERE `MenuItem`.`IsActive` = p_IsActive and
+		`MenuItem`.`MenuID` = p_MenuID;
 END$$
 
 drop procedure if exists update_MenuItem$$
 create procedure update_MenuItem
 (
-	IN p_ItemName varchar(64),
-    IN p_MenuID varchar(64),
-    IN p_Price varchar(64),
-    IN p_PriorityScore varchar(64),
-    IN p_ExecutionTime varchar(64),
-	IN p_ID varchar(64),
+	IN p_ID int,
     IN p_UUID varchar(64),
-	IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retVal int
+	IN p_IsActive int,
+    IN p_SortValue int,
+    IN p_MenuID int,
+    IN p_ItemName varchar(64),
+    IN p_Price double,
+    IN p_PriorityScore int,
+    IN p_ExecutionTime int
 )
 BEGIN
-	declare currItemName varchar(64);
-    declare currMenuID int;
-    declare currPrice double;
-    declare currPriorityScore int;
-    declare currExecutionTime int;
-	declare currID int;
-    declare currUUID varchar(64);
-	declare currIsActive int;
-    declare currSortValue int;
-    set currItemName = p_ItemName;
-    set currMenuID = cast(p_MenuID as unsigned);
-    set currPrice = cast(p_Price as decimal(10,2));
-    set currPriorityScore = cast(p_PriorityScore as unsigned);
-    set currExecutionTime = cast(p_ExecutionTIme as unsigned);
-    set currID = cast(p_ID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	UPDATE `posdb`.`MenuItem` SET
-		`SortValue` = currSortValue,
-		`IsActive` = currIsActive,
-		`MenuID` = currMenuID,
-		`ItemName` = currItemName,
-		`Price` = currMenuName
-	WHERE `UUID` = currUUID and `ID` = currID;
-	set retVal = 1;
+		`SortValue` = p_SortValue,
+		`IsActive` = p_IsActive,
+		`MenuID` = p_MenuID,
+		`ItemName` = p_ItemName,
+		`Price` = p_MenuName
+	WHERE `UUID` = p_UUID and `ID` = p_ID;
 END$$
 
 drop procedure if exists delete_MenuItem$$
 create procedure delete_MenuItem
 (
-	in p_ID varchar(64),
+	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    OUT retVal int
+    in p_IsActive int
 )
 BEGIN
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive bit;
-    set currID = cast(p_ID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUUID = p_UUID;
 	UPDATE `posdb`.`MenuItem` SET
-		`IsActive` = currIsActive
-	where `UUID` = currUUID and `ID` = currID;
-    SET retVal = 1;
+		`IsActive` = p_IsActive
+	where `UUID` = p_UUID and `ID` = p_ID;
 END$$
 
 drop procedure if exists create_PosCheck$$
 create procedure create_PosCheck
 (
-	IN p_TableID varchar(64),
-    IN p_UserID varchar(64),
-    IN p_CheckStatus varchar(64),
-    IN p_DateStarted varchar(64),
-    IN p_DateClosed varchar(64),
 	IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retID int
+    IN p_IsActive int,
+    IN p_SortValue int,
+	IN p_TableID int,
+    IN p_UserID int,
+    IN p_CheckStatus int,
+    IN p_DateStarted varchar(64),
+    IN p_DateClosed varchar(64)
 )
 BEGIN
-	declare currTableID int;
-    declare currUserID int;
-    declare currCheckStatus int;
-    declare currDateStarted datetime;
-    declare currDateClosed datetime;
-	declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currTableID = cast(p_TableID as unsigned);
-    set currUserID = cast(p_UserID as unsigned);
-    set currCheckStatus = cast(p_CheckStatus as unsigned);
-    set currDateStarted = cast(p_DateStarted as datetime);
-    set currDateClosed = cast(p_DateClosed as datetime);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	INSERT INTO `posdb`.`poscheck`
 	(
 		`UUID`,
@@ -327,103 +203,67 @@ BEGIN
 		`DateClosed`
 	) VALUES
 	(
-		currUUID,
-        currSortValue,
-        currIsActive,
-        currTableID,
-        currUserID,
-        currCheckStatus,
-        currDateStarted,
-        currDateClosed
+		p_UUID,
+        p_SortValue,
+        p_IsActive,
+        p_TableID,
+        p_UserID,
+        p_CheckStatus,
+        p_DateStarted,
+        p_DateClosed
     );
-	set retID = last_insert_id();
+	select last_insert_id();
 END$$
 
 drop procedure if exists read_PosCheck$$
 create procedure read_PosCheck
 (
-	IN p_IsActive varchar(64),
-    IN p_TableID varchar(64),
-    IN p_UserID varchar(64),
-    IN p_CheckStatus varchar(64),
-	out op_TableID int,
-    out op_UserID int,
-    out op_CheckStatus int,
-    out op_DateStarted datetime,
-    out op_DateClosed datetime,
-    out op_ID int,
-	out op_UUID varchar(64),
-    out op_IsActive int,
-    out op_SortValue int
+	IN p_IsActive int,
+    IN p_TableID int,
+    IN p_UserID int,
+    IN p_CheckStatus int
 )
 BEGIN
-	declare currIsActive int;
-    declare currTableID int;
-    declare currUserID int;
-    declare currCheckStatus int;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currTableID = cast(p_TableID as unsigned);
-    set currUserID = cast(p_UserID as unsigned);
-    set currCheckStatus = cast(p_CheckStatus as unsigned);
-	SELECT `poscheck`.`TableID`,
+	SELECT `poscheck`.`ID`,
+    `poscheck`.`UUID`,
+    `poscheck`.`IsActive`,
+    `poscheck`.`SortValue`,
+    `poscheck`.`TableID`,
     `poscheck`.`UserID`,
     `poscheck`.`CheckStatus`,
     `poscheck`.`DateStarted`,
-    `poscheck`.`DateClosed`,
-    `poscheck`.`ID`,
-    `poscheck`.`UUID`,
-    `poscheck`.`IsActive`,
-    `poscheck`.`SortValue`    
+    `poscheck`.`DateClosed`
 	FROM `posdb`.`poscheck`
-    where `IsActive` = currIsActive and
-    `TableID` = currTableID and
-    `UserID` = currUserID and
-    `CheckStatus` = currCheckStatus;
+    where `IsActive` = p_IsActive and
+    `TableID` = p_TableID and
+    `UserID` = p_UserID and
+    `CheckStatus` = p_CheckStatus;
 END$$
 
 drop procedure if exists delete_PosCheck$$
 create procedure delete_PosCheck
 (
-	in p_ID varchar(64),
+	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    OUT retVal int
+    in p_IsActive int
 )
 BEGIN
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive bit;
-    set currID = cast(p_ID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUUID = p_UUID;
 	UPDATE `posdb`.`poscheck`
 	SET
-		`IsActive` = currIsActive
-	WHERE `ID` = currID and `UUID` = currUUID;
-    SET retVal = 1;
+		`IsActive` = p_IsActive
+	WHERE `ID` = p_ID and `UUID` = p_UUID;
 END$$
 
 drop procedure if exists create_PosTables$$
 create procedure create_PosTables
 (
-	IN p_TableName varchar(64),
-    IN p_StoreID varchar(64),
 	IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retID int
+    IN p_IsActive int,
+    IN p_SortValue int,
+    IN p_TableName varchar(64),
+    IN p_StoreID int
 )
 Begin
-	declare currTableName varchar(64);
-    declare currStoreID int;
-	declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currTableName = p_TableName;
-    set currStoreID = cast(p_StoreID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	INSERT INTO `posdb`.`postables`
 		(`UUID`,
 		`SortValue`,
@@ -431,130 +271,79 @@ Begin
 		`TableName`,
 		`StoreID`)
 	VALUES
-		(currUUID,
-        currSortValue,
-		currIsActive,
-		currTableName,
-		currStoreID);
-	SET retID = last_insert_id();
+		(p_UUID,
+        p_SortValue,
+		p_IsActive,
+		p_TableName,
+		p_StoreID);
+	select last_insert_id();
 END$$
 
 Drop procedure if exists read_PosTable$$
 create procedure read_PosTable
 (
-	IN p_IsActive varchar(64),
-    IN p_StoreID varchar(64),
-    out op_TableName varchar(64),
-    out op_StoreID int,
-    out op_ID int,
-	out op_UUID varchar(64),
-    out op_IsActive int,
-    out op_SortValue int
+	IN p_IsActive int,
+    IN p_StoreID int
 )
 BEGIN
-	declare currIsActive int;
-    declare currStoreID int;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currStoreID = cast(p_StoreID as unsigned);
-	SELECT `postables`.`TableName`,
-    `postables`.`StoreID`,
-    `postables`.`ID`,
+	SELECT `postables`.`ID`,
     `postables`.`UUID`,
     `postables`.`sortValue`,
-    `postables`.`isActive`
-FROM `posdb`.`postables`
-WHERE `StoreID` = currStoreID and
-		`IsActive` = currIsActive;
+    `postables`.`isActive`,
+    `postables`.`TableName`,
+    `postables`.`StoreID`
+	FROM `posdb`.`postables`
+	WHERE `StoreID` = p_StoreID and
+		`IsActive` = p_IsActive;
 END$$
 
 Drop procedure if exists update_PosTable$$
 create procedure update_PosTable
 (
-	IN p_TableName varchar(64),
-    IN p_StoreID varchar(64),
-    IN p_ID varchar(64),
+	IN p_ID int,
     IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retVal int
+    IN p_IsActive int,
+    IN p_SortValue int,
+	IN p_TableName varchar(64),
+    IN p_StoreID int
 )
 BEGIN
-	declare currTableName varchar(64);
-    declare currStoreID int;
-    declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currTableName = p_TableName;
-    set currStoreID = cast(p_StoreID as unsigned);
-    set currID = cast(p_ID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	UPDATE `posdb`.`postables`
 		SET
-			`sortValue` = currSortValue,
-			`isActive` = currIsActive,
-			`TableName` = currTableName,
-			`StoreID` = currStoreID
-		WHERE `ID` = currID AND `UUID` = currUUID;
-	SET retVal = 1;
+			`sortValue` = p_SortValue,
+			`isActive` = p_IsActive,
+			`TableName` = p_TableName,
+			`StoreID` = p_StoreID
+		WHERE `ID` = p_ID AND `UUID` = p_UUID;
 END$$
 
 Drop procedure if exists delete_PosTable$$
 create procedure delete_PosTable
 (
-	in p_ID varchar(64),
+	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    OUT retVal int
+    in p_IsActive int
 )
 BEGIN
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive bit;
-    set currID = cast(p_ID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUUID = p_UUID;
 	UPDATE `posdb`.`postables`
 		SET
-			`IsActive` = currIsActive
-		WHERE `ID` = currID AND `UUID` = currUUID;
-	SET retVal = 1;
+			`IsActive` = p_IsActive
+		WHERE `ID` = p_ID AND `UUID` = p_UUID;
 END$$
 
 drop procedure if exists create_Ticket$$
 create procedure create_Ticket
 (
-	IN p_DateStarted varchar(64),
-    IN p_UserID varchar(64),
-    IN p_TableID varchar(64),
-    IN p_TicketStatus varchar(64),
-    IN p_TicketType varchar(64),
 	IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retID int
+    IN p_IsActive int,
+    IN p_SortValue int,
+    IN p_DateStarted varchar(64),
+    IN p_UserID int,
+    IN p_TableID int,
+    IN p_TicketStatus int,
+    IN p_TicketType int
 )
 BEGIN
-	declare currDateStarted date;
-    declare currUserID int;
-    declare currTableID int;
-    declare currTicketStatus int;
-    declare currTicketType int;
-    declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currDateStarted = cast(p_DateStarted as date);
-    set currUserID = cast(p_UserID as unsigned);
-    set currTableID = cast(p_TableID as unsigned);
-    set currTicketStatus = cast(p_TicketStatus as unsigned);
-    set currTicketType = cast(p_TicketType as unsigned);
-    set currID = cast(p_ID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	INSERT INTO `posdb`.`ticket`
 		(`UUID`,
 		`SortValue`,
@@ -565,146 +354,90 @@ BEGIN
 		`TicketStatus`,
 		`TicketType`)
 	VALUES
-		(currUUID,
-        currSortValue,
-        currIsActive,
-        currDateStarted,
-        currUserID,
-        currTableID,
-        currTicketStatus,
-        currTicketType);
-	SET retID = last_insert_id();
+		(p_UUID,
+        p_SortValue,
+        p_IsActive,
+        p_DateStarted,
+        p_UserID,
+        p_TableID,
+        p_TicketStatus,
+        p_TicketType);
+	select last_insert_id();
 END$$
 
 drop procedure if exists read_Ticket$$
 create procedure read_Ticket
 (
-	IN p_UserID varchar(64),
-    IN p_TableID varchar(64),
-    IN p_IsActive varchar(64),
-	out op_DateStarted date,
-    out op_UserID int,
-    out op_TableID int,
-    out op_TicketStatus int,
-    out op_TicketType int,
-    out op_ID int,
-	out op_UUID varchar(64),
-    out op_IsActive int,
-    out op_SortValue int
+	IN p_IsActive int,
+    IN p_UserID int,
+    IN p_TableID int
 )
 BEGIN
-	declare currUserID int;
-    declare currTableID int;
-    declare currIsActive int;
-    set currUserID = cast(p_UserID as unsigned);
-    set currTableID = cast(p_TableID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-	SELECT `ticket`.`DateStarted`,
+	SELECT `ticket`.`ID`,
+    `ticket`.`UUID`,
+    `ticket`.`sortValue`,
+    `ticket`.`isActive`,
+    `ticket`.`DateStarted`,
     `ticket`.`UserID`,
     `ticket`.`TableID`,
     `ticket`.`TicketStatus`,
-    `ticket`.`TicketType`,
-    `ticket`.`ID`,
-    `ticket`.`UUID`,
-    `ticket`.`isActive`,
-    `ticket`.`sortValue`    
-FROM `posdb`.`ticket`
-    WHERE `UserID` = currUserID and
-    `TableID` = currTableID and
-    `IsActive` = currIsActive;
+    `ticket`.`TicketType`
+	FROM `posdb`.`ticket`
+    WHERE `UserID` = p_UserID and
+    `TableID` = p_TableID and
+    `IsActive` = p_IsActive;
 END$$
 
 drop procedure if exists update_Ticket$$
 create procedure update_Ticket
 (
-	IN p_DateStarted varchar(64),
-    IN p_UserID varchar(64),
-    IN p_TableID varchar(64),
-    IN p_TicketStatus varchar(64),
-    IN p_TicketType varchar(64),
-	IN p_ID varchar(64),
+	IN p_ID int,
     IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retVal int
+    IN p_IsActive int,
+    IN p_SortValue int,
+    IN p_DateStarted varchar(64),
+    IN p_UserID int,
+    IN p_TableID int,
+    IN p_TicketStatus int,
+    IN p_TicketType int
 )
 BEGIN
-	declare currDateStarted date;
-    declare currUserID int;
-    declare currTableID int;
-    declare currTicketStatus int;
-    declare currTicketType int;
-    declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currDateStarted = cast(p_DateStarted as date);
-    set currUserID = cast(p_UserID as unsigned);
-    set currTableID = cast(p_TableID as unsigned);
-    set currTicketStatus = cast(p_TicketStatus as unsigned);
-    set currTicketType = cast(p_TicketType as unsigned);
-    set currID = cast(p_ID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	UPDATE `posdb`.`ticket`
 		SET
-			`SortValue` = currSortValue,
-			`IsActive` = currIsActive,
-			`DateStarted` = currDateStarted,
-			`UserID` = currUserID,
-			`TableID` = currTableID,
-			`TicketStatus` = currTicketStatus,
-			`TicketType` = currTicketType
-		WHERE `ID` = currID and `UUID` = currUUID;
-	SET retVal = 1;
+			`SortValue` = p_SortValue,
+			`IsActive` = p_IsActive,
+			`DateStarted` = p_DateStarted,
+			`UserID` = p_UserID,
+			`TableID` = p_TableID,
+			`TicketStatus` = p_TicketStatus,
+			`TicketType` = p_TicketType
+		WHERE `ID` = p_ID and `UUID` = p_UUID;
 END$$
 
 drop procedure if exists delete_Ticket$$
 create procedure delete_Ticket
 (
-	in p_ID varchar(64),
+	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    OUT retVal int
+    in p_IsActive int
 )
 BEGIN
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive bit;
-    set currID = cast(p_ID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUUID = p_UUID;
 	UPDATE `posdb`.`Ticket`
-		SET `IsActive` = currIsActive
-        WHERE `ID` = currID and `UUID` = currUUID;
-	SET retVal = 1;
+		SET `IsActive` = p_IsActive
+        WHERE `ID` = currID and `UUID` = p_UUID;
 END$$
 
 drop procedure if exists create_TicketItem$$
 create procedure create_TicketItem
 (
-	IN p_TicketID varchar(64),
-    IN p_MenuItemID varchar(64),
-    IN p_ItemPrice varchar(64),
-    IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retID int
+	IN p_UUID varchar(64),
+    IN p_IsActive int,
+    IN p_SortValue int,
+	IN p_TicketID int,
+    IN p_MenuItemID int,
+    IN p_ItemPrice double
 )
 begin
-	declare currTicketID int;
-    declare currMenuItemID int;
-    declare currItemPrice double;
-    declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currTicketID = cast(p_TicketID as unsigned);
-    set currMenuItemID = cast(p_MenuItemID as unsigned);
-    set currItemPrice = cast(p_ItemPrice as decimal(10, 2));
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	Insert into `posdb`.`TicketItem`
     (`UUID`,
     `IsActive`,
@@ -713,136 +446,82 @@ begin
 	`MenuItemID`,
     `ItemPrice`)
     values
-    (currUUID,
+    (p_UUID,
     currIsActive,
     currSortValue,
     currTicketID,
     currMenuItemID,
     currItemPrice);
-	set retID = last_insert_id();
+	select last_insert_id();
 END$$
 
 Drop procedure if exists read_TicketItem$$
 create procedure read_TicketItem
 (
 	IN p_IsActive varchar(64),
-    IN p_TicketID varchar(64),
-    out op_TicketID int,
-    out op_MenuItemID varchar(64),
-    out op_ItemPrice double,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_IsActive int,
-    out op_SortValue int
+    IN p_TicketID varchar(64)
 )
 begin
-	declare currIsActive int;
-    declare currTicketID int;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currTicketID = cast(p_TicketID as unsigned);
-	SELECT `ticketitem`.`TicketID`,
-    `ticketitem`.`MenuItemID`,
-    `ticketitem`.`ItemPrice`,
-    `ticketitem`.`ID`,
+	SELECT `ticketitem`.`ID`,
     `ticketitem`.`UUID`,
+    `ticketitem`.`SortValue`,
     `ticketitem`.`IsActive`,
-    `ticketitem`.`SortValue`
-FROM `posdb`.`ticketitem`
-    where `IsActive` = currIsActive and
-    `TicketID` = currTicketID;
+    `ticketitem`.`TicketID`,
+    `ticketitem`.`MenuItemID`,
+    `ticketitem`.`ItemPrice`
+	FROM `posdb`.`ticketitem`
+    where `IsActive` = p_IsActive and
+    `TicketID` = p_TicketID;
 end$$
 
 Drop procedure if exists update_TicketItem$$
 create procedure update_TicketItem
 (
-	IN p_TicketID varchar(64),
-    IN p_MenuItemID varchar(64),
-    IN p_ItemPrice varchar(64),
-    IN p_ID varchar(64),
+	IN p_ID int,
     IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retVal int
+    IN p_IsActive int,
+    IN p_SortValue int,
+	IN p_TicketID int,
+    IN p_MenuItemID int,
+    IN p_ItemPrice double
 )
 begin
-	declare currTicketID int;
-    declare currMenuItemID int;
-    declare currItemPrice double;
-    declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currTicketID = cast(p_TicketID as unsigned);
-    set currMenuItemID = cast(p_MenuItemID as unsigned);
-    set currItemPrice = cast(p_ItemPrice as decimal(10,2));
-    set currID = cast(p_ID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	update `posdb`.`TicketItem` set
-		`IsActive` = currIsActive,
-        `SortValue` = currSortValue,
-        `TicketID` = currTicketID,
-        `MenuItemID` = currMenuItemID,
-        `ItemPrice` = currItemPrice
-	where `ID` = currID and `UUID` = currUUID;
-    set retVal = 1;
+		`IsActive` = p_IsActive,
+        `SortValue` = p_SortValue,
+        `TicketID` = p_TicketID,
+        `MenuItemID` = p_MenuItemID,
+        `ItemPrice` = p_ItemPrice
+	where `ID` = p_ID and `UUID` = p_UUID;
 end$$
 
 Drop procedure if exists delete_TicketItem$$
 create procedure delete_TicketItem
 (
-	in p_ID varchar(64),
+	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    OUT retVal int
+    in p_IsActive int
 )
 begin
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive bit;
-    set currID = cast(p_ID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUUID = p_UUID;
 	update `posdb`.`TicketItem` set
-		`IsActive` = currIsActive
-	where `ID` = currID and `UUID` = currUUID;
-    set retVal = 1;
+		`IsActive` = p_IsActive
+	where `ID` = p_ID and `UUID` = p_UUID;
 end$$
 
 drop procedure if exists create_TransactionHistory$$
 create procedure create_TransactionHistory
 (
-	IN p_FinalTotal varchar(64),
-    IN p_CheckID varchar(64),
-    IN p_UserID varchar(64),
-    IN p_PaymentType varchar(64),
-    IN p_PaymentStatus varchar(64),
+	IN p_UUID varchar(64),
+    IN p_IsActive int,
+    IN p_SortValue int,
+    IN p_CheckID int,
+    IN p_UserID int,
+    IN p_FinalTotal double,
+    IN p_PaymentType int,
     IN p_PaymentDate varchar(64),
-    IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retID int
+    IN p_PaymentStatus int
 )
 begin
-    declare currFinalTotal double;
-    declare currCheckID int;
-    declare currUserID int;
-    declare currPaymentType int;
-    declare currPaymentStatus int;
-    declare currPaymentDate date;
-    declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currFinalTotal = cast(p_FinalTotal as decimal(10,2));
-    set currCheckID = cast(p_CheckID as unsigned);
-    set currUserID = cast(p_UserID as unsigned);
-    set currPaymentType = cast(p_PaymentType as unsigned);
-    set currPaymentStatus = cast(p_PaymentStatus as unsigned);
-    set currPaymentDate = cast(p_PaymentDate as date);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	insert into `posdb`.`TransactionHistory`
 		(`UUID`,
         `IsActive`,
@@ -854,129 +533,80 @@ begin
         `PaymentStatus`,
         `PaymentDate`)
         values
-        (currUUID,
-        currIsActive,
-        currSortValue,
-        currFinalTotal,
-        currCheckID,
-        currUserID,
-        currPaymentType,
-        currPaymentStatus,
-        currPaymentDate);
-	Set retID = last_insert_id();
+        (p_UUID,
+        p_IsActive,
+        p_SortValue,
+        p_FinalTotal,
+        p_CheckID,
+        p_UserID,
+        p_PaymentType,
+        p_PaymentStatus,
+        p_PaymentDate);
+	Select last_insert_id();
 end$$
 
 drop procedure if exists read_TransactionHistory$$
 create procedure read_TransactionHistory
 (
-	IN p_IsActive varchar(64),
-    IN p_UserID varchar(64),
-    IN p_PaymentStatus varchar(64),
-    out op_FinalTotal double,
-    out op_CheckID int,
-    out op_UserID int,
-    out op_PaymentType int,
-    out op_PaymentStatus int,
-    out op_PaymentDate date,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_IsActive int,
-    out op_SortValue int
+	IN p_IsActive int,
+    IN p_UserID int,
+    IN p_PaymentStatus int
 )
 begin
-	declare currIsActive int;
-    declare currUserID int;
-    declare currPaymentStatus int;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUserID = cast(p_UserID as unsigned);
-    set currPaymentStatus = cast(p_PaymentStatus as unsigned);
-	SELECT 
-    `transactionhistory`.`FinalTotal`,
-    `transactionhistory`.`CheckID`,
-    `transactionhistory`.`UserID`,
-    `transactionhistory`.`PaymentType`,
-    `transactionhistory`.`PaymentStatus`,
-    `transactionhistory`.`PaymentDate`,
-    `transactionhistory`.`ID`,
+	SELECT `transactionhistory`.`ID`,
     `transactionhistory`.`UUID`,
     `transactionhistory`.`IsActive`,
-    `transactionhistory`.`SortValue`
-FROM
-    `posdb`.`transactionhistory`
-WHERE
-    `UserID` = currUserID
-        AND `PaymentStatus` = currPaymentStatus
-        AND `IsActive` = currIsActive;
+    `transactionhistory`.`SortValue`,
+    `transactionhistory`.`CheckID`,
+    `transactionhistory`.`UserID`,
+    `transactionhistory`.`FinalTotal`,
+    `transactionhistory`.`PaymentType`,
+    `transactionhistory`.`PaymentDate`,
+    `transactionhistory`.`PaymentStatus`
+	FROM `posdb`.`transactionhistory`
+    WHERE `UserID` = p_UserID
+	AND `PaymentStatus` = p_PaymentStatus
+    AND `IsActive` = p_IsActive;
 end$$
 
 drop procedure if exists update_TransactionHistory$$
 create procedure update_TransactionHistory
 (
-	IN p_FinalTotal varchar(64),
-    IN p_CheckID varchar(64),
-    IN p_UserID varchar(64),
-    IN p_PaymentType varchar(64),
-    IN p_PaymentStatus varchar(64),
-    IN p_PaymentDate varchar(64),
-    IN p_ID varchar(64),
+	IN p_ID int,
     IN p_UUID varchar(64),
-    IN p_IsActive varchar(64),
-    IN p_SortValue varchar(64),
-    OUT retVal int
+    IN p_IsActive int,
+    IN p_SortValue int,
+    IN p_CheckID int,
+    IN p_UserID int,
+	IN p_FinalTotal double,
+    IN p_PaymentType int,
+    IN p_PaymentDate varchar(64),
+    IN p_PaymentStatus int
 )
 begin
-    declare currFinalTotal double;
-    declare currCheckID int;
-    declare currUserID int;
-    declare currPaymentType int;
-    declare currPaymentStatus int;
-    declare currPaymentDate date;
-    declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currFinalTotal = cast(p_FinalTotal as decimal(10,2));
-    set currCheckID = cast(p_CheckID as unsigned);
-    set currUserID = cast(p_UserID as unsigned);
-    set currPaymentType = cast(p_PaymentType as unsigned);
-    set currPaymentStatus = cast(p_PaymentStatus as unsigned);
-    set currPaymentDate = cast(p_PaymentDate as date);
-    set currID = cast(p_ID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	update `posdb`.`TransactionHistory` set
-        `IsActive` = currIsActive,
-		`SortValue` = currSortValue,
-        `FinalTotal` = currFinalTotal,
-        `CheckID` = currCheckID,
-        `UserID` = currUserID,
-        `PaymentType` = currPaymentType,
-        `PaymentStatus` = currPaymentStatus,
-        `PaymentDate` = currPaymentDate
-        where `ID` = currID and `UUID` = currUUID;
-	set retVal = 1;
+        `IsActive` = p_IsActive,
+		`SortValue` = p_SortValue,
+        `FinalTotal` = p_FinalTotal,
+        `CheckID` = p_CheckID,
+        `UserID` = p_UserID,
+        `PaymentType` = p_PaymentType,
+        `PaymentStatus` = p_PaymentStatus,
+        `PaymentDate` = p_PaymentDate
+        where `ID` = p_ID and `UUID` = p_UUID;
 end$$
 
 drop procedure if exists delete_TransactionHistory$$
 create procedure delete_TransactionHistory
 (
-	in p_ID varchar(64),
+	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    OUT retVal int
+    in p_IsActive int
 )
 begin
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive bit;
-    set currID = cast(p_ID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUUID = p_UUID;
 	update `posdb`.`TransactionHistory` set
-        `IsActive` = currIsActive
-        where `ID` = currID  and `UUID` = currUUID;
-	set retVal = 1;
+        `IsActive` = p_IsActive
+        where `ID` = p_ID  and `UUID` = p_UUID;
 end$$
 
 drop procedure if exists create_UserLU$$
@@ -985,58 +615,35 @@ create procedure create_UserLU
 	in p_UserName varchar(64),
     in p_FirstName varchar(64),
     in p_LastName varchar(64),
-    in p_RoleID varchar(64),
+    in p_RoleID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    in p_SortValue varchar(64),
-    out retID int
+    in p_IsActive int,
+    in p_SortValue int
 )
 begin
-declare currUserName varchar(64);
-declare currFirstName varchar(64);
-declare currLastName varchar(64);
-declare currRoleID int;
-declare currUUID varchar(64);
-declare currIsActive int;
-declare currSortValue int;
-set currUserName = p_UserName;
-set currFirstName = p_FirstName;
-set currLastName = p_LastName;
-set currRoleID = cast(p_RoleID as unsigned);
-set currUUID = p_UUID;
-set currIsActive = cast(p_IsActive as unsigned);
-set currSortValue = cast(p_SortValue as unsigned);
-INSERT INTO `posdb`.`userlu`
-(`UserName`,
-`FirstName`,
-`LastName`,
-`RoleID`,
-`UUID`,
-`IsActive`,
-`SortValue`)
-VALUES
-(currUserName,
-currFirstName,
-currLastName,
-currRoleID,
-currUUID,
-currIsActive,
-currSortValue);
-set retID = last_insert_id();
+	INSERT INTO `posdb`.`userlu`
+	(`UserName`,
+	`FirstName`,
+	`LastName`,
+	`RoleID`,
+	`UUID`,
+	`IsActive`,
+	`SortValue`)
+	VALUES
+	(p_UserName,
+	p_FirstName,
+	p_LastName,
+	p_RoleID,
+	p_UUID,
+	p_IsActive,
+	p_SortValue);
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_UserLU$$
 create procedure read_UserLU
 (
-	in p_UserName varchar(64),
-	out op_UserName varchar(64),
-    out op_FirstName varchar(64),
-    out op_LastName varchar(64),
-    out op_RoleID int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_IsActive int,
-    out op_SortValue int
+	in p_UserName varchar(64)
 )
 begin
 SELECT `userlu`.`UserName`,
@@ -1054,102 +661,56 @@ end$$
 drop procedure if exists update_UserLU$$
 create procedure update_UserLU
 (
+	in p_ID int,
 	in p_UserName varchar(64),
     in p_FirstName varchar(64),
     in p_LastName varchar(64),
-    in p_RoleID varchar(64),
-    in p_ID varchar(64),
+    in p_RoleID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    in p_SortValue varchar(64),
-    out retVal int
+    in p_IsActive int,
+    in p_SortValue int
 )
 begin
-	declare currUserName varchar(64);
-    declare currFirstName varchar(64);
-    declare currLastName varchar(64);
-    declare currRoleID int;
-    declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive int;
-    declare currSortValue int;
-    set currUserName = p_UserName;
-    set currFirstName = p_FirstName;
-    set currLastName = p_LastName;
-    set currRoleID = cast(p_RoleID as unsigned);
-    set currID = cast(p_ID as unsigned);
-    set currUUID = p_UUID;
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currSortValue = cast(p_SortValue as unsigned);
 	UPDATE `posdb`.`userlu`
 	SET
-		`UUID` = currUUID,
-		`UserName` = currUserName,
-		`FirstName` = currFirstName,
-		`LastName` = currLastName,
-		`RoleID` = currRoleID,
-        `IsActive` = currIsActive,
-        `SortValue` = currSortValue
-	WHERE `ID` = currID;
-	set retVal = 1;
+		`UUID` = p_UUID,
+		`UserName` = p_UserName,
+		`FirstName` = p_FirstName,
+		`LastName` = p_LastName,
+		`RoleID` = p_RoleID,
+        `IsActive` = p_IsActive,
+        `SortValue` = p_SortValue
+	WHERE `ID` = p_ID;
 end$$
 
 drop procedure if exists delete_UserLU$$
 create procedure delete_UserLU
 (
-	in p_ID varchar(64),
+	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive varchar(64),
-    OUT retVal int
+    in p_IsActive int
 )
 begin
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currIsActive bit;
-    set currID = cast(p_ID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currUUID = p_UUID;
 	UPDATE `posdb`.`userlu`
 	SET
-		`IsActive` = currIsActive
-	WHERE `ID` = currID;
-	set retVal = 1;
+		`IsActive` = p_IsActive
+	WHERE `ID` = p_ID;
 end$$
 
 drop procedure if exists create_inventoryaudit$$
 create procedure create_inventoryaudit
 (
     in p_UUID varchar(64),
-    in p_SortValue varchar(64),
-    in p_IsActive varchar(64),
+    in p_SortValue int,
+    in p_IsActive int,
+    in p_StoreID int,
     in p_DatePerformed varchar(64),
-    in p_StoreID varchar(64),
-    in p_UserID varchar(64),
-    in p_StockItemID varchar(64),
-    in p_Quantity varchar(64),
-    in p_Unit varchar(16),
-    out retID int
+    in p_UserID int,
+    in p_StockItemID int,
+    in p_Quantity double,
+    in p_Unit varchar(16)
 )
 begin
-    declare currUUID varchar(64);
-    declare currSortValue int;
-    declare currIsActive int;
-    declare currDatePerformed datetime;
-    declare currStoreID int;
-    declare currUserID int;
-    declare currStockItemID int;
-    declare currQuantity double;
-    declare currUnit varchar(16);
-    
-    set currUUID = p_UUID;
-    set currSortValue = cast(p_SortValue as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currDatePerformed = cast(p_currDatePerformed as datetime);
-    set currStoreID = cast(p_StoreID as unsigned);
-    set currUserID = cast(p_UserID as unsigned);
-    set currStockItemID = cast(p_StockItemID as unsigned);
-    set currQuantity = cast(p_Quantity as decimal(10,2));
-    set currUnit = p_Unit;
     INSERT INTO `posdb`.`inventoryaudit`
 		(`UUID`,
 		`SortValue`,
@@ -1161,39 +722,25 @@ begin
 		`Quantity`,
 		`Unit`)
 	VALUES
-	(currUUID,
-	currSortValue,
-	currIsActive,
-	currDatePerformed,
-	currStoreID,
-	currUserID,
-	currStockItemID,
-	currQuantity,
-	currUnit);
-	set retID = last_insert_id();
+	(p_UUID,
+	p_SortValue,
+	p_IsActive,
+	p_DatePerformed,
+	p_StoreID,
+	p_UserID,
+	p_StockItemID,
+	p_Quantity,
+	p_Unit);
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_inventoryaudit$$
 create procedure read_inventoryaudit
 (
-	in p_StoreID varchar(64),
-    in p_IsActive varchar(64),
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_StoreID int,
-    out op_DatePerformed datetime,
-    out op_UserID int,
-    out op_StockItemID int,
-    out op_Quantity double,
-    out op_Unit varchar(16)
+	in p_IsActive int,
+    in p_StoreID int
 )
 begin
-	declare currStoreID int;
-    declare currIsActive int;
-    set currStoreID = cast(p_StoreID as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
 	SELECT `inventoryaudit`.`ID`,
     `inventoryaudit`.`UUID`,
     `inventoryaudit`.`SortValue`,
@@ -1205,8 +752,8 @@ begin
     `inventoryaudit`.`Quantity`,
     `inventoryaudit`.`Unit`
 	FROM `posdb`.`inventoryaudit`
-    where `inventoryaudit`.`StoreID` = currStoreID
-    and `inventoryaudit`.`IsActive` = currIsActive;
+    where `inventoryaudit`.`StoreID` = p_StoreID
+    and `inventoryaudit`.`IsActive` = p_IsActive;
 end$$
 
 drop procedure if exists update_inventoryaudit$$
@@ -1221,42 +768,21 @@ create procedure update_inventoryaudit
     in p_UserID varchar(124),
     in p_StockItemID varchar(124),
     in p_Quantity varchar(124),
-    in p_Unit varchar(124),
-    out retval int
+    in p_Unit varchar(124)
 )
 begin
-	declare currID int;
-    declare currUUID varchar(64);
-    declare currSortValue int;
-    declare currIsActive int;
-    declare currStoreID int;
-    declare currDatePerformed datetime;
-    declare currUserID int;
-    declare currStockItemID int;
-    declare currQuantity double;
-    declare currUnit varchar(12);
-    set currID = cast(p_ID as unsigned);
-    set currSortValue = cast(p_currSortValue as unsigned);
-    set currIsActive = cast(p_IsActive as unsigned);
-    set currStoreID = cast(p_StoreID as unsigned);
-    set currDatePerformed = cast(p_DatePerformed as datetime);
-    set currUserID = cast(p_UserID as unsigned);
-    set currStockItemID = cast(p_StockItemID as unsigned);
-    set currQuantity = cast(p_Quantity as decimal(10,2));
-
 	UPDATE `posdb`.`inventoryaudit`
 	SET
 		`UUID` = p_UUID,
-		`SortValue` = currSortValue,
-		`IsActive` = currIsActive,
-		`DatePerformed` = currDatePerformed,
-		`StoreID` = currStoreID,
-		`UserID` = currUserID,
-		`StockItemID` = currStockItemID,
-		`Quantity` = currQuantity,
+		`SortValue` = p_SortValue,
+		`IsActive` = p_IsActive,
+		`DatePerformed` = p_DatePerformed,
+		`StoreID` = p_StoreID,
+		`UserID` = p_UserID,
+		`StockItemID` = p_StockItemID,
+		`Quantity` = p_Quantity,
 		`Unit` = p_Unit
-	WHERE `ID` = currID;
-	set retVal = 1;
+	WHERE `ID` = p_ID;
 end$$
 
 drop procedure if exists delete_inventoryaudit$$
@@ -1264,15 +790,13 @@ create procedure delete_inventoryaudit
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retval int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`inventoryaudit`
 	SET
 		`IsActive` = p_IsActive
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_itemssold$$
@@ -1284,8 +808,7 @@ create procedure create_itemssold
     in p_TicketID int,
     in p_MenuItem int,
     in p_CurrDatetime datetime,
-    in p_Quantity int,
-    out retID int
+    in p_Quantity int
 )
 begin
 	INSERT INTO `posdb`.`itemssold`
@@ -1307,22 +830,14 @@ begin
         p_CurrDatetime,
         p_Quantity
 	);
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_itemssold$$
 create procedure read_itemssold
 (
-	in p_MenuItemID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_TicketItemID int,
-    out op_MenuItemID int,
-    out op_CurrDateTime datetime,
-    out op_Quantity int
+	in p_IsActive int,
+	in p_MenuItemID int
 )
 begin
 SELECT `itemssold`.`ID`,
@@ -1348,8 +863,7 @@ create procedure update_itemssold
     in p_TicketID int,
     in p_MenuItemID int,
     in p_CurrDatetime datetime,
-    in p_Quantity int,
-    out retVal int
+    in p_Quantity int
 )
 begin
 	UPDATE `posdb`.`itemssold`
@@ -1362,7 +876,6 @@ begin
 		`CurrDatetime` = p_CurrDatetime,
 		`Quantity` = p_Quantity
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_itemssold$$
@@ -1370,15 +883,13 @@ create procedure delete_itemssold
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`itemssold`
 	SET
 		`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_job$$
@@ -1389,8 +900,7 @@ create procedure create_job
     in p_IsActive int,
     in p_Wage double,
     in p_RoleID int,
-    in p_UserID int,
-    out retID int
+    in p_UserID int
 )
 begin
 	INSERT INTO `posdb`.`job`
@@ -1410,21 +920,14 @@ begin
         p_RoleID,
         p_UserID
 	);
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_job$$
 create procedure read_job
 (
-	in p_UserID int,
-    in p_IsAcitve int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_Wage double,
-    out op_RoleID int,
-    out op_UserID int
+	in p_IsAcitve int,
+    in p_UserID int
 )
 begin
 	SELECT `job`.`ID`,
@@ -1448,8 +951,7 @@ create procedure update_job
     in p_IsActive int,
     in p_Wage double,
     in p_RoleID int,
-    in p_UserID int,
-    out retVal int
+    in p_UserID int
 )
 begin
 	UPDATE `posdb`.`job`
@@ -1461,7 +963,6 @@ begin
 	`RoleID` = p_RoleID,
 	`UserID` = p_UserID
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_job$$
@@ -1469,15 +970,13 @@ create procedure delete_job
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`job`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_payperiod$$
@@ -1487,9 +986,8 @@ create procedure create_payperiod
     in p_SortValue int,
     in p_IsActive int,
     in p_StoreID int,
-    in p_DateStart datetime,
-    in p_DateEnd datetime,
-    out retID int
+    in p_DateStart varchar(64),
+    in p_DateEnd varchar(64)
 )
 begin
 	INSERT INTO `posdb`.`payperiod`
@@ -1510,21 +1008,14 @@ begin
 		p_DateStart,
 		p_DateEnd
     );
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_payperiod$$
 create procedure read_payperiod
 (
-	in p_StoreID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_StoreID int,
-    out op_DateStart datetime,
-    out op_DateEnd datetime
+	in p_IsActive int,
+    in p_StoreID int
 )
 begin
 
@@ -1549,9 +1040,8 @@ create procedure update_payperiod
     in p_SortValue int,
     in p_IsActive int,
     in p_StoreID int,
-    in p_DateStart datetime,
-    in p_DateEnd datetime,
-    out retVal int
+    in p_DateStart varchar(64),
+    in p_DateEnd varchar(64)
 )
 begin
 	UPDATE `posdb`.`payperiod`
@@ -1563,7 +1053,6 @@ begin
 	`DateStart` = p_DateStart,
 	`DateEnd` = p_DateEnd
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_payperiod$$
@@ -1571,15 +1060,13 @@ create procedure delete_payperiod
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`payperiod`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_punch$$
@@ -1589,9 +1076,8 @@ create procedure create_punch
     in p_SortValue int,
     in p_IsActive int,
     in p_ShiftID int,
-    in p_ClockIn datetime,
-    in p_ClockOut datetime,
-    out retID int
+    in p_ClockIn varchar(64),
+    in p_ClockOut varchar(64)
 )
 begin
 	INSERT INTO `posdb`.`punch`
@@ -1612,21 +1098,14 @@ begin
             p_ClockIn,
             p_ClockOut
 		);
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_punch$$
 create procedure read_punch
 (
-	in p_ShiftID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_ShiftID int,
-    out op_ClockIn datetime,
-    out op_ClockOut datetime
+	in p_IsActive int,
+	in p_ShiftID int
 )
 begin
 	SELECT `punch`.`ID`,
@@ -1650,8 +1129,7 @@ create procedure update_punch
     in p_IsActive int,
     in p_ShiftID int,
     in p_ClockIn datetime,
-    in p_ClockOut datetime,
-    out retVal int
+    in p_ClockOut datetime
 )
 begin
 	UPDATE `posdb`.`punch`
@@ -1663,7 +1141,6 @@ begin
 	`ClockIn` = p_ClockIn,
 	`ClockOut` = p_ClockOut
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_punch$$
@@ -1671,15 +1148,13 @@ create procedure delete_punch
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`punch`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_recipe$$
@@ -1688,8 +1163,7 @@ create procedure create_recipe
 	in p_UUID varchar(64),
     in p_SortValue int,
     in p_IsActive int,
-    in p_MenuItemID int,
-    out retID int
+    in p_MenuItemID int
 )
 begin
 	INSERT INTO `posdb`.`recipe`
@@ -1706,19 +1180,14 @@ begin
         p_IsActive,
         p_MenuItemID
     );
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_recipe$$
 create procedure read_recipe
 (
-	in p_MenuItemID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_MenuItemID int
+	in p_IsActive int,
+    in p_MenuItemID int
 )
 begin
 	SELECT `recipe`.`ID`,
@@ -1738,8 +1207,7 @@ create procedure update_recipe
     in p_UUID varchar(64),
     in p_SortValue int,
     in p_IsActive int,
-    in p_MenuItemID int,
-    out retVal int
+    in p_MenuItemID int
 )
 begin
 	UPDATE `posdb`.`recipe`
@@ -1749,7 +1217,6 @@ begin
 	`IsActive` = p_IsActive,
 	`MenuItemID` = p_MenuItemID
 	WHERE `ID` = p_ID;
-    set retVal = 1;
 end$$
 
 drop procedure if exists delete_recipe$$
@@ -1757,15 +1224,13 @@ create procedure delete_recipe
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`recipe`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-    set retVal = 1;
 end$$
 
 drop procedure if exists create_schedule$$
@@ -1776,8 +1241,7 @@ create procedure create_schedule
     in p_IsActive int,
     in p_PayPeriodID int,
     in p_JobID int,
-    in p_UserID int,
-    out retID int
+    in p_UserID int
 )
 begin
 	INSERT INTO `posdb`.`schedule`
@@ -1797,21 +1261,14 @@ begin
         p_JobID,
         p_UserID
     );
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_schedule$$
 create procedure read_schedule
 (
-	in p_PayPeriodID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_PayPeriodID int,
-    out op_JobID int,
-    out op_UserID int
+	in p_IsActive int,
+    in p_PayPeriodID int
 )
 begin
 	SELECT `schedule`.`ID`,
@@ -1835,8 +1292,7 @@ create procedure update_schedule
     in p_IsActive int,
     in p_PayPeriodID int,
     in p_JobID int,
-    in p_UserID int,
-    out retVal int
+    in p_UserID int
 )
 begin
 	UPDATE `posdb`.`schedule`
@@ -1848,7 +1304,6 @@ begin
 	`JobID` = p_JobID,
 	`Employeeid` = p_UserID
 	WHERE `schedule`.`ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_schedule$$
@@ -1856,15 +1311,13 @@ create procedure delete_schedule
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`schedule`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_shift$$
@@ -1874,9 +1327,8 @@ create procedure create_shift
     in p_SortValue int,
     in p_IsActive int,
     in p_ScheduleID int,
-    in p_DateTimeStart datetime,
-    in p_DateTimeEnd datetime,
-    out retID int
+    in p_DateTimeStart varchar(64),
+    in p_DateTimeEnd varchar(64)
 )
 begin
 	INSERT INTO `posdb`.`shift`
@@ -1897,21 +1349,14 @@ begin
         p_DateTimeStart,
         p_DateTimeEnd
     );
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_shift$$
 create procedure read_shift
 (
-	in p_ScheduleID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_ScheduleID int,
-    out op_DateTimeStart datetime,
-    out op_DateTimeEnd datetime
+	in p_IsActive int,
+    in p_ScheduleID int
 )
 begin
 	SELECT `shift`.`ID`,
@@ -1934,9 +1379,8 @@ create procedure update_shift
     in p_SortValue int,
     in p_IsActive int,
     in p_ScheduleID int,
-    in p_DateTimeStart datetime,
-    in p_DateTimeEnd datetime,
-    out retVal int
+    in p_DateTimeStart varchar(64),
+    in p_DateTimeEnd varchar(64)
 )
 begin
 	UPDATE `posdb`.`shift`
@@ -1948,7 +1392,6 @@ begin
 	`DateTimeStart` = p_DateTimeStart,
 	`DateTimeEnd` = p_DateTimeEnd
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_shift$$
@@ -1956,15 +1399,13 @@ create procedure delete_shift
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`shift`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_stockitem$$
@@ -1976,8 +1417,7 @@ create procedure create_stockitem
     in p_StoreID int,
     in p_StockItemName varchar(128),
     in p_Quantity double,
-    in p_Unit varchar(16),
-    out retID int
+    in p_Unit varchar(16)
 )
 begin
 	INSERT INTO `posdb`.`stockitem`
@@ -2000,22 +1440,14 @@ begin
         p_Quantity,
         p_Unit
 	);
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_stockitem$$
 create procedure read_stockitem
 (
-	in p_StoreID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_StoreID int,
-    out op_StockItemName varchar(128),
-    out op_Quantity double,
-    out op_Unit varchar(16)
+	in p_IsActive int,
+    in p_StoreID int
 )
 begin
 	SELECT `stockitem`.`ID`,
@@ -2041,8 +1473,7 @@ create procedure update_stockitem
     in p_StoreID int,
     in p_StockItemName varchar(128),
     in p_Quantity double,
-    in p_Unit varchar(16),
-    out retVal int
+    in p_Unit varchar(16)
 )
 begin
 	UPDATE `posdb`.`stockitem`
@@ -2055,7 +1486,6 @@ begin
 	`Quantity` = p_Quantity,
 	`Unit` = p_Unit
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_stockitem$$
@@ -2063,15 +1493,13 @@ create procedure delete_stockitem
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`stockitem`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_stockpurchase$$
@@ -2082,9 +1510,8 @@ create procedure create_stockpurchase
     in p_IsActive int,
     in p_SellerID int,
     in p_StockItemID int,
-    in p_DateArrival datetime,
-    in p_Cost double,
-    out retID int
+    in p_DateArrival varchar(64),
+    in p_Cost double
 )
 begin
 	INSERT INTO `posdb`.`stockpurchase`
@@ -2105,22 +1532,14 @@ begin
     p_StockItemID,
     p_DateArrival,
     p_Cost);
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_stockpurchase$$
 create procedure read_stockpurchase
 (
-	in p_StockItemID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_SellerID int,
-    out op_StockItemID int,
-    out op_DateArrival datetime,
-    out op_Cost double
+	in p_IsActive int,
+    in p_StockItemID int
 )
 begin
 	SELECT `stockpurchase`.`ID`,
@@ -2145,9 +1564,8 @@ create procedure update_stockpurchase
     in p_IsActive int,
     in p_SellerID int,
     in p_StockItemID int,
-    in p_DateArrival datetime,
-    in p_Cost double,
-    out retVal int
+    in p_DateArrival varchar(64),
+    in p_Cost double
 )
 begin
 	UPDATE `posdb`.`stockpurchase`
@@ -2160,7 +1578,6 @@ begin
 	`DateArrival` = p_DateArrival,
 	`Cost` = p_Cost
 	WHERE `ID` = p_ID;
-    set retVal = 1;
 end$$
 
 drop procedure if exists delete_stockpurchase$$
@@ -2168,15 +1585,13 @@ create procedure delete_stockpurchase
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`stockpurchase`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-    set retVal = 1;
 end$$
 
 drop procedure if exists create_stockseller$$
@@ -2187,8 +1602,7 @@ create procedure create_stockseller
     in p_IsActive int,
     in p_StoreID int,
     in p_StockSellerName varchar(128),
-    in p_StockSellerType varchar(128),
-    out retID int
+    in p_StockSellerType varchar(128)
 )
 begin
 	INSERT INTO `posdb`.`stockseller`
@@ -2205,21 +1619,14 @@ begin
     p_StoreID,
     p_StockSellerName,
     p_StockSellerType);
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_stockseller$$
 create procedure read_stockseller
 (
-	in p_StoreID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_StoreID int,
-    out op_StockSellerName varchar(128),
-    out op_StockSellerType varchar(128)
+	in p_IsActive int,
+    in p_StoreID int
 )
 begin
 	SELECT `stockseller`.`ID`,
@@ -2243,8 +1650,7 @@ create procedure update_stockseller
     in p_IsActive int,
     in p_StoreID int,
     in p_StockSellerName varchar(128),
-    in p_StockSellerType varchar(128),
-    out retVal int
+    in p_StockSellerType varchar(128)
 )
 begin
 	UPDATE `posdb`.`stockseller`
@@ -2256,7 +1662,6 @@ begin
 	`StockSellerName` = p_StockSellerName,
 	`StockSellerType` = p_StockSellerType
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_stockseller$$
@@ -2264,15 +1669,13 @@ create procedure delete_stockseller
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`stockseller`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists create_wastelog$$
@@ -2281,11 +1684,10 @@ create procedure create_wastelog
 	in p_UUID varchar(64),
     in p_SortValue int,
     in p_IsActive int,
-    in p_CurrDatetime datetime,
+    in p_CurrDatetime varchar(64),
     in p_StockItemID int,
     in p_Quantity double,
-    in p_Unit varchar(16),
-    out retID int
+    in p_Unit varchar(16)
 )
 begin
 	INSERT INTO `posdb`.`wastelog`
@@ -2304,22 +1706,14 @@ begin
     p_StockItemID,
     p_Quantity,
     p_Unit);
-	set retID = last_insert_id();
+	select last_insert_id();
 end$$
 
 drop procedure if exists read_wastelog$$
 create procedure read_wastelog
 (
-	in p_StockItemID int,
-    in p_IsActive int,
-    out op_ID int,
-    out op_UUID varchar(64),
-    out op_SortValue int,
-    out op_IsActive int,
-    out op_CurrDatetime datetime,
-    out op_StockItemID int,
-    out op_Quantity double,
-    out op_Unit varchar(16)
+	in p_IsActive int,
+    in p_StockItemID int
 )
 begin
 	SELECT `wastelog`.`ID`,
@@ -2342,11 +1736,10 @@ create procedure update_wastelog
     in p_UUID varchar(64),
     in p_SortValue int,
     in p_IsActive int,
-    in p_CurrDatetime datetime,
+    in p_CurrDatetime varchar(64),
     in p_StockItemID int,
     in p_Quantity double,
-    in p_Unit varchar(16),
-    out retVal int
+    in p_Unit varchar(16)
 )
 begin
 	UPDATE `posdb`.`wastelog`
@@ -2359,7 +1752,6 @@ begin
 	`Quantity` = p_Quantity,
 	`Unit` = p_Unit
 	WHERE `ID` = p_ID;
-	set retVal = 1;
 end$$
 
 drop procedure if exists delete_wastelog$$
@@ -2367,13 +1759,11 @@ create procedure delete_wastelog
 (
 	in p_ID int,
     in p_UUID varchar(64),
-    in p_IsActive int,
-    out retVal int
+    in p_IsActive int
 )
 begin
 	UPDATE `posdb`.`wastelog`
 	SET
 	`IsActive` = p_IsActive
 	WHERE `ID` = p_ID and `UUID` = p_UUID;
-	set retVal = 1;
 end$$
