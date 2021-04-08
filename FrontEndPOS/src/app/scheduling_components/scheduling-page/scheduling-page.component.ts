@@ -6,8 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scheduling-page.component.scss']
 })
 export class SchedulingComponent implements OnInit {
+  
+  
 
-  constructor() { }
+  constructor() {
+    
+   }
 
   ngOnInit(): void {
   }
