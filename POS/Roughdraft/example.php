@@ -67,7 +67,7 @@
             <p>Placeholder content for the tab panel. This one relates to the contact tab. Her love is like a drug. All my girls vintage Chanel baby. Got a motel and built a fort out of sheets. 'Cause she's the muse and the artist. (This is how we do) So you wanna play with magic. So just be sure before you give it all to me. I'm walking, I'm walking on air (tonight). Skip the talk, heard it all, time to walk the walk. Catch her if you can. Stinging like a bee I earned my stripes.</p>
           </div>
         </div>
-        </div>
+  </div>
 
 /* (in Menu Column)
 | This snippet of code makes an organized carddeck of cards for 
