@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { MenuItem } from './menu-item';
 import { Transporter } from './transporter';
@@ -10,7 +10,9 @@ import { AppSettings } from '../../app.setting';
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST'
   })
 }
 
@@ -34,7 +36,7 @@ export class InventoryService {
   public getTransporterdata(): Observable<Transporter [] > {
     let params = new HttpParams().set('userId', "1");
     //let headers = new HttpHeaders().set("Authroization", "auth-token");
-    return this.http.get<Transporter[]>(`${AppSettings.BASE_URL}/users`)
+    return this.http.get<Transporter[]>(`${AppSettings.BASE_URL}`)
   }
 
   public createPost(inventoryClass:MenuItem ): Observable<MenuItem> {
@@ -47,11 +49,19 @@ export class InventoryService {
   }
 
   public createTransporterPost(transporter:Transporter ): Observable<Transporter> {
-    return this.http.post<Transporter>("api", transporter, httpOptions).pipe(
-        //.catchError(err => {
-          //console.log(err)
-          //eturn Observable.of(err)
-          // })
-    )
+    return this.http.post<Transporter>("http://localhost/POSAPI/", transporter, httpOptions)
   }
+
+  public getTransporterPost(transporter:Transporter ): Observable<HttpResponse<Transporter>> {
+    return this.http.post<Transporter>("http://localhost/POSAPI/", transporter, {observe: 'response'})
+  }
+
+  decodeTransporter(transporter: Transporter): Transporter{
+    return {
+      function:    transporter.function,
+      object:     transporter.object,
+      payload:    transporter.payload
+    };
+  }
+  
 }
