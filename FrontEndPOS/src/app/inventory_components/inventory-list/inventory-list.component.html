@@ -9,12 +9,12 @@
             <td>Price</td>
             <td>Priority Score</td>
         </thead>
-        <tr *ngFor='let menuitem of inventoryItems' [attr.id]="menuitem.menuID">
+        <tr *ngFor='let transporter of transporterArr' [attr.id]="transporter.payload[0]">
             <td> <input type="checkbox" id="myCheck"> </td>
-            <td>{{ menuitem.menuID }}</td>
-            <td>{{ menuitem.itemName }}</td>
-            <td>{{ menuitem.price }}</td>
-            <td>{{ menuitem.priorityScore }}</td>
+            <td>{{ transporterArr[0].payload[0] }}</td>
+            <td>{{ transporter.payload[4] }}</td>
+            <td>{{ transporter.payload[5] }}</td>
+            <td>{{ transporter.payload[6] }}</td>
             <button id="remove" (click)="deleteRow(menuitem.menuID)"> Delete</button>
         </tr>
     </table>
@@ -22,3 +22,5 @@
 <button type="button" (click) = "createPost()"> Create Post</button>
 <button type="button" (click) = "addBLT()"> Add BLT </button>
 <button type="button" (click) = "addItem()"> Add Item </button>
+{{ tempTransporter | async | json }}
+

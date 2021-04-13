@@ -13,6 +13,7 @@ export class InventoryListComponent implements OnInit {
   public inventoryItems:MenuItem[] = [];
   public transporterArr:Transporter[] = [];
   public error:string = "error detected";
+  public tempTransporter;
 
   constructor(private inventoryService: InventoryService) { }
 
@@ -48,18 +49,22 @@ export class InventoryListComponent implements OnInit {
       }
 
     ]
-    //this.inventoryService.getdata().subscribe(data => { this.inventoryItems = data;})
-    //this.inventoryService.getTransporterdata().subscribe(data => { this.transporterArr = data;})
 
+    //this.inventoryService.getdata().subscribe(data => { this.inventoryItems = data;})
+    //this.inventoryService.getTransporterdata()
+    //this.inventoryService.getTransporterdata().subscribe(data => { this.transporterArr = data;})
     const data : Transporter = {
       function: "read",
       object: "menuitem",
-      payload: []
+      payload: [
+        1,
+        1
+      ]
     }
 
-    this.inventoryService.createTransporterPost(data).subscribe(transporter => { 
-      this.transporterArr.push(transporter);
-    });
+    this.tempTransporter = this.inventoryService.createTransporterPost(data)
+    this.transporterArr = this.tempTransporter;
+
   }
 
   createPost(){
@@ -107,11 +112,10 @@ export class InventoryListComponent implements OnInit {
       function: "create",
       object: "menuitem",
       payload: [
-        67805,
         56789,
         1,
         1,
-        3456,
+        3,
         "Grilled Cheese",
         5.99,
         0,
