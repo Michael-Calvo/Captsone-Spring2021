@@ -8,9 +8,8 @@ header("Access-Control-Allow-Methods: GET, POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// get posted data
+//get posted data
 $data = json_decode(file_get_contents("php://input"));
-error_log($data);
 
 //call up the util
 $api = new apiUtil();
@@ -29,7 +28,7 @@ if(
 
     //process the request
     if ($data->function == API_CREATE) {
-        $api->creatObj($data->object, $data->payload);
+        $api->createObj($data->object, $data->payload);
     }
     if ($data->function == API_READ) {
         $api->readObj($data->object, $data->payload);

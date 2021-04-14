@@ -15,9 +15,18 @@ define("UPDATE_PARAM", " = ?");
 define("DELETE_START", "DELETE FROM ");
 
 //general sql constants
-define("PARAM_SPACER", "?");
+
 define("ID_END", "WHERE ? = ?;");
 define("PARAM_SEP", ", ");
 define("NORM_END", ";");
 define("PAR_END", ");");
+
+define("SP_START", "CALL posdb.");
+define("SP_CREATE", "create_");
+define("SP_READ", "read_");
+define("SP_UPDATE", "update_");
+define("SP_DELETE", "delete_");
+define("SP_PARAM_START", "(");
+define("SP_PARAM_SEP", ",");
+define("SP_END", ");");
 ?>

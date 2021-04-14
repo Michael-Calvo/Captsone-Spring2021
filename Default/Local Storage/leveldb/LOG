@@ -1,0 +1,34 @@
+2021/04/07-16:36:05.745 6dd8 Reusing MANIFEST C:\Users\Richard\Documents\GitHub\Captsone-Spring2021\Default\Local Storage\leveldb/MANIFEST-000001
+2021/04/08-11:43:25.722 6598 Level-0 table #5: started
+2021/04/08-11:43:25.726 6598 Level-0 table #5: 17514 bytes OK
+2021/04/08-11:43:25.729 6598 Delete type=0 #3
+2021/04/09-20:36:23.894 2930 Level-0 table #7: started
+2021/04/09-20:36:23.901 2930 Level-0 table #7: 12249 bytes OK
+2021/04/09-20:36:23.904 2930 Delete type=0 #4
+2021/04/10-16:36:25.992 2bdc Level-0 table #9: started
+2021/04/10-16:36:25.996 2bdc Level-0 table #9: 11564 bytes OK
+2021/04/10-16:36:26.001 2bdc Delete type=0 #6
+2021/04/11-08:36:28.634 2f88 Level-0 table #11: started
+2021/04/11-08:36:28.642 2f88 Level-0 table #11: 11022 bytes OK
+2021/04/11-08:36:28.647 2f88 Delete type=0 #8
+2021/04/11-20:36:29.067 8790 Level-0 table #13: started
+2021/04/11-20:36:29.072 8790 Level-0 table #13: 9731 bytes OK
+2021/04/11-20:36:29.075 8790 Delete type=0 #10
+2021/04/12-08:36:32.443 7f90 Level-0 table #15: started
+2021/04/12-08:36:32.449 7f90 Level-0 table #15: 10288 bytes OK
+2021/04/12-08:36:32.451 7f90 Delete type=0 #12
+2021/04/12-08:36:32.451 7f90 Compacting 4@0 + 1@1 files
+2021/04/12-08:36:32.455 7f90 Generated table #16@0: 20 keys, 4216 bytes
+2021/04/12-08:36:32.455 7f90 Compacted 4@0 + 1@1 files => 4216 bytes
+2021/04/12-08:36:32.456 7f90 compacted to: files[ 0 1 1 0 0 0 0 ]
+2021/04/12-08:36:32.457 7f90 Delete type=2 #7
+2021/04/12-08:36:32.457 7f90 Delete type=2 #9
+2021/04/12-08:36:32.457 7f90 Delete type=2 #11
+2021/04/12-08:36:32.457 7f90 Delete type=2 #13
+2021/04/12-08:36:32.457 7f90 Delete type=2 #15
+2021/04/12-16:36:32.578 7f38 Level-0 table #18: started
+2021/04/12-16:36:32.583 7f38 Level-0 table #18: 11200 bytes OK
+2021/04/12-16:36:32.585 7f38 Delete type=0 #14
+2021/04/13-04:36:35.280 6570 Level-0 table #20: started
+2021/04/13-04:36:35.286 6570 Level-0 table #20: 11831 bytes OK
+2021/04/13-04:36:35.289 6570 Delete type=0 #17
