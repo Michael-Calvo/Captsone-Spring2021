@@ -1,5 +1,0 @@
-2021/04/07-16:36:41.821 3910 Reusing MANIFEST C:\Users\Richard\Documents\GitHub\Captsone-Spring2021\Default\IndexedDB\http_localhost_4200.indexeddb.leveldb/MANIFEST-000001
-2021/04/13-11:01:58.750 3848 Level-0 table #5: started
-2021/04/13-11:01:58.753 3848 Level-0 table #5: 24918 bytes OK
-2021/04/13-11:01:58.756 3848 Delete type=0 #3
-2021/04/13-11:01:58.756 3848 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
