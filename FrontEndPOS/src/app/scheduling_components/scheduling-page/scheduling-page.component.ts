@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { formatDate } from '@angular/common';
-import { ClockIn } from '../scheduling-service/clock-in';
 
 @Component({
   selector: 'app-scheduling-page',
@@ -9,7 +8,7 @@ import { ClockIn } from '../scheduling-service/clock-in';
 })
 export class SchedulingComponent implements OnInit {
   
-  
+  msg:string;
   time = new Date();
   currentTime = '';
   constructor() {
@@ -17,9 +16,14 @@ export class SchedulingComponent implements OnInit {
    }
    ClockIn() {
      alert(this.currentTime);
+     return this.currentTime;
    }
    ClockOut(){
-     alert(this.currentTime)
+     alert(this.currentTime);
+     return this.currentTime;
+    }
+   ViewSchedule(){
+     
    }
 
   ngOnInit()  {
