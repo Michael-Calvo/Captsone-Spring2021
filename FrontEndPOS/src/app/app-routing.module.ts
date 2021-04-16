@@ -4,12 +4,15 @@ import { InventoryPageComponent } from './inventory_components/inventory-page/in
 import {ProfileComponent} from './landingPage_components/profile/profile.component';
 import {WelcomePageComponent} from './landingPage_components/welcome-page/welcome-page.component';
 import {SchedulingComponent} from './scheduling_components/scheduling-page/scheduling-page.component';
+import {ViewScheduleComponent} from './scheduling_components/view-schedule/view-schedule.component';
 const routes: Routes = [
   {path: '',component: WelcomePageComponent},
   {path: 'welcome-page',component: WelcomePageComponent},
   {path: 'inventory',component: InventoryPageComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'scheduling', component: SchedulingComponent}
+  {path: 'scheduling', component: SchedulingComponent},
+  {path: 'view-schedule', component: ViewScheduleComponent}
+  
 ];
 
 @NgModule({
