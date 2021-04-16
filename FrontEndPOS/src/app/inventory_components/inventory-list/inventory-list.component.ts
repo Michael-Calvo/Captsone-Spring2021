@@ -12,6 +12,8 @@ export class InventoryListComponent implements OnInit {
 
   public inventoryItems:MenuItem[] = [];
   public transporterArr:Transporter[] = [];
+  public error:string = "error detected";
+  public tempTransporter;
 
   constructor(private inventoryService: InventoryService) { }
 
@@ -47,9 +49,22 @@ export class InventoryListComponent implements OnInit {
       }
 
     ]
-    
+
     //this.inventoryService.getdata().subscribe(data => { this.inventoryItems = data;})
-    //this.inventoryService.getdata().subscribe(data => { this.transporterArr = data;})
+    //this.inventoryService.getTransporterdata()
+    //this.inventoryService.getTransporterdata().subscribe(data => { this.transporterArr = data;})
+    const data : Transporter = {
+      function: "read",
+      object: "menuitem",
+      payload: [
+        1,
+        1
+      ]
+    }
+
+    this.tempTransporter = this.inventoryService.createTransporterPost(data)
+    this.transporterArr = this.tempTransporter;
+
   }
 
   createPost(){
@@ -98,19 +113,15 @@ export class InventoryListComponent implements OnInit {
       object: "menuitem",
       payload: [
         56789,
-        2,
         1,
+        1,
+        3,
         "Grilled Cheese",
         5.99,
         0,
         0
       ]
     }
-    /*for(let i = 0; i < this.transporterArr.length; ++i){
-      if (this.transporterArr[i].payload[1] === data.payload[1]) {
-        data.payload[1] = data.payload[1] + 1
-      }
-  }*/
   this.inventoryService.createTransporterPost(data).subscribe(transporter => { 
     this.transporterArr.push(transporter);
   });
