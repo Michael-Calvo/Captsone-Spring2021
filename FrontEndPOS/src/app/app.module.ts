@@ -16,6 +16,8 @@ import {AngularFireAuthModule} from "@angular/fire/auth";
 import {environment} from "../environments/environment";
 import { WelcomePageComponent } from './landingPage_components/welcome-page/welcome-page.component';
 import { SchedulingClockComponent } from './scheduling_components/scheduling-clock/scheduling-clock.component';
+import { SchedulingComponent} from './scheduling_components/scheduling-page/scheduling-page.component';
+import { ViewScheduleComponent} from './scheduling_components/view-schedule/view-schedule.component'
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { SchedulingClockComponent } from './scheduling_components/scheduling-clo
     SidebarComponent,
     WelcomePageComponent,
     SchedulingClockComponent,
+    SchedulingComponent,
+    ViewScheduleComponent,
     
   ],
   imports: [
