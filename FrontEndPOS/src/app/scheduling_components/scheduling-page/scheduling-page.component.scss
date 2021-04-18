@@ -1,6 +1,5 @@
 .float-container {
   text-align: center;
-  position: fixed;
   padding: 20px 40px;
   margin-left: 400px;
   margin-right: 400px;
@@ -13,7 +12,6 @@
 .float-child {
   width: 90%;
   float: center;
-  position: fixed;
   padding: 10px;
 }
 
