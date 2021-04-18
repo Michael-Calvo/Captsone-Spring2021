@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { InventoryService } from '../inventory_service/inventory.service';
+import { Transporter } from '../inventory_service/transporter';
 
 @Component({
   selector: 'app-inventory-page',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inventory-page.component.scss']
 })
 export class InventoryPageComponent implements OnInit {
-
+  
   constructor() { }
 
   ngOnInit(): void {
+
   }
+
+  
+
+
 
 }

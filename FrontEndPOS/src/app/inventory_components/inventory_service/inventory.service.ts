@@ -3,10 +3,12 @@ import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/comm
 import { Observable } from 'rxjs';
 import { MenuItem } from './menu-item';
 import { Transporter } from './transporter';
+import { MenuItem2 } from './menu-item2';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { retry } from "rxjs/operators";
 import { AppSettings } from '../../app.setting';
+import { Receiver } from './receiver';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -49,19 +51,16 @@ export class InventoryService {
   }
 
   public createTransporterPost(transporter:Transporter ): Observable<Transporter> {
+    console.log(transporter);
     return this.http.post<Transporter>("http://localhost/POSAPI/", transporter, httpOptions)
   }
 
-  public getTransporterPost(transporter:Transporter ): Observable<HttpResponse<Transporter>> {
-    return this.http.post<Transporter>("http://localhost/POSAPI/", transporter, {observe: 'response'})
+  public getTransporterPost(transporter:Transporter): Observable<Receiver> {
+    return this.http.post<Receiver>("http://localhost/POSAPI/", transporter, httpOptions)
   }
 
-  decodeTransporter(transporter: Transporter): Transporter{
-    return {
-      function:    transporter.function,
-      object:     transporter.object,
-      payload:    transporter.payload
-    };
+  public deleteTransporterPost(transporter:Transporter): Observable<Transporter> {
+    return this.http.post<Transporter>("http://localhost/POSAPI/", transporter, httpOptions)
   }
   
 }
