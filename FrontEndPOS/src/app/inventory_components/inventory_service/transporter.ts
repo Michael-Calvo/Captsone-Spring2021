@@ -1,5 +1,5 @@
 export class Transporter{
-    function:any;
+    function: any;
     object:string;
     payload: Array<any> = [];
 }

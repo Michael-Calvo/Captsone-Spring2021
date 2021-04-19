@@ -15,6 +15,8 @@ import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {environment} from "../environments/environment";
 import { WelcomePageComponent } from './landingPage_components/welcome-page/welcome-page.component';
+import { AddInventoryItemComponent } from './inventory_components/add-inventory-item/add-inventory-item.component';
+import { MenuSearchComponent } from './inventory_components/menu-search/menu-search.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { WelcomePageComponent } from './landingPage_components/welcome-page/welc
     TitleComponent,
     ProfileComponent,
     SidebarComponent,
-    WelcomePageComponent
+    WelcomePageComponent,
+    AddInventoryItemComponent,
+    MenuSearchComponent
   ],
   imports: [
     BrowserModule,
