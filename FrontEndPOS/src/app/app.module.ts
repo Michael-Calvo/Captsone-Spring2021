@@ -18,6 +18,8 @@ import { WelcomePageComponent } from './landingPage_components/welcome-page/welc
 import { SchedulingClockComponent } from './scheduling_components/scheduling-clock/scheduling-clock.component';
 import { SchedulingComponent} from './scheduling_components/scheduling-page/scheduling-page.component';
 import { ViewScheduleComponent} from './scheduling_components/view-schedule/view-schedule.component'
+import { AddInventoryItemComponent } from './inventory_components/add-inventory-item/add-inventory-item.component';
+import { MenuSearchComponent } from './inventory_components/menu-search/menu-search.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ViewScheduleComponent} from './scheduling_components/view-schedule/view
     SchedulingComponent,
     ViewScheduleComponent,
     
+    AddInventoryItemComponent,
+    MenuSearchComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,9 @@
+<form class="form" (ngSubmit)="menuSeek()" novalidate>
+    <input type="text" name="Menu Number" id= "menuNumber" [(ngModel)]="menuNumber" name="menuNumber"
+    placeholder="Number of menu you can to look up...">
+    <input type="radio" id= "Inactive" [(ngModel)]="isActive" name= "isActive" value = 0>
+    <label for= "Inactive"> Inactive Items</label>
+    <input type="radio" id= "Active" [(ngModel)]="isActive" name= "isActive" value = 1>
+    <label for= "Active"> Active Items</label>
+    <input type="submit" value="Submit">
+</form>
