@@ -34,7 +34,6 @@ import { MenuSearchComponent } from './inventory_components/menu-search/menu-sea
     SchedulingClockComponent,
     SchedulingComponent,
     ViewScheduleComponent,
-    
     AddInventoryItemComponent,
     MenuSearchComponent
   ],

@@ -22,9 +22,7 @@ export class SchedulingComponent implements OnInit {
      alert(this.currentTime);
      return this.currentTime;
     }
-   ViewSchedule(){
-     
-   }
+  
 
   ngOnInit()  {
     setInterval(() => {
