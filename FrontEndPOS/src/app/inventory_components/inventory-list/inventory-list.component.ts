@@ -60,6 +60,7 @@ export class InventoryListComponent implements OnInit {
   });
   }*/
 
+  //function from button click to set IsActive in db to 0
   deleteRow(object){
 
     const data : Transporter = {
@@ -75,6 +76,7 @@ export class InventoryListComponent implements OnInit {
     this.inventoryService.deleteTransporterPost(data).subscribe();
   }
 
+  //function from button click to set IsActive in db to 1
   restoreRow(object){
 
     const data : Transporter = {
@@ -90,11 +92,13 @@ export class InventoryListComponent implements OnInit {
     this.inventoryService.deleteTransporterPost(data).subscribe();
   }
 
+  //function to read in all items from a menu
   getItems(data: Transporter) {
     //console.log(data);
     this.receiver$ = this.inventoryService.getTransporterPost(data);
    }
 
+   //function to read in all items from an inputed menu
    retrieveMenu(transporter: Transporter){
     console.log(transporter);
     this.receiver$ = this.inventoryService.getTransporterPost(transporter);
