@@ -11,6 +11,7 @@ export class WelcomePageComponent implements OnInit {
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+    
   }
 
 }
