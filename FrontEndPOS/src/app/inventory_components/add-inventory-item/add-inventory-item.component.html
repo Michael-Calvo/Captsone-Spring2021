@@ -1,22 +1,24 @@
 <div class="inventoryContainer">
-    <h2>Please Input All Fields to Add a New Menu Item</h2>
     <form class="form" (ngSubmit)="addMenuItem()" novalidate>
-        <input class= "form-control" type="text" name="Sort Value" id= "sortValue" [(ngModel)]="sortValue" name="sortValue"
-        placeholder="0 or 1 value to determine if item is active on menu...">
-        <input class= "form-control" type="text" name="Is Active" id= "isActive" [(ngModel)]="isActive" name="isActive"
-        placeholder=" Sort Value for new item... ">
-        <input class= "form-control" type="text" name="Menu ID" id= "menuID" [(ngModel)]="menuID" name="menuID"
+
+        <input type="text" name="UUID" id= "UUID" [(ngModel)]="UUID" name="UUID"
+        placeholder="UUID for new item...">
+        <input type="text" name="Sort Value" id= "sortValue" [(ngModel)]="sortValue" name="sortValue"
+        placeholder="Sort Value for new item...">
+        <input type="text" name="Is Active" id= "isActive" [(ngModel)]="isActive" name="isActive"
+        placeholder="0 or 1 value to determine if item is active on menu... ">
+        <input type="text" name="Menu ID" id= "menuID" [(ngModel)]="menuID" name="menuID"
         placeholder="Menu number...">
-        <input class= "form-control" type="text" name="Item Name" id= "itemName" [(ngModel)]="itemName" name="itemName"
+        <input type="text" name="Item Name" id= "itemName" [(ngModel)]="itemName" name="itemName"
         placeholder="Name of new item... ">
-        <input class= "form-control" type="text" name="Price" id= "price" [(ngModel)]="price" name="price"
+        <input type="text" name="Price" id= "price" [(ngModel)]="price" name="price"
         placeholder="New item price...">
-        <input class= "form-control" type="text" name="Priority Score" id= "priorityScore" [(ngModel)]="priorityScore" name="priorityScore"
+        <input type="text" name="Priority Score" id= "priorityScore" [(ngModel)]="priorityScore" name="priorityScore"
         placeholder="Priority of new item...">
-        <input class= "form-control" type="text" name="Execution Time" id= "executionTime" [(ngModel)]="executionTime" name="executionTime"
+        <input type="text" name="Execution Time" id= "executionTime" [(ngModel)]="executionTime" name="executionTime"
         placeholder="Execution Time of new item...">
 
-        <input class= "btn btn-primary" type="submit" value="Submit">
+        <input type="submit" value="Submit">
     </form>
 </div>
   <app-titlebar> </app-titlebar> 

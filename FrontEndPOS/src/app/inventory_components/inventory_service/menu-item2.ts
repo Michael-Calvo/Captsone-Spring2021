@@ -1,5 +1,6 @@
 export class MenuItem2 {
     ID: number;
+    UUID: number;
     SortValue: number;
     IsActive: number;
     MenuID: number;

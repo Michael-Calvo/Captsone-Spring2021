@@ -9,6 +9,8 @@ import { Transporter } from '../inventory_service/transporter';
   styleUrls: ['./add-inventory-item.component.scss']
 })
 export class AddInventoryItemComponent implements OnInit {
+
+    UUID: string;
     sortValue: number;
     isActive: number;
     menuID: number;
@@ -28,6 +30,7 @@ export class AddInventoryItemComponent implements OnInit {
       function: "create",
       object: "menuitem",
       payload: [
+        this.UUID,
         this.sortValue,
         this.isActive,
         this.menuID,
