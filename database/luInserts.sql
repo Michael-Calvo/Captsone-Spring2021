@@ -55,5 +55,5 @@ INSERT INTO `posdb`.`store`
 `StoreName`)
 VALUES
 (1,
-'POS');
+'ChickuhnNChili');
 

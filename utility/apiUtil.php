@@ -105,10 +105,13 @@ class apiUtil
         $retval = true;
 
         //check for all components of the call
-        foreach (API_UD_PAYLOADS as $key) {
+        /*foreach (API_UD_PAYLOADS as $key) {
             if (!key_exists($key, $payload)) {
                 $retval = false;
             }
+        }*/
+        if (empty($payload)) {
+            $retval = false;
         }
         return $retval;
     }
