@@ -18,7 +18,6 @@ import { WelcomePageComponent } from './landingPage_components/welcome-page/welc
 import { AddInventoryItemComponent } from './inventory_components/add-inventory-item/add-inventory-item.component';
 import { MenuSearchComponent } from './inventory_components/menu-search/menu-search.component';
 import { StoreComponent } from './store/store.component';
-import { TableComponent } from './store/table/table.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { TableComponent } from './store/table/table.component';
     AddInventoryItemComponent,
     MenuSearchComponent,
     StoreComponent,
-    TableComponent
   ],
   imports: [
     BrowserModule,

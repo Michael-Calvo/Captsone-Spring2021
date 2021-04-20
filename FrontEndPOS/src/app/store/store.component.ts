@@ -10,7 +10,7 @@ export class StoreComponent implements OnInit {
 
   //Will set this to an environmental value later
   public storeID:number = 1;
-  public tables: = [];
+  public tables = [];
   constructor() { }
 
   ngOnInit(): void {
