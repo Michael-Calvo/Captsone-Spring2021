@@ -1,6 +1,8 @@
-<div class="sidebar">
+<div class="sidebar" >
     <nav>
-      <a href="#profile">Profile</a>
+      <div class testProfile  *ngIf="authService.userData as user">
+      <a routerLink="/profile">Profile</a>
+      </div>
       <a href="#fabrication">Fabrication</a>
       <a href="#cashout">Cash out /Order</a>
       <a href="#scheduling">Scheduling</a>

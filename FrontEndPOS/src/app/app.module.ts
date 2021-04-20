@@ -8,8 +8,6 @@ import { AppComponent } from './app.component';
 import { InventoryPageComponent } from './inventory_components/inventory-page/inventory-page.component';
 import { InventoryListComponent } from './inventory_components/inventory-list/inventory-list.component';
 import { InventoryItemComponent } from './inventory_components/inventory-item/inventory-item.component';
-import { TitleComponent } from './landingPage_components/title/title.component';
-import { SidebarComponent } from './landingPage_components/sidebar/sidebar.component';
 import {ProfileComponent} from './landingPage_components/profile/profile.component';
 import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
@@ -17,6 +15,8 @@ import {environment} from "../environments/environment";
 import { WelcomePageComponent } from './landingPage_components/welcome-page/welcome-page.component';
 import { AddInventoryItemComponent } from './inventory_components/add-inventory-item/add-inventory-item.component';
 import { MenuSearchComponent } from './inventory_components/menu-search/menu-search.component';
+import { TitlebarComponent } from './nav_components/titlebar/titlebar.component';
+import {SidebarComponent} from './nav_components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -24,12 +24,12 @@ import { MenuSearchComponent } from './inventory_components/menu-search/menu-sea
     InventoryPageComponent,
     InventoryListComponent,
     InventoryItemComponent,
-    TitleComponent,
     ProfileComponent,
     SidebarComponent,
     WelcomePageComponent,
     AddInventoryItemComponent,
-    MenuSearchComponent
+    MenuSearchComponent,
+    TitlebarComponent
   ],
   imports: [
     BrowserModule,
