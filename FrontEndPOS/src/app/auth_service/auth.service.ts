@@ -1,11 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
-import {FireBaseUser} from '../landingPage_service/user/user';
-import {User2} from '../landingPage_service/user/user';
+import {FireBaseUser} from '../landingPage_components/landingPage_service/user/user';
+import {User2} from '../landingPage_components/landingPage_service/user/user';
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from "firebase/app";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +13,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 export class AuthService {
   userData: any;
   userData2: any;
+  isSignedIn: boolean;
   constructor(
     public afs: AngularFirestore,
     public router: Router,
@@ -39,6 +39,7 @@ export class AuthService {
           this.router.navigate(['profile']);
         });
         this.SetUserDataFirebase(res.user);
+        this.isSignedIn = true;
         this.userData2 = this.setUserData(res.user);
     }).catch((error)=>{
       window.alert(error)
@@ -79,13 +80,13 @@ export class AuthService {
       merge: true
     })
   }
+  
   setUserData(user){
     var email = user.email;
     var emailsplit = email.split("@",1);
     const userData2: User2 = new User2(emailsplit[0],10,"Roletest");
     return userData2
   }
-
   getUserData(){
     return this.userData2;
   }
