@@ -17,6 +17,8 @@ import {environment} from "../environments/environment";
 import { WelcomePageComponent } from './landingPage_components/welcome-page/welcome-page.component';
 import { AddInventoryItemComponent } from './inventory_components/add-inventory-item/add-inventory-item.component';
 import { MenuSearchComponent } from './inventory_components/menu-search/menu-search.component';
+import { StoreComponent } from './store/store.component';
+import { TableComponent } from './store/table/table.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { MenuSearchComponent } from './inventory_components/menu-search/menu-sea
     SidebarComponent,
     WelcomePageComponent,
     AddInventoryItemComponent,
-    MenuSearchComponent
+    MenuSearchComponent,
+    StoreComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
