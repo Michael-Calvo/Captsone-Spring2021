@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InventoryPageComponent } from './inventory_components/inventory-page/inventory-page.component';
 import { InventoryListComponent } from './inventory_components/inventory-list/inventory-list.component';
-import { InventoryItemComponent } from './inventory_components/inventory-item/inventory-item.component';
 import { TitleComponent } from './landingPage_components/title/title.component';
 import { SidebarComponent } from './landingPage_components/sidebar/sidebar.component';
 import {ProfileComponent} from './landingPage_components/profile/profile.component';
@@ -23,7 +22,6 @@ import { MenuSearchComponent } from './inventory_components/menu-search/menu-sea
     AppComponent,
     InventoryPageComponent,
     InventoryListComponent,
-    InventoryItemComponent,
     TitleComponent,
     ProfileComponent,
     SidebarComponent,
