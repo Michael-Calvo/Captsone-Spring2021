@@ -1,6 +1,6 @@
 <!--<app-inventory-item *ngFor='let menuitem of inventoryItems' [menuItem] = "menuitem"></app-inventory-item>-->
 <div>
-    <table #tableTag>
+    <table #tableTag class="table">
         <thead>
             <!--<td>Selection</td>-->
             <td>ID</td>
@@ -14,12 +14,14 @@
             <td>{{ object.ItemName }}</td>
             <td>{{ object.Price }}</td>
             <td>{{ object.PriorityScore }}</td>
-            <button id="remove" (click)="deleteRow(object)"> Delete</button>
+            <button *ngIf="object.IsActive>0; else elseBlock" id="remove" (click)="deleteRow(object)"> Delete</button>
+            <ng-template #elseBlock>
+                <button id="restore" (click)="restoreRow(object)"> Restore</button>
+            </ng-template>
         </tr>
     </table>
 <app-menu-search (findMenu) = "retrieveMenu($event)"></app-menu-search>
     <nav>
-    <button type="button" routerLink="/add-item"> Add Item </button>
+    <button  type="button" routerLink="/add-item"> Add Item </button>
   </nav>
-  <button type="button" (click) = "addItem()"> Add Grilled Cheese </button>
 </div>
