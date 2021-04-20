@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, ElementRef, ViewChild} from '@angular/core';
-import { MenuItem } from '../inventory_service/menu-item';
 import { InventoryService } from '../inventory_service/inventory.service';
 import { Transporter } from '../inventory_service/transporter';
 import { Receiver } from '../inventory_service/receiver';
@@ -14,11 +13,8 @@ import { Observable } from 'rxjs';
 
 export class InventoryListComponent implements OnInit {
 
-  public inventoryItems:MenuItem[] = [];
   public transporterArr:Transporter[] = [];
   public error:string = "error detected";
-  public externalItems;
-  public tempTransporter;
   public receiver$: Observable<Receiver>;
   @Input() transporter: Transporter = new Transporter;
   @ViewChild('tableTag') myTable: ElementRef;
@@ -39,17 +35,17 @@ export class InventoryListComponent implements OnInit {
     }
 
     this.getItems(data)
-    console.log(this.receiver$)
+    //console.log(this.receiver$)
   }
 
 
 
-  addItem(){
+  //dummy test function
+  /*addItem(){
     const data : Transporter = {
       function: "create",
       object: "menuitem",
       payload: [
-        56789,
         1,
         1,
         1,
@@ -62,7 +58,7 @@ export class InventoryListComponent implements OnInit {
   this.inventoryService.createTransporterPost(data).subscribe(transporter => { 
     this.transporterArr.push(transporter);
   });
-  }
+  }*/
 
   deleteRow(object){
 
@@ -70,18 +66,28 @@ export class InventoryListComponent implements OnInit {
       function: "delete",
       object: "menuitem",
       payload: [
-        object.ID,
-        object.UUID,
-        object.IsActive
+        object.ID as number,
+        0
       ]
     }
 
-    /*console.log(object.ID);
-    console.log( object.UUID);
-    console.log(object.IsActive);*/
-    //this.inventoryService.deleteTransporterPost(data).subscribe();
+    //console.log(object.ID);
+    this.inventoryService.deleteTransporterPost(data).subscribe();
+  }
 
-    this.myTable.nativeElement.deleteRow(object.ID);
+  restoreRow(object){
+
+    const data : Transporter = {
+      function: "delete",
+      object: "menuitem",
+      payload: [
+        object.ID as number,
+        1
+      ]
+    }
+
+    //console.log(object.ID);
+    this.inventoryService.deleteTransporterPost(data).subscribe();
   }
 
   getItems(data: Transporter) {

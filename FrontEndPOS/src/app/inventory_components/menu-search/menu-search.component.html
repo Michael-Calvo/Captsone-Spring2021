@@ -1,9 +1,15 @@
-<form class="form" (ngSubmit)="menuSeek()" novalidate>
-    <input type="text" name="Menu Number" id= "menuNumber" [(ngModel)]="menuNumber" name="menuNumber"
-    placeholder="Number of menu you can to look up...">
-    <input type="radio" id= "Inactive" [(ngModel)]="isActive" name= "isActive" value = 0>
-    <label for= "Inactive"> Inactive Items</label>
-    <input type="radio" id= "Active" [(ngModel)]="isActive" name= "isActive" value = 1>
-    <label for= "Active"> Active Items</label>
-    <input type="submit" value="Submit">
-</form>
+<div class= "col-sm-6">
+    <form class="form" (ngSubmit)="menuSeek()" novalidate>
+        <input class= "form-control" type="text" name="Menu Number" id= "menuNumber" [(ngModel)]="menuNumber" name="menuNumber"
+        placeholder="Number of menu you can to look up...">
+        <div class="custom-control custom-radio">
+            <input type="radio" id="Active" name="isActive" [(ngModel)]="isActive" value = 1 class="custom-control-input" >
+            <label class="custom-control-label" for="Active">Active Items</label>
+          </div>
+          <div class="custom-control custom-radio">
+            <input type="radio" id="Inactive" [(ngModel)]="isActive" name="isActive" value = 0 class="custom-control-input">
+            <label class="custom-control-label" for="Inactive">Inactive Items</label>
+          </div>
+        <button class="btn btn-secondary" type="submit" value="Submit"> Search Menu</button>
+    </form>
+</div>
