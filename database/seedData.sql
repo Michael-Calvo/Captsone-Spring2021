@@ -79,3 +79,20 @@ INSERT INTO `posdb`.`stockitem`
 VALUES
 (1,UUID(),1,1,1,"Frozen French Fries",2,"boxes");
 
+INSERT INTO `posdb`.`userlu`
+	(`ID`,
+    `UserName`,
+	`FirstName`,
+	`LastName`,
+	`RoleID`,
+	`UUID`,
+	`IsActive`,
+	`SortValue`)
+	VALUES
+    (1,'devuser','dev','dummy',4,UUID(),1,1),
+    (2,'Calvo.michael1','Michael','Calvo',4,UUID(),1,1),
+    (3,'sandman210','Jason','Manning',4,UUID(),1,1),
+    (4,'darthscifiguy','Richard','Abrams',4,UUID(),1,1),
+    (5,'Over9000Spears','Ronald','Abrams',4,UUID(),1,1),
+    (6,'enashburn99','Emily','Ashburn',4,UUID(),1,1),
+    (7,'i.wilhelmsen13','Ian','Wilhelmsen',4,UUID(),1,1);
