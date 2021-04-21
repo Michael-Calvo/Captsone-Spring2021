@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: 'inventory',component: InventoryPageComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'add-item', component: AddInventoryItemComponent},
-  {path: 'Store', component: StoreComponent}
+  {path: 'store', component: StoreComponent}
 ];
 
 @NgModule({
