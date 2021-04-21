@@ -1,19 +1,17 @@
 Insert into posdb.menu
 	(ID,
-    UUID,
     sortValue,
     isActive,
     StoreID,
     MenuType,
     MenuName)
     values
-    (1,UUID(), 1, 1, 1, 1, "Pizzas"),
-    (2,UUID(), 1, 1, 1, 2, "Sides"),
-    (3,UUID(), 1, 1, 1, 3, "Drinks");
+    (1, 1, 1, 1, 1, "ChickenSands"),
+    (2, 1, 1, 1, 2, "Chilis"),
+    (3, 1, 1, 1, 3, "Drinks");
 
 Insert into posdb.menuitem
 	(ID,
-    UUID,
     sortValue,
     isActive,
     MenuID,
@@ -22,54 +20,53 @@ Insert into posdb.menuitem
     PriorityScore,
     ExecutionTIme)
     values
-    (1, UUID(), 1, 1, 1, "L Hawaiian", 20.00, 0, 0),
-    (2, UUID(), 2, 1, 1, "S Hawaiian", 12.00, 0, 0),
-    (3, UUID(), 3, 1, 1, "L North Carolinian", 24.00, 0, 0),
-    (4, UUID(), 4, 1, 1, "S North Carolinian", 16.00, 0, 0),
-    (5, UUID(), 5, 1, 1, "L Italy Fav", 22.00, 0, 0),
-    (6, UUID(), 6, 1, 1, "S Italy Fav", 15.00, 0, 0),
-    (7, UUID(), 7, 1, 1, "L UNCG Classic", 20.00, 0, 0),
-    (8, UUID(), 8, 1, 1, "L UNCG Classic", 13.00, 0, 0),
-    (9, UUID(), 9, 1, 1, "L Welcome to the South", 21.00, 0, 0),
-    (10, UUID(), 10, 1, 1, "S Welcome to the South", 14.00, 0, 0),
-    (11, UUID(), 11, 1, 1, "L Ians Homemade", 26.00, 0, 0),
-    (12, UUID(), 12, 1, 1, "S Ians Homemade", 17.00, 0, 0),
-    (13, UUID(), 13, 1, 1, "L Chef Special", 32.00, 0, 0),
-    (14, UUID(), 14, 1, 1, "S Chef Special", 20.00, 0, 0),
-    (15, UUID(), 15, 1, 1, "L Sultans Magic", 26.00, 0, 0),
-    (16, UUID(), 16, 1, 1, "S Sultans Magic", 17.00, 0, 0),
-    (17, UUID(), 1, 1, 2, "L Fries", 8.00, 0, 0),
-    (18, UUID(), 2, 1, 2, "S Fries", 5.00, 0, 0),
-    (19, UUID(), 3, 1, 2, "L Chicken Nuggets", 13.00, 0, 0),
-    (20, UUID(), 4, 1, 2, "S Chicken Nuggets", 8.00, 0, 0),
-    (21, UUID(), 6, 1, 2, "L Meatballs", 12.00, 0, 0),
-    (22, UUID(), 7, 1, 2, "S Meatballs", 7.00, 0, 0),
-    (23, UUID(), 8, 1, 2, "Chocolate Lave", 6.00, 0, 0),
-    (24, UUID(), 9, 1, 2, "Brownie Sundae", 6.00, 0, 0),
-    (25, UUID(), 10, 1, 2, "Raianas Choc Chip", 5.00, 0, 0),
-    (26, UUID(), 1, 1, 3, "Soda", 3.00, 0, 0),
-    (27, UUID(), 2, 1, 3, "Coke Float", 5.00, 0, 0),
-    (28, UUID(), 3, 1, 3, "Juice", 5.00, 0, 0),
-    (29, UUID(), 3, 1, 3, "Soda with flavor", 4.00, 0, 0);
+    (1, 1, 1, 1, "Spicy Fried CHX Sand", 20.00, 0, 0),
+    (2, 2, 1, 1, "SweetNSavory Fried CHX Sand", 12.00, 0, 0),
+    (3, 3, 1, 1, "GRILLED CHX Sand", 24.00, 0, 0),
+    (4, 4, 1, 1, "Southern Comfort CHX", 16.00, 0, 0),
+    (5, 5, 1, 1, "Buffalo Fried w Bleu", 22.00, 0, 0),
+    (6, 6, 1, 1, "My Baby's Sweet CHX Sand", 15.00, 0, 0),
+    (7, 1, 1, 2, "White Bean CHX Chili", 8.00, 0, 0),
+    (8, 2, 1, 2, "TX CHILI", 5.00, 0, 0),
+    (9, 3, 1, 2, "Carnitas Chili", 13.00, 0, 0),
+    (10, 4, 1, 2, "A Deep Beanin Chili", 8.00, 0, 0),
+    (11, 6, 1, 2, "Chili Cheese N Chips", 12.00, 0, 0),
+    (12, 7, 1, 2, "Tortilla Chili", 7.00, 0, 0),
+    (13, 1, 1, 3, "Margiritas", 3.00, 0, 0),
+    (14, 2, 1, 3, "Rusty Nail", 5.00, 0, 0),
+    (15, 3, 1, 3, "House Amber", 5.00, 0, 0),
+    (16, 3, 1, 3, "House Porter", 4.00, 0, 0);
 
 INSERT INTO `posdb`.`postables`
 (`ID`,
-`UUID`,
 `sortValue`,
 `isActive`,
 `TableName`,
 `StoreID`)
 VALUES
-(1, UUID(), 1, 1, "Dine In 1", 1),
-(2, UUID(), 1, 1, "Dine In 2", 1),
-(3, UUID(), 1, 1, "Take Out 1", 1),
-(4, UUID(), 1, 1, "Take Out 2", 1),
-(5, UUID(), 1, 1, "Bar 1", 1),
-(6, UUID(), 1, 1, "Bar 2", 1);
+(1, 1, 1, "Dine In 1", 1),
+(2, 1, 1, "Dine In 2", 1),
+(3, 1, 1, "Take Out 1", 1),
+(4, 1, 1, "Take Out 2", 1),
+(5, 1, 1, "Bar 1", 1),
+(6, 1, 1, "Bar 2", 1),
+(7, 1, 1, "Bar 3", 1),
+(8, 1, 1, "Bar 4", 1),
+(9, 1, 1, "Bar 5", 1),
+(10, 1, 1, "Bar 6", 1),
+(11, 1, 1, "Patio 1", 1),
+(12, 1, 1, "Patio 2", 1),
+(13, 1, 1, "Patio 3", 1),
+(14, 1, 1, "Patio 4", 1),
+(15, 1, 1, "Patio 5", 1),
+(16, 1, 1, "Rooftop 1", 1),
+(17, 1, 1, "Rooftop 2", 1),
+(18, 1, 1, "Rooftop 3", 1),
+(19, 1, 1, "Rooftop 4", 1),
+(20, 1, 1, "Rooftop 5", 1);
 
 INSERT INTO `posdb`.`stockitem`
 (`ID`,
-`UUID`,
 `SortValue`,
 `IsActive`,
 `StoreID`,
@@ -77,7 +74,7 @@ INSERT INTO `posdb`.`stockitem`
 `Quantity`,
 `Unit`)
 VALUES
-(1,UUID(),1,1,1,"Frozen French Fries",2,"boxes");
+(1,1,1,1,"Frozen French Fries",2,"boxes");
 
 INSERT INTO `posdb`.`userlu`
 	(`ID`,
@@ -85,14 +82,13 @@ INSERT INTO `posdb`.`userlu`
 	`FirstName`,
 	`LastName`,
 	`RoleID`,
-	`UUID`,
 	`IsActive`,
 	`SortValue`)
 	VALUES
-    (1,'devuser','dev','dummy',4,UUID(),1,1),
-    (2,'Calvo.michael1','Michael','Calvo',4,UUID(),1,1),
-    (3,'sandman210','Jason','Manning',4,UUID(),1,1),
-    (4,'darthscifiguy','Richard','Abrams',4,UUID(),1,1),
-    (5,'Over9000Spears','Ronald','Abrams',4,UUID(),1,1),
-    (6,'enashburn99','Emily','Ashburn',4,UUID(),1,1),
-    (7,'i.wilhelmsen13','Ian','Wilhelmsen',4,UUID(),1,1);
+    (1,'devuser','dev','dummy',4,1,1),
+    (2,'Calvo.michael1','Michael','Calvo',4,1,1),
+    (3,'sandman210','Jason','Manning',4,1,1),
+    (4,'darthscifiguy','Richard','Abrams',4,1,1),
+    (5,'Over9000Spears','Ronald','Abrams',4,1,1),
+    (6,'enashburn99','Emily','Ashburn',4,1,1),
+    (7,'i.wilhelmsen13','Ian','Wilhelmsen',4,1,1);

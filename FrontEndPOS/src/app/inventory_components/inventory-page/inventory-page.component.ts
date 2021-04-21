@@ -15,8 +15,4 @@ export class InventoryPageComponent implements OnInit {
 
   }
 
-  
-
-
-
 }

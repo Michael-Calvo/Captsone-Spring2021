@@ -1,25 +1,31 @@
 <!--<app-inventory-item *ngFor='let menuitem of inventoryItems' [menuItem] = "menuitem"></app-inventory-item>-->
-<div>
-    <table #tableTag>
-        <thead>
-            <!--<td>Selection</td>-->
-            <td>ID</td>
-            <td>Name</td>
-            <td>Price</td>
-            <td>Priority Score</td>
-        </thead>
-        <tr *ngFor='let object of (receiver$  | async)?.Objects' [attr.id]="object.ID">
-            <!--<td> <input type="checkbox" id="myCheck"> </td>-->
-            <td>{{ object.ID }}</td>
-            <td>{{ object.ItemName }}</td>
-            <td>{{ object.Price }}</td>
-            <td>{{ object.PriorityScore }}</td>
-            <button id="remove" (click)="deleteRow(object)"> Delete</button>
-        </tr>
-    </table>
-<app-menu-search (findMenu) = "retrieveMenu($event)"></app-menu-search>
-    <nav>
-    <button type="button" routerLink="/add-item"> Add Item </button>
-  </nav>
-  <button type="button" (click) = "addItem()"> Add Grilled Cheese </button>
+<div class="p-1 mb-1">
+    <div class="inventoryContainer">
+        <table #tableTag class="table">
+            <thead>
+                <!--<td>Selection</td>-->
+                <td>ID</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Priority Score</td>
+            </thead>
+            <tr *ngFor='let object of (receiver$  | async)?.Objects' [attr.id]="object.ID">
+                <!--<td> <input type="checkbox" id="myCheck"> </td>-->
+                <td>{{ object.ID }}</td>
+                <td>{{ object.ItemName }}</td>
+                <td>{{ object.Price }}</td>
+                <td>{{ object.PriorityScore }}</td>
+                <button *ngIf="object.IsActive>0; else elseBlock" id="remove" (click)="deleteRow(object)"> Delete</button>
+                <ng-template #elseBlock>
+                    <button id="restore" (click)="restoreRow(object)"> Restore</button>
+                </ng-template>
+            </tr>
+        </table>
+        <app-menu-search (findMenu) = "retrieveMenu($event)"></app-menu-search>
+        <nav>
+            <button class="btn btn-secondary "  type="button" routerLink="/add-item"> Add Item </button>
+        </nav>
+    </div>
 </div>
+<app-sidebar> </app-sidebar>
+<app-titlebar> </app-titlebar>

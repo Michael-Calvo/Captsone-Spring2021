@@ -3,7 +3,6 @@ CREATE DATABASE `posdb`;
 Create table if not exists posdb.PosCheck (
 
 	  ID INT NOT NULL AUTO_INCREMENT,
-	  UUID varchar(64) NOT NULL,
       IsActive INT NOT NULL default 1,
       SortValue int not null default 0,
 	  TableID INT NOT NULL,
@@ -22,7 +21,6 @@ Create table if not exists posdb.CheckStatusLU (
 Create table if not exists posdb.Menu(
 
 	ID int NOT NULL auto_increment,
-    UUID varchar(64) NOT NULL,
     IsActive INT NOT NULL default 1,
     SortValue int NOT NULL default 0,
 	StoreID int NOT NULL,
@@ -33,7 +31,6 @@ Create table if not exists posdb.Menu(
 Create table if not exists posdb.MenuItem  (
 
 	ID INT NOT NULL AUTO_INCREMENT,
-    UUID varchar(64) NOT NULL,
     SortValue int NOT NULL default 0,
     IsActive INT NOT NULL default 1,
 	MenuID int NOT NULL,
@@ -80,7 +77,6 @@ Create table if not exists posdb.Store  (
 Create table if not exists posdb.POSTables  (
 
 	ID INT NOT NULL AUTO_INCREMENT,
-	UUID varchar(64) NOT NULL,
     sortValue int NOT NULL default 0,
     isActive INT NOT NULL default 1,
 	TableName varchar(64) NOT NULL,
@@ -98,7 +94,6 @@ Create table if not exists posdb.TableStatusLU  (
 CREATE TABLE IF NOT EXISTS posdb.Ticket (
 
     ID INT NOT NULL AUTO_INCREMENT,
-	UUID varchar(64) NOT NULL,
     sortValue int NOT NULL default 0,
     isActive INT NOT NULL default 1,
     DateStarted DATE NOT NULL,
@@ -126,7 +121,6 @@ CREATE TABLE IF NOT EXISTS posdb.TicketTypeLU (
 CREATE TABLE IF NOT EXISTS posdb.TransactionHistory (
 
     ID INT NOT NULL AUTO_INCREMENT,
-    UUID varchar(64) not null,
     IsActive INT default 1,
     SortValue int default 0,
     CheckID INT NOT NULL,
@@ -145,7 +139,6 @@ Create table if not exists posdb.UserLU  (
 	FirstName varchar(64) NOT NULL,
 	LastName varchar(64) NOT NULL,
 	RoleID int NOT NULL,
-    UUID varchar(64) not null,
     IsActive int default 1,
     SortValue int default 0,
     primary key(`ID`)
@@ -154,7 +147,6 @@ Create table if not exists posdb.UserLU  (
 create table if not exists posdb.TicketItem (
 
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     TicketID int not null,
@@ -165,7 +157,6 @@ create table if not exists posdb.TicketItem (
 
 create table if not exists posdb.PayPeriod(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     StoreID int not null,
@@ -176,7 +167,6 @@ create table if not exists posdb.PayPeriod(
 
 create table if not exists posdb.Schedule(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     PayPeriodID int not null,
@@ -186,7 +176,6 @@ create table if not exists posdb.Schedule(
 );
 create table if not exists posdb.Shift(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     ScheduleID int not null,
@@ -197,7 +186,6 @@ create table if not exists posdb.Shift(
 
 create table if not exists posdb.Job(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     Wage double not null,
@@ -208,7 +196,6 @@ create table if not exists posdb.Job(
 
 create table if not exists posdb.Punch(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     ShiftID int not null,
@@ -219,7 +206,6 @@ create table if not exists posdb.Punch(
 
 create table if not exists posdb.ItemsSold(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     TicketID int not null,
@@ -231,7 +217,6 @@ create table if not exists posdb.ItemsSold(
 
 create table if not exists posdb.WasteLog(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     CurrDatetime varchar(64),
@@ -243,7 +228,6 @@ create table if not exists posdb.WasteLog(
 
 create table if not exists posdb.Recipe(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     MenuItemID int not null,
@@ -252,7 +236,6 @@ create table if not exists posdb.Recipe(
 
 create table if not exists posdb.RecipeItem(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     RecipeID int not null,
@@ -265,7 +248,6 @@ create table if not exists posdb.RecipeItem(
 
 create table if not exists posdb.StockItem(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     StoreID int,
@@ -277,7 +259,6 @@ create table if not exists posdb.StockItem(
 
 create table if not exists posdb.StockPurchase(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     SellerID int not null,
@@ -289,7 +270,6 @@ create table if not exists posdb.StockPurchase(
 
 create table if not exists posdb.StockSeller(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     StoreID int,
@@ -300,7 +280,6 @@ create table if not exists posdb.StockSeller(
 
 create table if not exists posdb.InventoryAudit(
 	ID int not null auto_increment,
-    UUID varchar(64) not null,
     SortValue int default 0,
     IsActive INT default 1,
     StoreID int not null,
