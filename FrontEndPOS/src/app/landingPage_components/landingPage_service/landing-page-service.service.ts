@@ -18,7 +18,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 
-export class LandingPageServiceService {
+export class LandingPage_Service {
   baseUrl = "https://jsonplaceholder.typicode.com";
 
   constructor(private http:HttpClient) { }
@@ -58,5 +58,9 @@ public getTransporterPost(transporter:Transporter): Observable<Receiver> {
 public deleteTransporterPost(transporter:Transporter): Observable<Transporter> {
   return this.http.post<Transporter>("http://localhost/POSAPI/", transporter, httpOptions)
 }
+
+
+
+
 }
 

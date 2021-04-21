@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../landingPage_components/auth_service/auth.service";
-
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -9,8 +8,9 @@ import {AuthService} from "../../landingPage_components/auth_service/auth.servic
 export class SidebarComponent implements OnInit {
 
   constructor( public authService: AuthService) { }
-
+  userRole;
   ngOnInit(): void {
+
   }
 
 

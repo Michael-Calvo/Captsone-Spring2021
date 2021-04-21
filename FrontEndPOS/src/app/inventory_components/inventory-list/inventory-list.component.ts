@@ -96,6 +96,7 @@ export class InventoryListComponent implements OnInit {
   getItems(data: Transporter) {
     //console.log(data);
     this.receiver$ = this.inventoryService.getTransporterPost(data);
+    console.log(this.receiver$);
    }
 
    //function to read in all items from an inputed menu

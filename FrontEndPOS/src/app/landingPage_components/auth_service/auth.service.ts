@@ -82,7 +82,7 @@ export class AuthService {
   setUserData(user){
     var email = user.email;
     var emailsplit = email.split("@",1);
-    const userData2: User2 = new User2(emailsplit[0],10,"Roletest");
+    const userData2: User2 = new User2(emailsplit[0]);
     return userData2
   }
 
