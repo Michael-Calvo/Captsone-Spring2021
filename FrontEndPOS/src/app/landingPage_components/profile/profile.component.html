@@ -8,18 +8,10 @@
             <div class="media-body" >
               <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
               <p>User DisplayName: <strong>{{user.displayName}}</strong></p>
-              <p>User ID: <strong>{{user.uid}}</strong></p>
+              <p>User ID: <strong>{{ userPersist.ID }}</strong></p>
               <p>Email: <strong>{{user.email}}</strong></p>
+              <p>Role ID: <strong>{{ userPersist.RoleID }}</strong></p>
               <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
-              <h1><strong>Database Information</strong></h1>
-              <p>User ID: <strong>{{ (receiver$ | async).Objects[0].ID }}</strong></p>
-              <p>First Name: <strong>{{ (receiver$ | async).Objects[0].FirstName }}</strong></p>
-              <p>Last Name: <strong>{{ (receiver$ | async).Objects[0].LastName }}</strong></p>
-              <p>Role ID: <strong>{{ (receiver$ | async).Objects[0].RoleID }}</strong></p>
-              <p>is Active: <strong>{{ (receiver$ | async).Objects[0].IsActive }}</strong></p>
-              <p>SortValue: <strong>{{ (receiver$ | async).Objects[0].SortValue }}</strong></p>
-              <p>Role IDTest: <strong>{{ userData.RoleID }}</strong></p>
-
             </div>
           </div>
         </div>

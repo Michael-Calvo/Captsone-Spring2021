@@ -1,16 +1,12 @@
 import { Injectable, NgZone } from '@angular/core';
-import { EventEmitter, Output} from '@angular/core';
 import {FireBaseUser} from '../landingPage_service/user/user';
 import {User2} from '../landingPage_service/user/user';
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from "firebase/app";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import {Transporter} from "../landingPage_service/transporter";
 import {Receiver} from "../landingPage_service/receiver";
-import {LandingPage_Service} from "../landingPage_service/landing-page-service.service"
 import { Observable } from 'rxjs';
-import { DBUser } from '../landingPage_service/user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +15,6 @@ import { DBUser } from '../landingPage_service/user/user';
 export class AuthService {
   userData: any;
   userData2: any;
-  userName;
-  user1;
-  user2;
-  @Output() findUser:EventEmitter<Transporter> = new EventEmitter<Transporter>();
  
   public receiver$: Observable<Receiver>;
 
@@ -32,7 +24,6 @@ export class AuthService {
     public ngZone: NgZone,
     public afAuth: AngularFireAuth,
     private angularFireAuth: AngularFireAuth,
-    public landingPage_service: LandingPage_Service
   ) { 
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -70,6 +61,7 @@ export class AuthService {
   SignOut() {  
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      localStorage.removeItem('userName');
       this.router.navigate(['welcome-page']).then(
         ()=>{window.location.reload();
         });
@@ -96,15 +88,9 @@ export class AuthService {
     var email = user.email;
     var emailsplit = email.split("@",1);
     const userData2: User2 = new User2(emailsplit[0]);
+    localStorage.setItem('userName', JSON.stringify(userData2));
+    JSON.parse(localStorage.getItem('userName'));
     return userData2
   }
-
-  getUserData(){
-    return this.userData2;
-  }
-
-  getUserFireBaseData(){
-    return this.userData;
-  } 
 
 }

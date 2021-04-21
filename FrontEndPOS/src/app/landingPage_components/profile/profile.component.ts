@@ -1,12 +1,10 @@
 import { variable } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {AuthService} from "../auth_service/auth.service";
 import {Transporter} from "../landingPage_service/transporter";
 import {Receiver} from "../landingPage_service/receiver";
 import {LandingPage_Service} from "../landingPage_service/landing-page-service.service"
 import { Observable } from 'rxjs';
-import { DBUser } from '../landingPage_service/user/user';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { __assign } from 'tslib';
 import {userService} from '../../user.service'
 
@@ -19,22 +17,29 @@ export class ProfileComponent implements OnInit {
   @Output() findUser:EventEmitter<Transporter> = new EventEmitter<Transporter>();
  
   public receiver$: Observable<Receiver>;
-  user1;
-  user2;
-  user3;
+  firebaseUser;
   userName;
   userData;
-  userReturn;
-  userTest;
+  userServiceData;
   userSub;
+  userPersist;
+  userHolder;
 
-  constructor(public afs: AngularFirestore, public authService: AuthService, public landingPage_service: LandingPage_Service) { }
+
+  constructor(public authService: AuthService, 
+    public landingPage_service: LandingPage_Service, 
+    public userService:userService) {
+   }
 
   ngOnInit(): void {
-    this.user2 = this.authService.getUserData();
-    this.userName = this.user2.userName;
+    console.log(this.userPersist)
+
+    this.firebaseUser =  JSON.parse(localStorage.getItem('userName'));
+    this.userName = this.firebaseUser.userName;
     this.userSeek(this.userName);
-  }
+    this.userPersist =  JSON.parse(localStorage.getItem('userData'))
+    }
+    
 
   userSeek(userName) {
     const Userdata:Transporter = {
@@ -52,22 +57,11 @@ export class ProfileComponent implements OnInit {
     this.receiver$ = this.landingPage_service.getTransporterPost(userData);
     this.receiver$.subscribe(res =>{
       console.log(res);
-      this.user1 = res.Objects[0];
-      localStorage.setItem('userDB', JSON.stringify(this.user1));
-      this.userReturn = JSON.parse(localStorage.getItem('userDB'));
-      this.userData =this.setUserData(this.user1);
-      });
-    
+      this.userHolder =res.Objects[0];
+      this.userService.setUserData(res.Objects[0]);
+
+    });
   }
-
-setUserData(user){
-  const userData: DBUser = new DBUser(user.ID, user.UserName,user.FirstName,user.LastName,user.RoleID,user.IsActive,user.SortValue)
-
-  return userData;
-}
-getUserData(){
-  return this.userData;
-}
 
 }
 

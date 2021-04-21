@@ -1,21 +1,34 @@
 import {Injectable} from '@angular/core';
-import { BehaviorSubject} from 'rxjs';
-import { DBUser } from './landingPage_components/landingPage_service/user/user';
-
-@Injectable()
+import { Subject} from 'rxjs';
+@Injectable({
+    providedIn: 'root'
+  })
 export class userService{
-    DefaultUser = new DBUser(0,'UserName','FirstName','LastName',0,0,0);
-    private userSource = new BehaviorSubject(this.DefaultUser);
-    user4 = this.userSource.asObservable();
-    constructor(){}
+    public userSource$ = new Subject();
+    userReturn = this.userSource$.asObservable();
+    localStorage: Storage;
+    userLocal;
+    constructor(){
+        this.localStorage = window.localStorage;
+    }
 
     
     setUserData(user){
-      const userData: DBUser = new DBUser(user.ID, user.UserName,user.FirstName,user.LastName,user.RoleID,user.IsActive,user.SortValue)
-      this.userSource.next(userData);
-      return userData;
+        this.userSource$.next(user);
+        this.userLocal = user;
+        if(!this.localStorage.getItem('userData')){
+            this.localStorage.setItem('userData', JSON.stringify(this.userLocal));
+            JSON.parse(localStorage.getItem('userData')); 
+        }
     }
 
+    getUserData(){
+        return JSON.parse(this.localStorage.getItem('userData'))
+    }
+
+    removeUser(){
+        this.localStorage.removeItem('user');
+    }
 
 
 }

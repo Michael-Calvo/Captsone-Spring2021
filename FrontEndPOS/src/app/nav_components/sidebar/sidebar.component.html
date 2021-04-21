@@ -6,14 +6,8 @@
       <a href="#cashout">Cash out /Order</a>
       <a href="#scheduling">Scheduling</a>
       <a routerLink="/inventory">Inventory</a>
-
+      <a *ngIf= "userTest.RoleID == 4" href="#Role4">Role4</a>
     </nav>
   </div>
 
-<div class=testPull *ngIf="authService.userData as user">
-  <h2>
-    <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-              <p>User ID: <strong>{{user.uid}}</strong></p>
-  </h2>
-</div>
  

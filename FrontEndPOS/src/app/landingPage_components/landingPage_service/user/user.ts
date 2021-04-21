@@ -13,16 +13,16 @@ export class DBUser{
     FirstName: string;
     LastName: string;
     RoleID: number;
-    isActive: number;
+    IsActive: number;
     SortValue: number;
 
-    constructor( ID: number, UserName: string, FirstName: string,  LastName: string, RoleID: number, isActive: number, SortValue: number){
+    constructor( ID: number, UserName: string, FirstName: string,  LastName: string, RoleID: number, IsActive: number, SortValue: number){
         this.ID = ID;
         this.UserName = UserName;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.RoleID = RoleID;
-        this.isActive = isActive;
+        this.IsActive = IsActive;
         this.SortValue = SortValue;
 
     }
