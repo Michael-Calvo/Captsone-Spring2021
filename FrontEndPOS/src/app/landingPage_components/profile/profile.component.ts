@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { DBUser } from '../landingPage_service/user/user';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { __assign } from 'tslib';
+import {userService} from '../../user.service'
 
 @Component({
   selector: 'app-profile',
@@ -24,6 +25,8 @@ export class ProfileComponent implements OnInit {
   userName;
   userData;
   userReturn;
+  userTest;
+  userSub;
 
   constructor(public afs: AngularFirestore, public authService: AuthService, public landingPage_service: LandingPage_Service) { }
 
@@ -52,13 +55,14 @@ export class ProfileComponent implements OnInit {
       this.user1 = res.Objects[0];
       localStorage.setItem('userDB', JSON.stringify(this.user1));
       this.userReturn = JSON.parse(localStorage.getItem('userDB'));
-      this.userData =this.setUserData(res.Objects[0]);
+      this.userData =this.setUserData(this.user1);
       });
     
   }
 
 setUserData(user){
   const userData: DBUser = new DBUser(user.ID, user.UserName,user.FirstName,user.LastName,user.RoleID,user.IsActive,user.SortValue)
+
   return userData;
 }
 getUserData(){

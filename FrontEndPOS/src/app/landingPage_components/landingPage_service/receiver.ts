@@ -1,4 +1,4 @@
-import { DBUser, User2 } from '../landingPage_service/user/user';
+import { DBUser} from '../landingPage_service/user/user';
 
 export interface Receiver {
     message: string;

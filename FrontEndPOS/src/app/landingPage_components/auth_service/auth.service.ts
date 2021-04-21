@@ -67,7 +67,6 @@ export class AuthService {
     });
   }
 
-
   SignOut() {  
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
@@ -92,12 +91,14 @@ export class AuthService {
       merge: true
     })
   }
+
   setUserData(user){
     var email = user.email;
     var emailsplit = email.split("@",1);
     const userData2: User2 = new User2(emailsplit[0]);
     return userData2
   }
+
   getUserData(){
     return this.userData2;
   }

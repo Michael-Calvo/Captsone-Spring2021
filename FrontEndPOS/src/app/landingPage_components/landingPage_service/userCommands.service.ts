@@ -7,7 +7,7 @@ import { Injectable,NgZone } from '@angular/core';
 export class userCommands{
   private_zone: NgZone
 
-
+  
 
 
 
