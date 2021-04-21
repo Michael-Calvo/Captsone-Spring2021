@@ -31,7 +31,7 @@ import {SidebarComponent} from './nav_components/sidebar/sidebar.component';
     MenuSearchComponent,
     StoreComponent,
     POSTableComponent,
-    TitlebarComponent
+    TitlebarComponent,
   ],
   imports: [
     BrowserModule,
