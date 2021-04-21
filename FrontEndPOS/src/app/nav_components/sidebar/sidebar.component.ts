@@ -7,10 +7,8 @@ import {AuthService} from "../../landingPage_components/auth_service/auth.servic
 })
 export class SidebarComponent implements OnInit {
 
-  constructor( public authService: AuthService) { }
-  userRole;
+  constructor( public authService: AuthService ) { }
   ngOnInit(): void {
-
   }
 
 
