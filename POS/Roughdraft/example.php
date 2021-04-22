@@ -1,10 +1,9 @@
 <?php
-
-
 /*
 | This snippet of code is the navbar on the left side of the screen
 | which allows jumping from one subsystem to another.
 */
+?>
 <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
     <li class="nav-item">
       <a href="#" class="nav-link active py-3 border-bottom" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
@@ -34,18 +33,18 @@
   </ul>
 
 
-/* 
+<?php/* 
 | This snippet is to form the shape of the page which holds the rest of the snippets.
-*/
+*/?>
 <div class="row">
   <div class="col-4">Ticket Column</div>
   <div class="col-8">Menu Column</div>
 </div>
 
-
+<?php
 /* (in Menu Column)
 | This snippet of code displays the tabs of menus at the top of the page.
-*/
+*/?>
 <div class="bd-example">
         <nav>
           <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
@@ -68,11 +67,11 @@
           </div>
         </div>
   </div>
-
+<?php
 /* (in Menu Column)
 | This snippet of code makes an organized carddeck of cards for 
 | the submenus to display menuitems.
-*/
+*/?>
         <div class="card-columns">
             <div class="card">
             <img class="card-img-top" src="..." alt="Card image cap">
@@ -94,14 +93,14 @@
             </div>
         </div>
 
-
+<?php
 /* (in Ticket Column)
 | This snippet is used for the div that contains the Ticket component 
 | to allow for a scrollable "receipt" of items ordered.
- */
+ */?>
 <div class="overflow-auto">...</div>
 
-
+<?php
 /* (in Ticket Column)
 | This snippet is for the Ticket component.
 | It displays the items ordered and how many of each with a badge.
@@ -109,7 +108,7 @@
 |   ** SIDE NOTE: I added the .list-group-flush class to make the items
 |   line up like items on a receipt instead of in a bunch of boxes.
 |   If it doesn't work as intended, then get rid of it <3 **
-*/
+*/?>
 <ul class="list-group list-group-flush">
   <li class="list-group-item d-flex justify-content-between align-items-center">
     Regular BLT
@@ -125,12 +124,10 @@
   </li>
 </ul>
 
-
+<?php
 /* (in Ticket Column)
 | This snippet is for the buttons below the Ticket. One button for 'send' and
 | another button beside it for 'pay'. 
-*/
+*/?>
 <button type="button" class="btn btn-primary btn-lg btn-block">Send</button>
 <button type="button" class="btn btn-primary btn-lg btn-block">Pay</button>
-
-?>

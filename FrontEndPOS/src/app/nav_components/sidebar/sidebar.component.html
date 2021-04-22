@@ -1,13 +1,22 @@
-<div class="sidebar" >
-    <nav>
-      <div class=testProfile  *ngIf="authService.userData as user">
-      <a routerLink="/profile">Profile</a>
-      <a *ngIf="userTest.RoleID == 4 || 1 || 3" href="#cashout">Cash out /Order</a>
-      <a href="#scheduling">Scheduling</a>
-      <a *ngIf="userTest.RoleID == 4 || 2" routerLink="/inventory">Inventory</a>
-      <a *ngIf= "userTest.RoleID == 4" routerLink="/add-user">Admin User Controls</a>
-    </div>
-    </nav>
+<ul class="nav flex-column sideNav bg-dark">
+  <div class testPull *ngIf="authService.userData as user">
+    <li class="nav-item">
+      <a class="nav-link active" routerLink="/profile">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#fabrication">Fabrication</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#scheduling">Scheduling</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/store">POS</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="userTest.RoleID == 4 || 2" class="nav-link" routerLink="/inventory">Inventory</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf= "userTest.RoleID == 4" class="nav-link" routerLink="/add-user">Admin User Controls</a>
+    </li>
   </div>
-
- 
+</ul>

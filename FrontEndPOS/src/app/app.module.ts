@@ -14,8 +14,13 @@ import {environment} from "../environments/environment";
 import { WelcomePageComponent } from './landingPage_components/welcome-page/welcome-page.component';
 import { AddInventoryItemComponent } from './inventory_components/add-inventory-item/add-inventory-item.component';
 import { MenuSearchComponent } from './inventory_components/menu-search/menu-search.component';
+import { StoreComponent } from './store/store.component';
+import { POSTableComponent } from "./store/postable/postable.component";
 import { TitlebarComponent } from './nav_components/titlebar/titlebar.component';
 import {SidebarComponent} from './nav_components/sidebar/sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { AddUserComponentComponent } from './add-user-component/add-user-component.component';
 
 @NgModule({
@@ -28,6 +33,8 @@ import { AddUserComponentComponent } from './add-user-component/add-user-compone
     WelcomePageComponent,
     AddInventoryItemComponent,
     MenuSearchComponent,
+    StoreComponent,
+    POSTableComponent,
     TitlebarComponent,
     AddUserComponentComponent
   ],
@@ -38,7 +45,10 @@ import { AddUserComponentComponent } from './add-user-component/add-user-compone
     FormsModule,
     RouterModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
