@@ -1,32 +1,28 @@
-<!--<div class="sidebar" > -->
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <ul class="nav flex-column col-2">
-    <div class testPull *ngIf="authService.userData as user">
-      <h5 class="nav-item">
-        <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-                  <p>User ID: <strong>{{user.uid}}</strong></p>
-      </h5>
-    </div>
-    <div class testProfile  *ngIf="authService.userData as user">
-      <li class="nav-item">
-        <a class="nav-link active" routerLink="/profile">Profile</a>
-      </li>
-    </div>
+<ul class="nav flex-column sideNav bg-dark">
+  <div class testPull *ngIf="authService.userData as user">
+    <h5 class="nav-item">
+      <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+                <p>User ID: <strong>{{user.uid}}</strong></p>
+    </h5>
+  </div>
+  <div class testProfile  *ngIf="authService.userData as user">
     <li class="nav-item">
-      <a class="nav-link" href="#fabrication">Fabrication</a>
+      <a class="nav-link active" routerLink="/profile">Profile</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#scheduling">Scheduling</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/store">POS</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" routerLink="/inventory">Inventory</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-  </ul>
-</nav>
+  </div>
+  <li class="nav-item">
+    <a class="nav-link" href="#fabrication">Fabrication</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#scheduling">Scheduling</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/store">POS</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/inventory">Inventory</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+</ul>

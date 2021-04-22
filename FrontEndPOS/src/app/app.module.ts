@@ -18,6 +18,9 @@ import { StoreComponent } from './store/store.component';
 import { POSTableComponent } from "./store/postable/postable.component";
 import { TitlebarComponent } from './nav_components/titlebar/titlebar.component';
 import {SidebarComponent} from './nav_components/sidebar/sidebar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import {SidebarComponent} from './nav_components/sidebar/sidebar.component';
     FormsModule,
     RouterModule,
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
