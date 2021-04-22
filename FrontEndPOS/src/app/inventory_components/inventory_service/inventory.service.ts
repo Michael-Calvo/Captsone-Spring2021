@@ -6,6 +6,7 @@ import { MenuItem2 } from './menu-item2';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { retry } from "rxjs/operators";
+import { delay } from "rxjs/operators";
 import { AppSettings } from '../../app.setting';
 import { Receiver } from './receiver';
 
