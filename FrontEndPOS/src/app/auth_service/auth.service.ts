@@ -1,13 +1,15 @@
 import { Injectable, NgZone } from '@angular/core';
-import {FireBaseUser} from '../landingPage_service/user/user';
-import {User2} from '../landingPage_service/user/user';
+import {FireBaseUser} from '../landingPage_components/landingPage_service/user';
+import {User2} from '../landingPage_components/landingPage_service/user';
 import {Router} from "@angular/router";
 import {AngularFireAuth} from "@angular/fire/auth";
 import firebase from "firebase/app";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import {Receiver} from "../landingPage_service/receiver";
 import { Observable } from 'rxjs';
-
+import {userService} from "../user.service";
+import {LandingPage_Service} from "../landingPage_components/landingPage_service/landing-page-service.service"
+import {Transporter} from "../landingPage_components/landingPage_service/transporter";
+import {Receiver} from "../landingPage_components/landingPage_service/receiver";
 @Injectable({
   providedIn: 'root'
 })
@@ -24,6 +26,8 @@ export class AuthService {
     public ngZone: NgZone,
     public afAuth: AngularFireAuth,
     private angularFireAuth: AngularFireAuth,
+    public userService: userService,
+    public landingPage_service: LandingPage_Service
   ) { 
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -39,11 +43,16 @@ export class AuthService {
 
   OAuthProvider(provider){
     return this.afAuth.signInWithPopup(provider).then((res) =>{
-        this.ngZone.run(()=> {
+      this.SetUserDataFirebase(res.user);
+      this.userData2 = this.setUserData(res.user); 
+      this.userSeek(this.userData2.UserName);
+      this.ngZone.run(()=> {
+        setTimeout(() => {
           this.router.navigate(['profile']);
+        }, 50);
+          
         });
-        this.SetUserDataFirebase(res.user);
-        this.userData2 = this.setUserData(res.user);
+ 
     }).catch((error)=>{
       window.alert(error)
     })
@@ -62,6 +71,8 @@ export class AuthService {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
       localStorage.removeItem('userName');
+      localStorage.removeItem('userData');
+
       this.router.navigate(['welcome-page']).then(
         ()=>{window.location.reload();
         });
@@ -93,4 +104,27 @@ export class AuthService {
     return userData2
   }
 
+  
+
+  userSeek(userName) {
+    const Userdata:Transporter = {
+      function: "read",
+      object: "userlu",
+      payload: [
+        userName
+      ]
+    }
+    this.retrieveUser(Userdata);
+  }
+
+  retrieveUser(userData: Transporter){
+    console.log(userData);
+    this.receiver$ = this.landingPage_service.getTransporterPost(userData);
+    this.receiver$.subscribe(res =>{
+      console.log(res);
+      this.userService.setUserData(res.Objects[0]);
+
+    });
+
+  }
 }

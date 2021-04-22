@@ -28,6 +28,20 @@ export class DBUser{
     }
 }
 
+export class DBUserForm_ADD{
+    UserName: string;
+    FirstName: string;
+    LastName: string;
+    RoleID: number;
+    IsActive: number;
+    SortValue: number;
+
+    constructor( ){
+        this.IsActive = 1;
+        this.SortValue = 1;
+    }
+}
+
 export class RoleID{
     roleID: number;
     role: string;
@@ -42,8 +56,8 @@ export class RoleID{
 }
 
 export class User2 {
-    public userName: string;
-    constructor(userName:string){
-       this.userName = userName;
+    public UserName: string;
+    constructor(UserName:string){
+       this.UserName = UserName;
     }
   }

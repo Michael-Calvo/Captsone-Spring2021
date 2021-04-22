@@ -1,6 +1,6 @@
 import { variable } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, EventEmitter, Output} from '@angular/core';
-import {AuthService} from "../auth_service/auth.service";
+import { Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
+import {AuthService} from "../../auth_service/auth.service";
 import {Transporter} from "../landingPage_service/transporter";
 import {Receiver} from "../landingPage_service/receiver";
 import {LandingPage_Service} from "../landingPage_service/landing-page-service.service"
@@ -18,7 +18,8 @@ export class ProfileComponent implements OnInit {
  
   public receiver$: Observable<Receiver>;
   firebaseUser;
-  userName;
+  firebaseUserName;
+  UserName;
   userData;
   userServiceData;
   userSub;
@@ -33,13 +34,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.userPersist)
-
-    this.firebaseUser =  JSON.parse(localStorage.getItem('userName'));
-    this.userName = this.firebaseUser.userName;
-    this.userSeek(this.userName);
+    this.firebaseUser =  JSON.parse(localStorage.getItem('user'));
+    this.firebaseUserName =  JSON.parse(localStorage.getItem('userName'));
+    this.UserName = this.firebaseUserName.UserName;
     this.userPersist =  JSON.parse(localStorage.getItem('userData'))
     }
     
+
 
   userSeek(userName) {
     const Userdata:Transporter = {

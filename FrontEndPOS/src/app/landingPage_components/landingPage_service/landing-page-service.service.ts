@@ -3,7 +3,7 @@ import { Transporter } from './transporter';
 import { Receiver } from './receiver';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import{DBUser} from './user/user';
+import{DBUser} from './user';
 import { AppSettings } from '../../app.setting';
 
 

@@ -3,6 +3,7 @@ import { InventoryService } from '../inventory_service/inventory.service';
 import { Transporter } from '../inventory_service/transporter';
 
 
+
 @Component({
   selector: 'app-add-inventory-item',
   templateUrl: './add-inventory-item.component.html',

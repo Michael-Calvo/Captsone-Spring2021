@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../landingPage_components/auth_service/auth.service";
+import {AuthService} from "../../auth_service/auth.service";
 
 @Component({
   selector: 'app-titlebar',

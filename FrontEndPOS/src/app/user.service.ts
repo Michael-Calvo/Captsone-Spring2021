@@ -11,7 +11,6 @@ export class userService{
     constructor(){
         this.localStorage = window.localStorage;
     }
-
     
     setUserData(user){
         this.userSource$.next(user);

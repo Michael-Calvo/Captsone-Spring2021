@@ -5,12 +5,14 @@ import { InventoryListComponent} from './inventory_components/inventory-list/inv
 import {ProfileComponent} from './landingPage_components/profile/profile.component';
 import {WelcomePageComponent} from './landingPage_components/welcome-page/welcome-page.component';
 import {AddInventoryItemComponent} from './inventory_components/add-inventory-item/add-inventory-item.component';
+import {AddUserComponentComponent} from './add-user-component/add-user-component.component';
 const routes: Routes = [
   {path: '',component: WelcomePageComponent},
   {path: 'welcome-page',component: WelcomePageComponent},
   {path: 'inventory',component: InventoryListComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'add-item', component: AddInventoryItemComponent}
+  {path: 'add-item', component: AddInventoryItemComponent},
+  {path: 'add-user',component:AddUserComponentComponent }
 ];
 
 @NgModule({
