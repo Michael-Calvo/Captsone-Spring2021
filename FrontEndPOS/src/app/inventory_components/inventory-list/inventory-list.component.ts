@@ -76,7 +76,7 @@ export class InventoryListComponent implements OnInit {
     this.inventoryService.deleteTransporterPost(data).subscribe();
 
     //looper to delay retriever request
-    var num:number = 150; 
+    var num:number = 999; 
     var i:number; 
 
     for(i = 0;i<=num;i++) {
@@ -111,7 +111,7 @@ export class InventoryListComponent implements OnInit {
     this.inventoryService.deleteTransporterPost(data).subscribe();
 
     //looper to delay retriever request
-    var num:number = 150; 
+    var num:number = 999; 
     var i:number; 
 
     for(i = 0;i<=num;i++) {
