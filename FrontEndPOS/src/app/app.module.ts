@@ -21,6 +21,7 @@ import {SidebarComponent} from './nav_components/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { AddUserComponentComponent } from './add-user-component/add-user-component.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     StoreComponent,
     POSTableComponent,
     TitlebarComponent,
+    AddUserComponentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,55 @@
+<div class="profileContainer">
+    <div class="formCard">
+        <h4>Add New User (Admin Only)</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <form (ngSubmit)="addUserFun()" nonvalidate>
+                    <div class="form-group">
+                        <label><strong>User Name</strong> Please use employee's gmail without @gmail.com</label>
+                        <input type="text" class="form-control"name="UserName"[(ngModel)]="UserName">
+                    </div>
+                    <div class="form-group">
+                        <label><strong>First Name</strong></label>
+                        <input type="text" class="form-control" name="FirstName"[(ngModel)]="FirstName">
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Last Name</strong></label>
+                        <input type="text" class="form-control"name="LastName"[(ngModel)]="LastName">
+                    </div>
+                    <div class="form-group">
+                        <label><strong>Role ID</strong></label>
+                        <input type="number" class="form-control"name="RoleID"[(ngModel)]="RoleID">
+                    </div>
+                    <button type="Submit" class="btn btn-primary">Submit</button>
+                    <button class="btn btn-default">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--  
+    <div class="formCard2">
+        <h4>Deactivate User (Admin Only)</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <form nonvalidate>
+                    <div class="form-group">
+                        <label><strong>User Name</strong> Please use employee's gmail without @gmail.com</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>-->
+  </div>
+  <div class= login-bar>
+    <p>
+      
+    </p>
+      <div class= "login-wrapper">
+          <button type="button" class="large-button" (click)= "authService.SignOut()">
+              <p> Sign Out</p>
+          </button>
+        </div>
+    
+<app-titlebar> </app-titlebar> 
+<app-sidebar> </app-sidebar> 
