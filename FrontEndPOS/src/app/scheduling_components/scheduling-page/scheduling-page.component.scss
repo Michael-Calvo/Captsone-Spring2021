@@ -1,0 +1,32 @@
+.float-container {
+  text-align: center;
+  padding: 20px 40px;
+  margin-left: 400px;
+  margin-right: 400px;
+  height: calc(100% - 300px);
+  width: calc(100% -300px);
+  background-color: rgb(165, 180, 199);
+  display: block
+}
+
+.float-child {
+  width: 90%;
+  float: center;
+  padding: 10px;
+}
+
+.schedulingContainer {
+    text-align: center;
+    position:fixed;
+    top: 140px;
+    padding: 20px 10px;
+    margin-left: 250px;
+    margin-right: 28px;
+    height:  auto;
+    width: calc(100% - 500px);
+    float: right;
+    background-color: rgb(165, 180, 199);
+    display: block;
+  }
+ 
+  

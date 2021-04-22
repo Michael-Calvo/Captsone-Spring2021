@@ -12,6 +12,9 @@ import {AngularFireModule} from "@angular/fire";
 import {AngularFireAuthModule} from "@angular/fire/auth";
 import {environment} from "../environments/environment";
 import { WelcomePageComponent } from './landingPage_components/welcome-page/welcome-page.component';
+import { SchedulingClockComponent } from './scheduling_components/scheduling-clock/scheduling-clock.component';
+import { SchedulingComponent} from './scheduling_components/scheduling-page/scheduling-page.component';
+import { ViewScheduleComponent} from './scheduling_components/view-schedule/view-schedule.component'
 import { AddInventoryItemComponent } from './inventory_components/add-inventory-item/add-inventory-item.component';
 import { MenuSearchComponent } from './inventory_components/menu-search/menu-search.component';
 import { StoreComponent } from './store/store.component';
@@ -31,6 +34,9 @@ import { AddUserComponentComponent } from './add-user-component/add-user-compone
     ProfileComponent,
     SidebarComponent,
     WelcomePageComponent,
+    SchedulingClockComponent,
+    SchedulingComponent,
+    ViewScheduleComponent,
     AddInventoryItemComponent,
     MenuSearchComponent,
     StoreComponent,
