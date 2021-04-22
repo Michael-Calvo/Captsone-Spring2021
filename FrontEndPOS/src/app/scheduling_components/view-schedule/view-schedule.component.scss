@@ -1,0 +1,51 @@
+.schedulingContainer {
+    text-align: center;
+    position:fixed;
+    top: 140px;
+    padding: 20px 10px;
+    margin-left: 250px;
+    margin-right: 28px;
+    height: 10 auto;
+    width: calc(100% - 500px);
+    float: right;
+    background-color: rgb(165, 180, 199);
+    display: block;
+  }
+
+  .scheduleContainer{
+      text-align: left;
+      position: relative;
+      padding: 10px 10px;
+      margin: 0 auto;
+      background-color: white;
+      display: block;
+  }
+  td {
+  padding-left: 2px;
+  padding-right: 2px;
+  background-color: white;
+  height: 40px;
+  border: 1px white;
+  width: 10%;
+}
+
+td:first-child {
+  padding-left: 0;
+}
+
+td:last-child {
+  padding-right: 0;
+}
+
+table {
+  width: calc(100% );
+  table-layout: fixed;
+  border-spacing: 15px 0px;
+  background: white;
+  margin: 0px 0px;
+}
+.table-container {
+  overflow: hidden;
+  width: 700px;
+  margin: 0 auto;
+}

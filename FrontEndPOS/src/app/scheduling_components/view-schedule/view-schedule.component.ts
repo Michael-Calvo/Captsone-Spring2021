@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewScheduleComponent implements OnInit {
 
+  schedule = 'Employee Schedule';
+  scheduleheader = 'Week of April 22, 2021';
+  days = ['Jason', 'Mike'];
   constructor() { }
 
   ngOnInit(): void {

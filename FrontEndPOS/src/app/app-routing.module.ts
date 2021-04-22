@@ -7,6 +7,9 @@ import {WelcomePageComponent} from './landingPage_components/welcome-page/welcom
 import {AddInventoryItemComponent} from './inventory_components/add-inventory-item/add-inventory-item.component';
 import { StoreComponent } from "./store/store.component";
 import {AddUserComponentComponent} from './add-user-component/add-user-component.component';
+import {SchedulingComponent} from './scheduling_components/scheduling-page/scheduling-page.component';
+import {SchedulingClockComponent} from './scheduling_components/scheduling-clock/scheduling-clock.component';
+import {ViewScheduleComponent} from './scheduling_components/view-schedule/view-schedule.component';
 const routes: Routes = [
   {path: '',component: WelcomePageComponent},
   {path: 'welcome-page',component: WelcomePageComponent},
@@ -14,7 +17,10 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'add-item', component: AddInventoryItemComponent},
   {path: 'store', component: StoreComponent},
-  {path: 'add-user',component:AddUserComponentComponent }
+  {path: 'add-user',component:AddUserComponentComponent },
+  {path: 'scheduling', component:SchedulingComponent},
+  {path: 'scheduling-clock', component: SchedulingClockComponent},
+  {path: 'view-schedule', component: ViewScheduleComponent}
 ];
 
 @NgModule({
