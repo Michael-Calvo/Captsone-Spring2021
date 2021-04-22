@@ -10,9 +10,16 @@
             <ul class="nav justify-content-end">
                 <li class="nav-item">
                     <!-- Need a logo here-->
-                    <button type="button" class="btn btn-secondary" (click)= "authService.SigninWithGoogle()">
-                        <h6> Sign in With Google</h6>
-                    </button>
+                    <div *ngIf="authService.userData as user; else elseBlock">
+                        <button type="button" class="btn btn-danger" (click)= "authService.SignOut()">
+                            <h6> Sign Out</h6>
+                        </button>
+                    </div>
+                    <ng-template #elseBlock>
+                        <button type="button" class="btn btn-secondary" (click)= "authService.SigninWithGoogle()">
+                            <h6> Sign in With Google</h6>
+                        </button>
+                    </ng-template>
                 </li>
             </ul>
         </div>

@@ -1,50 +1,39 @@
-
-    <div class="profileContainer">
-      <div class="row" *ngIf="authService.userData as user" >
-        <div class="col-md-12">
-          <div class="media">
-            <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
-              alt="{{user.displayName}}">
-            <div class="media-body" *ngIf= "userPersist ; else elseBlock">
-              <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-              <p>User DisplayName: <strong>{{user.displayName}}</strong></p>
-              <p>User UserName: <strong>{{ userPersist.UserName }}</strong></p>
-              <p>Email: <strong>{{user.email}}</strong></p>
-              <p>User ID: <strong>{{ userPersist.ID }}</strong></p>
-              <p>Role ID: <strong>{{ userPersist.RoleID }}</strong></p>
-              <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
-            </div>
-            <ng-template #elseBlock>
-              <div class="card">
-
-                <div class="card-header">
-            
-                  Sign in Error
-            
-                </div>
-            
-                <div class="card-body">
-            
-                  <h5 class="card-title">User Not Found</h5>
-            
-                  <p class="card-text">Please Log in with a account registered in our system.</p>
-            
-                  <a href="#" class="btn btn-primary"(click)= "authService.SignOut()">Go Home</a>
-            
-                </div>
-                </div>
-            </ng-template>
-          </div>
+<div class="profileContainer">
+  <div class="row" *ngIf="authService.userData as user" >
+    <div class="col-md-12">
+      <div class="media">
+        <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
+          alt="{{user.displayName}}">
+        <div class="media-body" *ngIf= "userPersist ; else elseBlock">
+          <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+          <p>User DisplayName: <strong>{{user.displayName}}</strong></p>
+          <p>User UserName: <strong>{{ userPersist.UserName }}</strong></p>
+          <p>Email: <strong>{{user.email}}</strong></p>
+          <p>User ID: <strong>{{ userPersist.ID }}</strong></p>
+          <p>Role ID: <strong>{{ userPersist.RoleID }}</strong></p>
+          <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
         </div>
+        <ng-template #elseBlock>
+          <div class="card">
+
+            <div class="card-header">
+        
+              Sign in Error
+        
+            </div>
+        
+            <div class="card-body">
+        
+              <h5 class="card-title">User Not Found</h5>
+        
+              <p class="card-text">Please Log in with a account registered in our system.</p>
+        
+              <a href="#" class="btn btn-primary"(click)= "authService.SignOut()">Go Home</a>
+        
+            </div>
+            </div>
+        </ng-template>
       </div>
     </div>
-    <div class= login-bar>
-      <p>
-        
-      </p>
-        <div class= "login-wrapper">
-            <button type="button" class="large-button" (click)= "authService.SignOut()">
-                <p> Sign Out</p>
-            </button>
-    
-    </div>
+  </div>
+</div>
