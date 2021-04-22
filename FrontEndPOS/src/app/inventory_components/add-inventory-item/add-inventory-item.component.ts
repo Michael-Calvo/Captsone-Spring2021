@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { InventoryService } from '../inventory_service/inventory.service';
 import { Transporter } from '../inventory_service/transporter';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -18,7 +20,7 @@ export class AddInventoryItemComponent implements OnInit {
     executionTime: number;
     transporterArr: Transporter [];
 
-  constructor(private inventoryService: InventoryService) { }
+  constructor(private inventoryService: InventoryService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -39,6 +41,8 @@ export class AddInventoryItemComponent implements OnInit {
     }
     console.log(transporter);
     this.inventoryService.createTransporterPost(transporter).subscribe();
+
+    this.router.navigate(['/', 'inventory']);
   }
 
 }

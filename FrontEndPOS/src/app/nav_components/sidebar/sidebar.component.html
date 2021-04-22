@@ -1,19 +1,22 @@
-<div class="sidebar" >
-    <nav>
-      <div class testProfile  *ngIf="authService.userData as user">
-      <a routerLink="/profile">Profile</a>
-      </div>
-      <a href="#fabrication">Fabrication</a>
-      <a href="#cashout">Cash out /Order</a>
-      <a href="#scheduling">Scheduling</a>
-      <a routerLink="/inventory">Inventory</a>
-    </nav>
+<ul class="nav flex-column sideNav bg-dark">
+  <div class testPull *ngIf="authService.userData as user">
+    <li class="nav-item">
+      <a class="nav-link active" routerLink="/profile">Profile</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#fabrication">Fabrication</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#scheduling">Scheduling</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/store">POS</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf="userTest.RoleID == 4 || 2" class="nav-link" routerLink="/inventory">Inventory</a>
+    </li>
+    <li class="nav-item">
+      <a *ngIf= "userTest.RoleID == 4" class="nav-link" routerLink="/add-user">Admin User Controls</a>
+    </li>
   </div>
-
-<div class testPull *ngIf="authService.userData as user">
-  <h2>
-    <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-              <p>User ID: <strong>{{user.uid}}</strong></p>
-  </h2>
-</div>
- 
+</ul>
