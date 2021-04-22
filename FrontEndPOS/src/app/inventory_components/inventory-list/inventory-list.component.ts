@@ -74,6 +74,25 @@ export class InventoryListComponent implements OnInit {
 
     //console.log(object.ID);
     this.inventoryService.deleteTransporterPost(data).subscribe();
+
+    //looper to delay retriever request
+    var num:number = 150; 
+    var i:number; 
+
+    for(i = 0;i<=num;i++) {
+      console.log("delay loop");
+    }
+
+    const transporter : Transporter = {
+      function: "read",
+      object: "menuitem",
+      payload: [
+        object.IsActive,
+        object.MenuID
+      ]
+    }
+
+    this.retrieveMenu(transporter);
   }
 
   //function from button click to set IsActive in db to 1
@@ -90,6 +109,25 @@ export class InventoryListComponent implements OnInit {
 
     //console.log(object.ID);
     this.inventoryService.deleteTransporterPost(data).subscribe();
+
+    //looper to delay retriever request
+    var num:number = 150; 
+    var i:number; 
+
+    for(i = 0;i<=num;i++) {
+      console.log(i);
+    }
+
+    const transporter : Transporter = {
+      function: "read",
+      object: "menuitem",
+      payload: [
+        object.IsActive,
+        object.MenuID
+      ]
+    }
+
+    this.retrieveMenu(transporter);
   }
 
   //function to read in all items from a menu
