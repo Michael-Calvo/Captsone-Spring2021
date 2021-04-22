@@ -4,6 +4,7 @@ import { Transporter } from '../inventory_service/transporter';
 import { Router } from '@angular/router';
 
 
+
 @Component({
   selector: 'app-add-inventory-item',
   templateUrl: './add-inventory-item.component.html',

@@ -16,6 +16,7 @@ import { AddInventoryItemComponent } from './inventory_components/add-inventory-
 import { MenuSearchComponent } from './inventory_components/menu-search/menu-search.component';
 import { TitlebarComponent } from './nav_components/titlebar/titlebar.component';
 import {SidebarComponent} from './nav_components/sidebar/sidebar.component';
+import { AddUserComponentComponent } from './add-user-component/add-user-component.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {SidebarComponent} from './nav_components/sidebar/sidebar.component';
     WelcomePageComponent,
     AddInventoryItemComponent,
     MenuSearchComponent,
-    TitlebarComponent
+    TitlebarComponent,
+    AddUserComponentComponent
   ],
   imports: [
     BrowserModule,
