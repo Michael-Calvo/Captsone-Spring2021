@@ -2,11 +2,11 @@
     <nav>
       <div class=testProfile  *ngIf="authService.userData as user">
       <a routerLink="/profile">Profile</a>
-      </div>
-      <a href="#cashout">Cash out /Order</a>
+      <a *ngIf="userTest.RoleID == 4 || 1 || 3" href="#cashout">Cash out /Order</a>
       <a href="#scheduling">Scheduling</a>
-      <a routerLink="/inventory">Inventory</a>
+      <a *ngIf="userTest.RoleID == 4 || 2" routerLink="/inventory">Inventory</a>
       <a *ngIf= "userTest.RoleID == 4" routerLink="/add-user">Admin User Controls</a>
+    </div>
     </nav>
   </div>
 

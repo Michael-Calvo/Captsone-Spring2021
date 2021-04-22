@@ -49,8 +49,7 @@ export class AuthService {
       this.ngZone.run(()=> {
         setTimeout(() => {
           this.router.navigate(['profile']);
-        }, 50);
-          
+          }, 50);
         });
  
     }).catch((error)=>{
