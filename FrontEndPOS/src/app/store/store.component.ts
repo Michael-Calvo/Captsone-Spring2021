@@ -1,6 +1,5 @@
 import { ResolvedStaticSymbol } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { POSTableComponent } from "src/app/store/postable/postable.component";
 
 @Component({
   selector: 'app-store',
@@ -12,7 +11,7 @@ export class StoreComponent implements OnInit {
   //Class parameters
   public storeID:number;
   public storeName:string;
-  public tables:POSTableComponent[];
+  //public tables:POSTableComponent[];
 
   //debug paramter
   //When this is set to true, the application is developer mode.
@@ -26,11 +25,11 @@ export class StoreComponent implements OnInit {
     if (this.debug) {
       this.storeID = 1;
       this.storeName = "ChickunNChili";
-      this.tables = this.getDevTables();
+      //this.tables = this.getDevTables();
     }
   }
 
-  private getDevTables():POSTableComponent[] {
+  /* private getDevTables():POSTableComponent[] {
     let tableArray = [[1, 1, 1, "Dine In 1", 1],
         [2, 1, 1, "Dine In 2", 1],
         [3, 1, 1, "Take Out 1", 1],
@@ -56,5 +55,5 @@ export class StoreComponent implements OnInit {
     });
 
     return returnTables;
-  }
+  } */
 }

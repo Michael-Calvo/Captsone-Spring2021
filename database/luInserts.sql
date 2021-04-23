@@ -8,9 +8,9 @@ INSERT INTO posdb.CheckStatusLU
 INSERT INTO posdb.MenuTypeLU
 		(ID,MenuType)
 	Values
-		(1, 'Pizza'),
-		(2, 'Sides'),
-		(3, 'Drinks');
+		(1, 'CHX'),
+		(2, 'CHILI'),
+		(3, 'DRINKS');
 
 Insert into posdb.PaymentStatusLU
 		(ID, PaymentStatusType)
