@@ -2,14 +2,16 @@
     <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
         <div class="container-fluid">
             <!-- Brand -->
-            <a class="navbar-brand" href="#">Get This Bread</a>
+            <a class="navbar-brand" href="#">
+                <img src="assets/gtb.svg" alt="" width="30" height="24"> 
+                Get This Bread
+            </a>
 
             <!-- Spacer -->
             <div class="col-9"></div>
             <!-- Links -->
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <!-- Need a logo here-->
                     <div *ngIf="authService.userData as user; else elseBlock">
                         <button type="button" class="btn btn-danger" (click)= "authService.SignOut()">
                             <h6> Sign Out</h6>
