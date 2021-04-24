@@ -25,7 +25,6 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AddUserComponentComponent } from './add-user-component/add-user-component.component';
 import { POSTablesComponent } from './postables/postables.component';
-import { APICallerComponent } from './apicaller/apicaller.component';
 
 @NgModule({
   declarations: [
@@ -43,8 +42,7 @@ import { APICallerComponent } from './apicaller/apicaller.component';
     StoreComponent,
     TitlebarComponent,
     AddUserComponentComponent,
-    POSTablesComponent,
-    APICallerComponent
+    POSTablesComponent
   ],
   imports: [
     BrowserModule,
